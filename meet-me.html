@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meet Me — Sangram Ganguly</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.events{display:grid;gap:24px;margin-top:30px}
+.event{display:grid;grid-template-columns:minmax(220px,390px) 1fr;gap:26px;padding:18px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(12,21,37,.88),rgba(4,8,15,.92));overflow:hidden}
+.event-media{border-radius:15px;overflow:hidden;border:1px solid rgba(85,231,255,.16);background:#03050b}
+.event-media img{display:block;width:100%;height:auto}
+.event-body{padding:8px 4px}.event-kicker{font:10px ui-monospace,monospace;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+.event h2{font-size:1.7rem;margin:10px 0}.event p{color:var(--muted);line-height:1.7}.event-meta{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.event-meta span{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:#a9bed1;font:10px ui-monospace,monospace}
+.countdown{font:12px ui-monospace,monospace;color:var(--green);margin-top:12px}.meet-note{margin-top:35px;padding:20px;border:1px solid rgba(155,124,255,.28);border-radius:18px;background:rgba(155,124,255,.06);color:#b9c5ce;line-height:1.7}
+@media(max-width:760px){.event{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="logo" href="index.html">sangram<span>.space</span></a><a class="back" href="index.html">← Home</a></nav>
+<main class="single">
+<div class="kicker">08 / Rendezvous</div>
+<h1>Meet Me</h1>
+<p class="lead">If you're attending one of these events, come say hello. This page is my public event rendezvous point.</p>
+
+<div class="events">
+<article class="event">
+<div class="event-media"><img src="aws-future-builders-connect.png" alt="AWS Builder Center Future Builders Connect event graphic"></div>
+<div class="event-body">
+<div class="event-kicker">Upcoming · Kolkata · In person</div>
+<h2>AWS Builder Center — Future Builders Connect</h2>
+<p>India's student builder event. I plan to be at the Kolkata event on <strong>30 October 2026</strong>. If you're going too, come meet me and talk tech, cloud, cybersecurity and projects.</p>
+<div class="event-meta"><span>30 OCT 2026</span><span>KOLKATA</span><span>IN PERSON</span><span>AWS</span></div>
+<div class="countdown" data-date="2026-10-30T10:00:00+05:30"></div>
+</div>
+</article>
+
+<article class="event">
+<div class="event-media"><img src="microsoft-ignite-attending.png" alt="Microsoft Ignite attending graphic"></div>
+<div class="event-body">
+<div class="event-kicker">Upcoming · San Francisco · Microsoft</div>
+<h2>Microsoft Ignite 2026</h2>
+<p>Microsoft Ignite takes place <strong>November 17–20, 2026</strong> at Moscone Center in San Francisco. Microsoft also offers a free digital pass; my supplied event graphic says I’m attending.</p>
+<div class="event-meta"><span>17–20 NOV 2026</span><span>SAN FRANCISCO</span><span>MICROSOFT</span><span>REGISTERED</span></div>
+<div class="countdown" data-date="2026-11-17T09:00:00-08:00"></div>
+<a class="btn" href="https://ignite.microsoft.com/en-US/home" target="_blank" rel="noopener">Microsoft Ignite ↗</a>
+</div>
+</article>
+</div>
+
+<div class="meet-note">
+<strong>Want to meet?</strong><br>
+If you're attending one of these events, connect with me through LinkedIn before the event and mention <em>“Sangram.Space”</em> so I know it's you.
+<div class="btns"><a class="btn" href="https://www.linkedin.com/in/sangramcloud" target="_blank" rel="noopener">Connect on LinkedIn ↗</a></div>
+</div>
+</main>
+<footer>© 2026 Sangram Ganguly · CYBERSECURITY × SPACE · sangram.space</footer>
+</div>
+<script>
+function countdown(){
+  document.querySelectorAll('.countdown').forEach(el=>{
+    const target=new Date(el.dataset.date).getTime(), now=Date.now(), diff=target-now;
+    if(diff<=0){el.textContent='EVENT DAY / IN PROGRESS';return;}
+    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000);
+    el.textContent=`T− ${d}d ${h}h ${m}m`;
+  });
+}
+countdown();setInterval(countdown,60000);
+</script>
+</body>
+</html>
