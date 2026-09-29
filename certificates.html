@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Certificates — Sangram Ganguly</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.certificate-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}
+.certificate-card{overflow:hidden;border:1px solid rgba(85,231,255,.2);border-radius:20px;background:linear-gradient(145deg,rgba(10,19,34,.94),rgba(3,8,16,.9));box-shadow:0 20px 70px rgba(0,0,0,.28);transition:.3s;display:flex;flex-direction:column}
+.certificate-card:hover{transform:translateY(-4px);border-color:rgba(85,231,255,.48);box-shadow:0 25px 80px rgba(0,0,0,.42),0 0 30px rgba(85,231,255,.08)}
+.certificate-card .image-wrap{height:220px;display:flex;align-items:center;justify-content:center;padding:12px;background:radial-gradient(circle at 50% 45%,rgba(85,231,255,.07),transparent 62%),#07101d;border-bottom:1px solid rgba(113,174,224,.12)}
+.certificate-card img{display:block;max-width:100%;max-height:196px;width:auto;height:auto;object-fit:contain;border-radius:10px}
+.certificate-card .body{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column}
+.certificate-card h3{margin:0 0 7px;font-size:1.02rem;line-height:1.35}
+.certificate-card p{margin:0;color:var(--muted);line-height:1.55;font-size:.88rem}
+.certificate-card .meta{margin-top:12px;color:#78dff5;font:10px/1.6 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+.certificate-card .btns{margin-top:auto;padding-top:15px}
+.certificate-card .btn{font-size:.78rem;width:100%;text-align:center}
+.credly-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:30px;padding:22px;border:1px solid rgba(155,124,255,.3);border-radius:18px;background:linear-gradient(120deg,rgba(85,231,255,.05),rgba(155,124,255,.08))}
+.note{margin-top:16px;color:#8396aa;font:11px/1.6 ui-monospace,monospace}
+@media(max-width:1050px){.certificate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.certificate-grid{grid-template-columns:1fr}.certificate-card .image-wrap{height:230px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="logo" href="index.html">sangram<span>.space</span></a><a class="back" href="index.html">← Home</a></nav>
+<main class="single">
+<div class="kicker">05 / Credentials</div>
+<h1>Certificates</h1>
+<p class="lead">Each credential is displayed separately with its own badge/certificate image and a dedicated credential link.</p>
+
+<div class="credly-cta">
+<div>
+<strong>Credly credential hub</strong>
+<p style="margin:6px 0 0;color:var(--muted)">Open my Credly profile to inspect the live digital credentials.</p>
+</div>
+<a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">Open Credly ↗</a>
+</div>
+
+<section class="section">
+<h2>Individual credentials</h2>
+<div class="certificate-grid">
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="operating-systems-basics.png" alt="Cisco Operating Systems Basics badge"></div>
+  <div class="body"><h3>Operating Systems Basics</h3><p>Cisco Networking Academy digital badge.</p><div class="meta">CISCO · ISSUED NOV 12, 2025</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="introduction-to-iot.png" alt="Cisco Introduction to IoT badge"></div>
+  <div class="body"><h3>Introduction to IoT</h3><p>Cisco Networking Academy digital badge.</p><div class="meta">CISCO · ISSUED OCT 31, 2025</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="introduction-to-modern-ai.png" alt="Cisco Introduction to Modern AI badge"></div>
+  <div class="body"><h3>Introduction to Modern AI</h3><p>Cisco Networking Academy digital badge.</p><div class="meta">CISCO · ISSUED OCT 24, 2025</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="opswat-ocfa.png" alt="OPSWAT Cybersecurity Fundamentals Associate badge"></div>
+  <div class="body"><h3>OPSWAT Cybersecurity Fundamentals Associate (OCFA)</h3><p>OPSWAT cybersecurity certification credential.</p><div class="meta">OPSWAT · EXPIRES SEP 20, 2027</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="isc2-candidate.png" alt="ISC2 Candidate badge"></div>
+  <div class="body"><h3>ISC2 Candidate</h3><p>ISC2 Candidate digital credential.</p><div class="meta">ISC2 · EXPIRES MAR 31, 2027</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="endpoint-security.png" alt="Cisco Endpoint Security badge"></div>
+  <div class="body"><h3>Endpoint Security</h3><p>Cisco Networking Academy digital badge.</p><div class="meta">CISCO · ISSUED MAR 13, 2026</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="introduction-to-cybersecurity.png" alt="Cisco Introduction to Cybersecurity badge"></div>
+  <div class="body"><h3>Introduction to Cybersecurity</h3><p>Cisco Networking Academy digital badge.</p><div class="meta">CISCO · ISSUED OCT 18, 2025</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential on Credly ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="certificate-microsoft.png" alt="Microsoft Applied Skills credential"></div>
+  <div class="body"><h3>Microsoft Applied Skills</h3><p>Microsoft Applied Skills credential shown in the supplied badge image.</p><div class="meta">MICROSOFT · ISSUED SEP 18, 2026</div><div class="btns"><a class="btn" href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener">View Credential Profile ↗</a></div></div>
+</article>
+
+<article class="certificate-card">
+  <div class="image-wrap"><img src="hackviser-core.png" alt="Hackviser CORE Certified Cybersecurity Foundations certificate"></div>
+  <div class="body"><h3>Hackviser CORE — Certified Cybersecurity Foundations</h3><p>Issued to Sangram Ganguly on September 16, 2026. Certificate ID: HV-CORE-EXRKUUNH.</p><div class="meta">HACKVISER · CORE</div><div class="btns"><a class="btn" href="https://hackviser.com/verify?id=HV-CORE-EXRKUUNH" target="_blank" rel="noopener">Verify This Certificate ↗</a></div></div>
+</article>
+
+</div>
+<p class="note">For Credly credentials, the button opens the live Credly profile. Individual public badge URLs can replace these profile links if you provide the personal badge URLs.</p>
+</section>
+</main>
+<footer>© 2026 Sangram Ganguly · CYBERSECURITY × SPACE · sangram.space</footer>
+</div>
+</body>
+</html>
