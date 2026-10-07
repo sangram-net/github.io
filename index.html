@@ -2,29 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sangram Ganguly — Security & Systems</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sangram / Digital Space</title>
 
 <style>
-/* =========================================================
-   SANGRAM GANGULY — SINGLE FILE PORTFOLIO
-   ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
 
 :root{
     --bg:#080d10;
-    --bg2:#0c1317;
-    --paper:#e8eee9;
-    --muted:#8e9b97;
-    --line:#26342f;
-    --blue:#315d78;
-    --blue-soft:#183342;
-    --olive:#747d43;
-    --olive-dark:#3e4829;
-    --orange:#d36d35;
-    --orange-soft:#70391f;
-    --max:1180px;
+    --text:#e7ece8;
+    --muted:#78827f;
+    --line:#24302d;
+    --blue:#355e78;
+    --olive:#77804b;
+    --orange:#d66f38;
+    --soft:#10191c;
 }
 
 *{
@@ -33,622 +25,702 @@
     padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
+html,body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
     background:var(--bg);
-    color:var(--paper);
+    color:var(--text);
     font-family:"DM Sans",sans-serif;
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
-/* ---------- ATMOSPHERE ---------- */
+/* ======================================================
+   ATMOSPHERE
+====================================================== */
 
-body::before{
+body:before,
+body:after{
     content:"";
     position:fixed;
-    inset:-30%;
-    z-index:-3;
-    background:
-        radial-gradient(circle at 15% 20%,rgba(49,93,120,.25),transparent 27%),
-        radial-gradient(circle at 82% 13%,rgba(116,125,67,.17),transparent 25%),
-        radial-gradient(circle at 62% 72%,rgba(211,109,53,.10),transparent 24%),
-        radial-gradient(circle at 30% 90%,rgba(49,93,120,.14),transparent 30%);
-    filter:blur(55px);
-    animation:clouds 20s ease-in-out infinite alternate;
-}
-
-@keyframes clouds{
-    from{transform:translate3d(-2%,0,0) scale(1)}
-    to{transform:translate3d(3%,-2%,0) scale(1.06)}
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
     pointer-events:none;
-    z-index:100;
-    opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    z-index:-5;
+    border-radius:50%;
+    filter:blur(90px);
 }
 
-/* ---------- GATE ---------- */
+body:before{
+    width:55vw;
+    height:55vw;
+    left:-20vw;
+    top:-20vw;
+    background:rgba(43,87,112,.18);
+}
+
+body:after{
+    width:45vw;
+    height:45vw;
+    right:-15vw;
+    bottom:-20vw;
+    background:rgba(107,118,62,.12);
+}
+
+/* ======================================================
+   GATE
+====================================================== */
 
 #gate{
     position:fixed;
     inset:0;
     z-index:9999;
-    background:
-        radial-gradient(circle at 70% 30%,rgba(49,93,120,.18),transparent 30%),
-        radial-gradient(circle at 20% 80%,rgba(116,125,67,.13),transparent 28%),
-        #080d10;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:25px;
-    transition:opacity .7s ease,visibility .7s ease;
+    background:#080d10;
+    display:grid;
+    place-items:center;
+    transition:.7s;
 }
 
-#gate.hidden{
+#gate.hide{
     opacity:0;
     visibility:hidden;
-    pointer-events:none;
 }
 
-.gate-inner{
-    width:min(520px,100%);
+.gate{
+    width:min(600px,calc(100% - 40px));
 }
 
-.eyebrow{
-    font:500 11px "DM Mono",monospace;
-    letter-spacing:.18em;
-    text-transform:uppercase;
+.gate-small{
+    font:11px "DM Mono",monospace;
     color:var(--olive);
+    letter-spacing:.15em;
 }
 
-.gate-title{
-    margin-top:25px;
-    font-size:clamp(48px,8vw,82px);
-    line-height:.92;
-    letter-spacing:-.065em;
-    font-weight:600;
+.gate h1{
+    margin-top:24px;
+    font-size:clamp(55px,9vw,105px);
+    line-height:.83;
+    letter-spacing:-.075em;
 }
 
-.gate-title em{
+.gate h1 i{
     font-family:"Playfair Display",serif;
-    color:#aab37b;
-    font-weight:500;
+    color:#a1aa7a;
+    font-weight:400;
 }
 
-.gate-description{
-    margin-top:25px;
-    max-width:460px;
+.gate p{
     color:var(--muted);
-    line-height:1.7;
+    margin-top:25px;
+    max-width:410px;
+    line-height:1.6;
+    font-size:14px;
 }
 
 .game{
     margin-top:35px;
     border:1px solid var(--line);
-    background:rgba(12,19,23,.82);
 }
 
-.game-top{
+.game-head{
+    height:42px;
+    padding:0 14px;
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    padding:13px 15px;
     border-bottom:1px solid var(--line);
-    font:11px "DM Mono",monospace;
-    color:#7f8c87;
+    color:#67736e;
+    font:10px "DM Mono",monospace;
 }
 
-.game-area{
+#arena{
+    height:190px;
     position:relative;
-    height:210px;
     overflow:hidden;
-    cursor:crosshair;
     background:
-        radial-gradient(circle at 40% 60%,rgba(49,93,120,.12),transparent 30%),
-        #0a1114;
-}
-
-.game-grid{
-    position:absolute;
-    inset:0;
-    opacity:.12;
-    background-image:
-        linear-gradient(var(--line) 1px,transparent 1px),
-        linear-gradient(90deg,var(--line) 1px,transparent 1px);
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
     background-size:30px 30px;
 }
 
-#target{
+#dot{
     position:absolute;
-    width:34px;
-    height:34px;
-    border:1px solid #e8eee9;
+    width:32px;
+    height:32px;
+    border:1px solid #dfe7e2;
     border-radius:50%;
     display:none;
-    align-items:center;
-    justify-content:center;
     transform:translate(-50%,-50%);
     cursor:pointer;
-    transition:left .25s ease,top .25s ease;
 }
 
-#target::before{
+#dot:after{
     content:"";
-    width:9px;
-    height:9px;
+    width:7px;
+    height:7px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
     border-radius:50%;
     background:var(--orange);
-    box-shadow:0 0 0 6px rgba(211,109,53,.12);
-}
-
-#target:hover{
-    background:rgba(211,109,53,.1);
 }
 
 .game-bottom{
-    padding:15px;
     border-top:1px solid var(--line);
+    padding:12px 14px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:15px;
+    align-items:center;
 }
 
-#status{
-    font:11px "DM Mono",monospace;
-    color:#7f8c87;
+#gameStatus{
+    color:#6e7975;
+    font:10px "DM Mono",monospace;
 }
 
 button{
     border:0;
+    padding:10px 15px;
     background:var(--orange);
     color:#101010;
-    padding:11px 17px;
-    font:600 11px "DM Mono",monospace;
     cursor:pointer;
-    transition:.2s;
+    font:500 10px "DM Mono",monospace;
 }
 
-button:hover{
-    background:#e28349;
-    transform:translateY(-1px);
+/* ======================================================
+   APP
+====================================================== */
+
+#app{
+    display:none;
+    height:100vh;
+    overflow:hidden;
 }
 
-#game-message{
-    margin-top:12px;
+#app.show{
+    display:grid;
+    grid-template-columns:220px 1fr;
+}
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
+
+.sidebar{
+    border-right:1px solid var(--line);
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.brand{
+    font:500 14px "DM Mono",monospace;
+    text-decoration:none;
+    color:var(--text);
+}
+
+.brand b{
+    color:var(--orange);
+    font-weight:400;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.nav button{
+    text-align:left;
+    color:#68736f;
+    background:none;
+    padding:9px 0;
     font:11px "DM Mono",monospace;
-    color:var(--olive);
-    min-height:15px;
 }
 
-/* ---------- SITE ---------- */
+.nav button:hover,
+.nav button.active{
+    color:var(--text);
+}
 
-#site{
+.nav button.active:before{
+    content:"— ";
+    color:var(--orange);
+}
+
+.side-bottom{
+    color:#56625e;
+    font:9px "DM Mono",monospace;
+    line-height:1.8;
+}
+
+/* ======================================================
+   CONTENT
+====================================================== */
+
+.main{
+    height:100vh;
+    overflow:auto;
+    scrollbar-width:none;
+}
+
+.main::-webkit-scrollbar{
     display:none;
 }
 
-#site.visible{
+.page{
+    width:min(1050px,calc(100% - 80px));
+    min-height:100%;
+    margin:auto;
+    padding:55px 0 80px;
+    display:none;
+    animation:pageIn .45s ease;
+}
+
+.page.active{
     display:block;
 }
 
-.container{
-    width:min(var(--max),calc(100% - 42px));
-    margin:auto;
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-header{
-    height:82px;
+/* ======================================================
+   HOME
+====================================================== */
+
+.home{
+    min-height:calc(100vh - 135px);
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid var(--line);
+    flex-direction:column;
+    justify-content:center;
 }
 
-.logo{
-    color:var(--paper);
-    text-decoration:none;
-    font:500 13px "DM Mono",monospace;
-    letter-spacing:.04em;
-}
-
-.logo span{
-    color:var(--orange);
-}
-
-nav{
-    display:flex;
-    gap:27px;
-}
-
-nav a{
-    color:#89948f;
-    text-decoration:none;
-    font:11px "DM Mono",monospace;
-    transition:.2s;
-}
-
-nav a:hover{
-    color:var(--paper);
-}
-
-/* ---------- HERO ---------- */
-
-.hero{
-    min-height:calc(100vh - 82px);
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    gap:50px;
-    align-items:center;
-    padding:90px 0 110px;
-}
-
-.hero-meta{
-    font:11px "DM Mono",monospace;
+.kicker{
+    font:10px "DM Mono",monospace;
     color:var(--olive);
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    margin-bottom:30px;
+    letter-spacing:.16em;
 }
 
-.hero h1{
+.home h1{
+    margin-top:22px;
     font-size:clamp(70px,10vw,145px);
     line-height:.78;
-    letter-spacing:-.085em;
-    font-weight:600;
+    letter-spacing:-.09em;
 }
 
-.hero h1 span{
+.home h1 span{
     display:block;
 }
 
-.hero h1 .italic{
+.home h1 i{
     font-family:"Playfair Display",serif;
-    font-style:italic;
-    font-weight:500;
-    color:#9da879;
-    margin-left:55px;
-    margin-top:8px;
+    font-weight:400;
+    color:#a0aa78;
 }
 
-.hero-copy{
-    align-self:end;
-    max-width:430px;
-    padding-bottom:8px;
-}
-
-.hero-copy p{
-    color:#9ba6a2;
-    line-height:1.75;
-    font-size:15px;
-}
-
-.hero-links{
+.home-bottom{
+    margin-top:65px;
     display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:25px;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
 }
 
-.hero-links a{
-    color:#dbe2de;
-    text-decoration:none;
-    border-bottom:1px solid #405049;
-    padding-bottom:4px;
-    font:11px "DM Mono",monospace;
+.home-bottom p{
+    color:#7d8985;
+    max-width:370px;
+    font-size:13px;
+    line-height:1.7;
 }
 
-.hero-links a:hover{
-    color:var(--orange);
-    border-color:var(--orange);
+.enter{
+    border-bottom:1px solid var(--orange);
+    color:var(--text);
+    padding-bottom:6px;
+    font:10px "DM Mono",monospace;
+    cursor:pointer;
 }
 
-/* ---------- SECTIONS ---------- */
+/* ======================================================
+   PAGE HEAD
+====================================================== */
 
-section{
-    padding:110px 0;
-    border-top:1px solid var(--line);
+.page-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;
+    margin-bottom:45px;
 }
 
-.section-head{
-    display:grid;
-    grid-template-columns:180px 1fr;
-    gap:40px;
-    margin-bottom:55px;
-}
-
-.section-number{
-    font:11px "DM Mono",monospace;
-    color:var(--olive);
-}
-
-.section-title{
-    font-size:clamp(38px,5vw,70px);
-    line-height:.95;
+.page-top h2{
+    font-size:46px;
     letter-spacing:-.06em;
     font-weight:500;
 }
 
-.section-title em{
-    font-family:"Playfair Display",serif;
-    color:#9ca77a;
+.page-top span{
+    color:var(--olive);
+    font:10px "DM Mono",monospace;
 }
 
-/* ---------- ABOUT ---------- */
+/* ======================================================
+   WORK
+====================================================== */
 
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:70px;
-    margin-left:220px;
-}
-
-.about-grid p{
-    color:#9ba6a2;
-    line-height:1.85;
-    font-size:16px;
-}
-
-.fact-list{
+.project-list{
     border-top:1px solid var(--line);
 }
 
-.fact{
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    padding:15px 0;
-    border-bottom:1px solid var(--line);
-    font:11px "DM Mono",monospace;
-}
-
-.fact span:first-child{
-    color:#66736e;
-}
-
-.fact span:last-child{
-    color:#c8d0cc;
-    text-align:right;
-}
-
-/* ---------- PROJECTS ---------- */
-
-.projects{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-}
-
 .project{
-    min-height:300px;
-    padding:30px;
-    background:var(--bg);
-    text-decoration:none;
-    color:inherit;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:.3s;
+    display:grid;
+    grid-template-columns:70px 1fr 90px;
+    align-items:center;
+    min-height:115px;
+    border-bottom:1px solid var(--line);
+    cursor:pointer;
+    transition:.25s;
 }
 
 .project:hover{
-    background:#0d171c;
-}
-
-.project:nth-child(2):hover{
-    background:#11170f;
-}
-
-.project:nth-child(3):hover{
-    background:#17100d;
-}
-
-.project:nth-child(4):hover{
-    background:#0d1519;
+    padding-left:15px;
+    background:rgba(49,93,120,.06);
 }
 
 .project-number{
-    font:11px "DM Mono",monospace;
-    color:#596760;
+    color:#4e5a56;
+    font:10px "DM Mono",monospace;
 }
 
 .project h3{
-    margin-top:auto;
-    font-size:28px;
-    letter-spacing:-.04em;
+    font-size:23px;
     font-weight:500;
+    letter-spacing:-.03em;
 }
 
 .project p{
-    margin-top:10px;
-    color:#7e8a85;
-    line-height:1.6;
-    font-size:13px;
+    margin-top:5px;
+    color:#66716d;
+    font-size:12px;
 }
 
-.project-bottom{
-    margin-top:30px;
-    display:flex;
-    justify-content:space-between;
-    font:10px "DM Mono",monospace;
+.project-type{
     color:var(--orange);
+    font:9px "DM Mono",monospace;
+    text-align:right;
 }
 
-.project-tag{
-    color:#68756e;
+/* ======================================================
+   PROJECT DETAIL
+====================================================== */
+
+.detail{
+    display:none;
 }
 
-/* ---------- CREDENTIALS ---------- */
+.detail.show{
+    display:block;
+}
 
-.credentials{
+.back{
+    color:var(--olive);
+    cursor:pointer;
+    font:10px "DM Mono",monospace;
+    margin-bottom:45px;
+}
+
+.detail h2{
+    font-size:clamp(50px,7vw,90px);
+    letter-spacing:-.075em;
+    line-height:.85;
+    max-width:800px;
+}
+
+.detail h2 i{
+    color:#a0aa78;
+    font-family:"Playfair Display",serif;
+    font-weight:400;
+}
+
+.detail-info{
+    margin-top:50px;
     display:grid;
     grid-template-columns:1fr 1fr;
+    gap:50px;
+}
+
+.detail-info p{
+    color:#7d8985;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.detail-link{
+    color:var(--text);
+    text-decoration:none;
+    font:11px "DM Mono",monospace;
+    border-bottom:1px solid var(--orange);
+    padding-bottom:7px;
+    width:max-content;
+}
+
+/* ======================================================
+   CREDENTIALS
+====================================================== */
+
+.credential-list{
     border-top:1px solid var(--line);
 }
 
 .credential{
-    min-height:190px;
-    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    min-height:110px;
     border-bottom:1px solid var(--line);
     text-decoration:none;
     color:inherit;
     transition:.25s;
 }
 
-.credential:nth-child(odd){
-    border-right:1px solid var(--line);
-}
-
 .credential:hover{
-    background:#0d1519;
-}
-
-.credential-type{
-    font:10px "DM Mono",monospace;
-    color:var(--orange);
-    text-transform:uppercase;
-    letter-spacing:.1em;
+    padding-left:12px;
 }
 
 .credential h3{
-    margin-top:35px;
-    font-size:21px;
+    font-size:20px;
     font-weight:500;
 }
 
 .credential p{
-    margin-top:8px;
-    color:#75827d;
-    font-size:12px;
+    margin-top:5px;
+    color:#65716d;
+    font-size:11px;
 }
 
-/* ---------- EDUCATION ---------- */
+.credential span{
+    color:var(--orange);
+    font:10px "DM Mono",monospace;
+}
 
-.education{
-    margin-left:220px;
+/* ======================================================
+   ABOUT
+====================================================== */
+
+.about-big{
+    font-size:clamp(38px,5vw,65px);
+    line-height:1;
+    letter-spacing:-.065em;
+    max-width:800px;
+}
+
+.about-big i{
+    font-family:"Playfair Display",serif;
+    color:#a0aa78;
+    font-weight:400;
+}
+
+.about-grid{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+}
+
+.about-grid p{
+    color:#7d8985;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.facts{
+    border-top:1px solid var(--line);
+}
+
+.fact{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+    font:10px "DM Mono",monospace;
+}
+
+.fact span:first-child{
+    color:#53605b;
+}
+
+.fact span:last-child{
+    color:#b8c1bd;
+}
+
+/* ======================================================
+   EDUCATION
+====================================================== */
+
+.edu{
+    border-top:1px solid var(--line);
 }
 
 .edu-item{
-    padding:30px 0;
-    border-top:1px solid var(--line);
     display:grid;
     grid-template-columns:150px 1fr;
-    gap:40px;
+    padding:35px 0;
+    border-bottom:1px solid var(--line);
 }
 
 .edu-year{
     color:var(--olive);
-    font:11px "DM Mono",monospace;
+    font:10px "DM Mono",monospace;
 }
 
-.edu-item h3{
-    font-size:23px;
+.edu h3{
+    font-size:24px;
     font-weight:500;
 }
 
-.edu-item p{
-    margin-top:8px;
-    color:#7f8b86;
-    font-size:13px;
+.edu p{
+    margin-top:7px;
+    color:#66726d;
+    font-size:12px;
 }
 
-/* ---------- FOOTER ---------- */
+/* ======================================================
+   FOOTER
+====================================================== */
 
-footer{
-    border-top:1px solid var(--line);
-    padding:45px 0;
-}
-
-.footer-inner{
+.mini-socials{
+    margin-top:80px;
     display:flex;
-    justify-content:space-between;
-    gap:30px;
-    align-items:flex-end;
+    gap:18px;
+    flex-wrap:wrap;
 }
 
-.footer-name{
-    font-size:25px;
-    letter-spacing:-.04em;
-}
-
-.footer-note{
-    color:#65716c;
+.mini-socials a{
+    color:#697570;
+    text-decoration:none;
     font:10px "DM Mono",monospace;
-    line-height:1.7;
-    text-align:right;
 }
 
-/* ---------- MOBILE ---------- */
+.mini-socials a:hover{
+    color:var(--orange);
+}
 
-@media(max-width:800px){
+/* ======================================================
+   MOBILE
+====================================================== */
 
-    .container{
-        width:min(100% - 28px,var(--max));
+@media(max-width:750px){
+
+    body{
+        overflow:hidden;
     }
 
-    header{
-        height:70px;
+    #app.show{
+        display:block;
     }
 
-    nav{
-        gap:12px;
+    .sidebar{
+        height:65px;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+        padding:0 18px;
+        flex-direction:row;
+        align-items:center;
     }
 
-    nav a{
+    .nav{
+        flex-direction:row;
+        gap:4px;
+    }
+
+    .nav button{
+        padding:8px;
         font-size:9px;
     }
 
-    .hero{
+    .nav button.active:before{
+        display:none;
+    }
+
+    .side-bottom{
+        display:none;
+    }
+
+    .main{
+        height:calc(100vh - 65px);
+    }
+
+    .page{
+        width:calc(100% - 34px);
+        padding:35px 0 60px;
+    }
+
+    .home{
+        min-height:calc(100vh - 130px);
+    }
+
+    .home h1{
+        font-size:clamp(60px,18vw,100px);
+    }
+
+    .home-bottom{
         display:block;
-        padding:90px 0;
+        margin-top:50px;
     }
 
-    .hero h1{
-        font-size:clamp(65px,19vw,110px);
+    .enter{
+        display:inline-block;
+        margin-top:25px;
     }
 
-    .hero h1 .italic{
-        margin-left:20px;
+    .page-top h2{
+        font-size:37px;
     }
 
-    .hero-copy{
-        margin-top:80px;
+    .project{
+        grid-template-columns:42px 1fr;
+        padding:22px 0;
     }
 
-    section{
-        padding:80px 0;
+    .project-type{
+        display:none;
     }
 
-    .section-head{
-        grid-template-columns:1fr;
-        gap:15px;
+    .project h3{
+        font-size:19px;
     }
 
-    .about-grid,
-    .education{
-        margin-left:0;
-    }
-
+    .detail-info,
     .about-grid{
         grid-template-columns:1fr;
-        gap:45px;
+        gap:35px;
     }
 
-    .projects,
-    .credentials{
-        grid-template-columns:1fr;
+    .detail h2{
+        font-size:52px;
     }
 
-    .credential:nth-child(odd){
-        border-right:0;
+    .credential{
+        min-height:100px;
+    }
+
+    .credential h3{
+        font-size:16px;
+    }
+
+    .credential span{
+        display:none;
     }
 
     .edu-item{
@@ -656,18 +728,6 @@ footer{
         gap:12px;
     }
 
-    .footer-inner{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .footer-note{
-        text-align:left;
-    }
-
-    .gate-title{
-        font-size:58px;
-    }
 }
 </style>
 </head>
@@ -675,54 +735,51 @@ footer{
 <body>
 
 <!-- ======================================================
-     PLAYFUL CAPTCHA
-     ====================================================== -->
+     CAPTCHA
+====================================================== -->
 
 <div id="gate">
 
-    <div class="gate-inner">
+    <div class="gate">
 
-        <div class="eyebrow">PRIVATE ENTRY / 01</div>
+        <div class="gate-small">
+            SG / PRIVATE ENTRY
+        </div>
 
-        <h1 class="gate-title">
-            Prove you're<br>
-            <em>human enough.</em>
+        <h1>
+            Not a robot.<br>
+            <i>Probably.</i>
         </h1>
 
-        <p class="gate-description">
-            A tiny game instead of a checkbox.
-            Start the verification and catch five drifting signals
-            before the clock runs out.
+        <p>
+            Catch the little signal five times.
+            That's the whole security check.
         </p>
 
         <div class="game">
 
-            <div class="game-top">
-                <span>SECURITY CHECK</span>
-                <span id="counter">0 / 5</span>
+            <div class="game-head">
+                <span>LOCAL VERIFICATION</span>
+                <span id="count">0 / 5</span>
             </div>
 
-            <div class="game-area" id="gameArea">
-
-                <div class="game-grid"></div>
-
-                <div id="target"></div>
-
+            <div id="arena">
+                <div id="dot"></div>
             </div>
 
             <div class="game-bottom">
 
-                <span id="status">READY</span>
+                <span id="gameStatus">
+                    WAITING
+                </span>
 
-                <button id="startBtn">
-                    START VERIFICATION
+                <button id="start">
+                    BEGIN
                 </button>
 
             </div>
 
         </div>
-
-        <div id="game-message"></div>
 
     </div>
 
@@ -730,656 +787,678 @@ footer{
 
 
 <!-- ======================================================
-     WEBSITE
-     ====================================================== -->
+     APP
+====================================================== -->
 
-<div id="site">
+<div id="app">
 
-<div class="container">
+    <aside class="sidebar">
 
-<header>
-
-    <a class="logo" href="#top">
-        SG<span>/</span>
-    </a>
-
-    <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#credentials">Credentials</a>
-        <a href="#education">Education</a>
-    </nav>
-
-</header>
-
-
-<!-- HERO -->
-
-<main id="top">
-
-<section class="hero">
-
-    <div>
-
-        <div class="hero-meta">
-            Sangram Ganguly · Kolkata, India
-        </div>
-
-        <h1>
-            <span>Security,</span>
-            <span>systems</span>
-            <span class="italic">& things worth</span>
-            <span>building.</span>
-        </h1>
-
-    </div>
-
-    <div class="hero-copy">
-
-        <p>
-            Cybersecurity student focused on security,
-            Linux, systems and practical experimentation.
-            I like understanding how things work —
-            especially when they break.
-        </p>
-
-        <div class="hero-links">
-
-            <a href="https://github.com/sangram-net" target="_blank">
-                GitHub ↗
-            </a>
-
-            <a href="https://www.linkedin.com/in/sangramcloud" target="_blank">
-                LinkedIn ↗
-            </a>
-
-            <a href="https://instagram.com/cyber_sangram" target="_blank">
-                Instagram ↗
-            </a>
-
-            <a href="mailto:connect.sangram@proton.me">
-                Email ↗
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section id="about">
-
-    <div class="section-head">
-
-        <div class="section-number">
-            01 / ABOUT
-        </div>
-
-        <h2 class="section-title">
-            Curious about<br>
-            <em>systems.</em>
-        </h2>
-
-    </div>
-
-    <div class="about-grid">
-
-        <p>
-            I'm Sangram — a BCA student exploring cybersecurity,
-            ethical hacking, Linux and software development.
-            My work sits somewhere between learning,
-            breaking things and building them back better.
-        </p>
-
-        <div class="fact-list">
-
-            <div class="fact">
-                <span>FOCUS</span>
-                <span>Cybersecurity / Systems</span>
-            </div>
-
-            <div class="fact">
-                <span>DEGREE</span>
-                <span>BCA</span>
-            </div>
-
-            <div class="fact">
-                <span>STACK</span>
-                <span>Python · Linux · Git</span>
-            </div>
-
-            <div class="fact">
-                <span>INTERESTS</span>
-                <span>Security · Cloud · Systems</span>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PROJECTS -->
-
-<section id="projects">
-
-    <div class="section-head">
-
-        <div class="section-number">
-            02 / PROJECTS
-        </div>
-
-        <h2 class="section-title">
-            Things I've<br>
-            <em>built.</em>
-        </h2>
-
-    </div>
-
-    <div class="projects">
-
-
-        <a
-            class="project"
-            href="https://github.com/sangram-net/SentinelX"
-            target="_blank"
-        >
-
-            <div class="project-number">01</div>
-
-            <div>
-
-                <h3>SentinelX</h3>
-
-                <p>
-                    Local smart log sentinel designed
-                    around security monitoring and
-                    suspicious activity detection.
-                </p>
-
-            </div>
-
-            <div class="project-bottom">
-                <span>GITHUB ↗</span>
-                <span class="project-tag">SECURITY</span>
-            </div>
-
+        <a class="brand" href="#" onclick="go('home')">
+            sangram<b>/</b>
         </a>
 
+        <nav>
 
-        <a
-            class="project"
-            href="https://github.com/sangram-net/password-strength-checker"
-            target="_blank"
-        >
+            <button class="active" data-page="home">
+                HOME
+            </button>
 
-            <div class="project-number">02</div>
+            <button data-page="work">
+                WORK
+            </button>
 
-            <div>
+            <button data-page="credentials">
+                CREDENTIALS
+            </button>
 
-                <h3>Password Strength Checker</h3>
+            <button data-page="about">
+                ABOUT
+            </button>
 
-                <p>
-                    A small security-focused utility
-                    for evaluating password strength
-                    and common weaknesses.
-                </p>
+        </nav>
 
-            </div>
-
-            <div class="project-bottom">
-                <span>GITHUB ↗</span>
-                <span class="project-tag">PYTHON</span>
-            </div>
-
-        </a>
-
-
-        <a
-            class="project"
-            href="https://github.com/sangram-net/password_generator"
-            target="_blank"
-        >
-
-            <div class="project-number">03</div>
-
-            <div>
-
-                <h3>Password Generator</h3>
-
-                <p>
-                    Lightweight password generation
-                    tool built as a practical security
-                    programming project.
-                </p>
-
-            </div>
-
-            <div class="project-bottom">
-                <span>GITHUB ↗</span>
-                <span class="project-tag">PYTHON</span>
-            </div>
-
-        </a>
-
-
-        <a
-            class="project"
-            href="https://github.com/sangram-net/System-Usage-Dashboard"
-            target="_blank"
-        >
-
-            <div class="project-number">04</div>
-
-            <div>
-
-                <h3>System Usage Dashboard</h3>
-
-                <p>
-                    A compact system-monitoring project
-                    for observing machine resources and
-                    system activity.
-                </p>
-
-            </div>
-
-            <div class="project-bottom">
-                <span>GITHUB ↗</span>
-                <span class="project-tag">SYSTEMS</span>
-            </div>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- CREDENTIALS -->
-
-<section id="credentials">
-
-    <div class="section-head">
-
-        <div class="section-number">
-            03 / CREDENTIALS
+        <div class="side-bottom">
+            KOLKATA / INDIA<br>
+            2026
         </div>
 
-        <h2 class="section-title">
-            Proof of<br>
-            <em>learning.</em>
-        </h2>
-
-    </div>
-
-    <div class="credentials">
+    </aside>
 
 
-        <a
-            class="credential"
-            href="https://learn.microsoft.com/en-us/users/sangramganguly-8466/credentials/656cd979f1fb8dd0"
-            target="_blank"
-        >
-
-            <div class="credential-type">
-                Microsoft
-            </div>
-
-            <h3>Microsoft Credential</h3>
-
-            <p>
-                View verified credential
-            </p>
-
-        </a>
+    <main class="main">
 
 
-        <a
-            class="credential"
-            href="https://hackviser.com/verify?id=HV-CORE-EXRKUUNH"
-            target="_blank"
-        >
+        <!-- ================= HOME ================= -->
 
-            <div class="credential-type">
-                Hackviser
-            </div>
+        <section class="page active" id="home">
 
-            <h3>Hackviser Credential</h3>
+            <div class="home">
 
-            <p>
-                Verify credential ↗
-            </p>
+                <div class="kicker">
+                    CYBERSECURITY / SYSTEMS
+                </div>
 
-        </a>
+                <h1>
+                    <span>security.</span>
+                    <span>systems.</span>
+                    <span><i>curiosity.</i></span>
+                </h1>
 
+                <div class="home-bottom">
 
-        <a
-            class="credential"
-            href="https://www.credly.com/badges/088ea347-9db3-4a03-876c-342a5d201e27/public_url"
-            target="_blank"
-        >
+                    <p>
+                        Sangram Ganguly.
+                        I build, break and learn things around
+                        computers and security.
+                    </p>
 
-            <div class="credential-type">
-                Credly
-            </div>
+                    <span class="enter" onclick="go('work')">
+                        SEE WHAT I'VE BUILT →
+                    </span>
 
-            <h3>Verified Badge</h3>
+                </div>
 
-            <p>
-                View badge ↗
-            </p>
+                <div class="mini-socials">
 
-        </a>
+                    <a href="https://github.com/sangram-net" target="_blank">
+                        GITHUB
+                    </a>
 
+                    <a href="https://www.linkedin.com/in/sangramcloud" target="_blank">
+                        LINKEDIN
+                    </a>
 
-        <a
-            class="credential"
-            href="https://www.credly.com/users/sangram.space"
-            target="_blank"
-        >
+                    <a href="https://instagram.com/cyber_sangram" target="_blank">
+                        INSTAGRAM
+                    </a>
 
-            <div class="credential-type">
-                Credly Profile
-            </div>
+                    <a href="mailto:connect.sangram@proton.me">
+                        EMAIL
+                    </a>
 
-            <h3>All Certifications</h3>
-
-            <p>
-                View complete badge collection ↗
-            </p>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- EDUCATION -->
-
-<section id="education">
-
-    <div class="section-head">
-
-        <div class="section-number">
-            04 / EDUCATION
-        </div>
-
-        <h2 class="section-title">
-            Currently<br>
-            <em>learning.</em>
-        </h2>
-
-    </div>
-
-    <div class="education">
-
-        <div class="edu-item">
-
-            <div class="edu-year">
-                2025 — 2028
-            </div>
-
-            <div>
-
-                <h3>
-                    Bachelor of Computer Applications
-                </h3>
-
-                <p>
-                    Amity University Online
-                </p>
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
 
-        <div class="edu-item">
+        <!-- ================= WORK ================= -->
 
-            <div class="edu-year">
-                NOW
+        <section class="page" id="work">
+
+            <div class="page-top">
+                <h2>Selected work</h2>
+                <span>04 PROJECTS</span>
             </div>
 
-            <div>
+            <div class="project-list">
 
-                <h3>
-                    Cybersecurity & Systems
-                </h3>
+                <div class="project" onclick="project(0)">
+                    <div class="project-number">01</div>
+                    <div>
+                        <h3>SentinelX</h3>
+                        <p>Local security monitoring</p>
+                    </div>
+                    <div class="project-type">SECURITY</div>
+                </div>
 
-                <p>
-                    Independent labs · CTFs · Linux ·
-                    Security projects · Practical experimentation
-                </p>
+                <div class="project" onclick="project(1)">
+                    <div class="project-number">02</div>
+                    <div>
+                        <h3>Password Strength Checker</h3>
+                        <p>Password security utility</p>
+                    </div>
+                    <div class="project-type">PYTHON</div>
+                </div>
+
+                <div class="project" onclick="project(2)">
+                    <div class="project-number">03</div>
+                    <div>
+                        <h3>Password Generator</h3>
+                        <p>Random password generation</p>
+                    </div>
+                    <div class="project-type">PYTHON</div>
+                </div>
+
+                <div class="project" onclick="project(3)">
+                    <div class="project-number">04</div>
+                    <div>
+                        <h3>System Usage Dashboard</h3>
+                        <p>System resource monitoring</p>
+                    </div>
+                    <div class="project-type">SYSTEMS</div>
+                </div>
 
             </div>
 
-        </div>
+            <!-- PROJECT DETAIL -->
 
-    </div>
+            <div class="detail" id="detail">
 
-</section>
+                <div class="back" onclick="closeProject()">
+                    ← BACK TO WORK
+                </div>
 
-</main>
+                <h2 id="detailTitle"></h2>
 
+                <div class="detail-info">
 
-<!-- FOOTER -->
+                    <p id="detailText"></p>
 
-<footer>
+                    <a
+                        id="detailLink"
+                        class="detail-link"
+                        href="#"
+                        target="_blank"
+                    >
+                        OPEN REPOSITORY →
+                    </a>
 
-    <div class="footer-inner">
+                </div>
 
-        <div>
-
-            <div class="footer-name">
-                Sangram Ganguly
             </div>
 
-            <div class="hero-links">
+        </section>
 
-                <a href="https://github.com/sangram-net" target="_blank">
-                    GitHub
+
+        <!-- ================= CREDENTIALS ================= -->
+
+        <section class="page" id="credentials">
+
+            <div class="page-top">
+                <h2>Credentials</h2>
+                <span>VERIFIED</span>
+            </div>
+
+            <div class="credential-list">
+
+                <a
+                    class="credential"
+                    href="https://learn.microsoft.com/en-us/users/sangramganguly-8466/credentials/656cd979f1fb8dd0"
+                    target="_blank"
+                >
+
+                    <div>
+                        <h3>Microsoft</h3>
+                        <p>Verified credential</p>
+                    </div>
+
+                    <span>VIEW ↗</span>
+
                 </a>
 
-                <a href="https://x.com/Sangramexe" target="_blank">
-                    X
+
+                <a
+                    class="credential"
+                    href="https://hackviser.com/verify?id=HV-CORE-EXRKUUNH"
+                    target="_blank"
+                >
+
+                    <div>
+                        <h3>Hackviser</h3>
+                        <p>Verified cybersecurity credential</p>
+                    </div>
+
+                    <span>VERIFY ↗</span>
+
                 </a>
 
-                <a href="https://instagram.com/cyber_sangram" target="_blank">
-                    Instagram
+
+                <a
+                    class="credential"
+                    href="https://www.credly.com/badges/088ea347-9db3-4a03-876c-342a5d201e27/public_url"
+                    target="_blank"
+                >
+
+                    <div>
+                        <h3>Credly Badge</h3>
+                        <p>Verified digital badge</p>
+                    </div>
+
+                    <span>VIEW ↗</span>
+
                 </a>
 
-                <a href="mailto:connect.sangram@proton.me">
-                    Email
+
+                <a
+                    class="credential"
+                    href="https://www.credly.com/users/sangram.space"
+                    target="_blank"
+                >
+
+                    <div>
+                        <h3>Credly</h3>
+                        <p>All badges & credentials</p>
+                    </div>
+
+                    <span>PROFILE ↗</span>
+
                 </a>
 
             </div>
 
-        </div>
+        </section>
 
-        <div class="footer-note">
 
-            SECURITY / SYSTEMS / CURIOSITY<br>
-            © 2026 SANGRAM GANGULY
+        <!-- ================= ABOUT ================= -->
 
-        </div>
+        <section class="page" id="about">
 
-    </div>
+            <div class="page-top">
+                <h2>About</h2>
+                <span>SG / 21</span>
+            </div>
 
-</footer>
+            <div class="about-big">
 
-</div>
+                Computer science student
+                <i>interested in the parts</i>
+                most people don't look at.
+
+            </div>
+
+
+            <div class="about-grid">
+
+                <p>
+                    Currently studying BCA while spending
+                    most of my free time around Linux,
+                    cybersecurity, CTFs and small experiments.
+                </p>
+
+                <div class="facts">
+
+                    <div class="fact">
+                        <span>DEGREE</span>
+                        <span>BCA</span>
+                    </div>
+
+                    <div class="fact">
+                        <span>FOCUS</span>
+                        <span>CYBERSECURITY</span>
+                    </div>
+
+                    <div class="fact">
+                        <span>BASED</span>
+                        <span>KOLKATA</span>
+                    </div>
+
+                    <div class="fact">
+                        <span>GITHUB</span>
+                        <span>SANGRAM-NET</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-grid" style="margin-top:35px">
+
+                <div>
+
+                    <div class="kicker">
+                        EDUCATION
+                    </div>
+
+                    <br>
+
+                    <div style="font-size:21px">
+                        Bachelor of Computer Applications
+                    </div>
+
+                    <div style="color:#68746f;font-size:12px;margin-top:6px">
+                        Amity University Online · 2025—2028
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div class="kicker">
+                        ELSEWHERE
+                    </div>
+
+                    <br>
+
+                    <div class="mini-socials" style="margin-top:0">
+
+                        <a href="https://github.com/sangram-net" target="_blank">
+                            GITHUB
+                        </a>
+
+                        <a href="https://x.com/Sangramexe" target="_blank">
+                            X
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/sangramcloud" target="_blank">
+                            LINKEDIN
+                        </a>
+
+                        <a href="https://instagram.com/cyber_sangram" target="_blank">
+                            INSTAGRAM
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </div>
 
 
 <script>
-/* =========================================================
-   PLAYABLE CAPTCHA
-   ========================================================= */
 
-const gate = document.getElementById("gate");
-const site = document.getElementById("site");
-const startBtn = document.getElementById("startBtn");
-const target = document.getElementById("target");
-const gameArea = document.getElementById("gameArea");
-const counter = document.getElementById("counter");
-const status = document.getElementById("status");
-const message = document.getElementById("game-message");
+/* ======================================================
+   PAGE SYSTEM
+====================================================== */
 
-let score = 0;
-let timer = null;
-let playing = false;
-let timeLeft = 12;
+const pages =
+document.querySelectorAll(".page");
+
+const navButtons =
+document.querySelectorAll(".nav button");
 
 
-/* Random target position */
+function go(name){
 
-function moveTarget(){
+    pages.forEach(page=>{
+        page.classList.remove("active");
+    });
 
-    const rect = gameArea.getBoundingClientRect();
+    document
+        .getElementById(name)
+        .classList.add("active");
 
-    const padding = 35;
+    navButtons.forEach(btn=>{
+        btn.classList.toggle(
+            "active",
+            btn.dataset.page === name
+        );
+    });
 
-    const x =
-        padding +
-        Math.random() *
-        (rect.width - padding * 2);
+    document
+        .querySelector(".main")
+        .scrollTo({
+            top:0,
+            behavior:"instant"
+        });
 
-    const y =
-        padding +
-        Math.random() *
-        (rect.height - padding * 2);
-
-    target.style.left = x + "px";
-    target.style.top = y + "px";
+    history.replaceState(null,"","#"+name);
 }
 
 
-/* Start */
+navButtons.forEach(btn=>{
 
-startBtn.addEventListener("click", () => {
+    btn.addEventListener("click",()=>{
 
-    score = 0;
-    timeLeft = 12;
-    playing = true;
+        go(btn.dataset.page);
 
-    counter.textContent = "0 / 5";
-    status.textContent = "12.0s";
-    message.textContent = "";
+    });
 
-    startBtn.style.display = "none";
-    target.style.display = "flex";
+});
 
-    moveTarget();
+
+/* ======================================================
+   PROJECTS
+====================================================== */
+
+const projects = [
+
+    {
+        title:"SentinelX.",
+        text:"A local smart log sentinel built around security monitoring, system events and suspicious activity.",
+        link:"https://github.com/sangram-net/SentinelX"
+    },
+
+    {
+        title:"Password strength.",
+        text:"A small security utility for checking password quality and common weaknesses.",
+        link:"https://github.com/sangram-net/password-strength-checker"
+    },
+
+    {
+        title:"Password generator.",
+        text:"A lightweight Python tool for generating strong random passwords.",
+        link:"https://github.com/sangram-net/password_generator"
+    },
+
+    {
+        title:"System usage.",
+        text:"A compact dashboard for observing system resources and machine activity.",
+        link:"https://github.com/sangram-net/System-Usage-Dashboard"
+    }
+
+];
+
+
+function project(index){
+
+    const data = projects[index];
+
+    document
+        .querySelector(".project-list")
+        .style.display="none";
+
+    document
+        .querySelector(".page-top")
+        .style.display="none";
+
+    document
+        .getElementById("detail")
+        .classList.add("show");
+
+    document
+        .getElementById("detailTitle")
+        .innerHTML=data.title;
+
+    document
+        .getElementById("detailText")
+        .innerText=data.text;
+
+    document
+        .getElementById("detailLink")
+        .href=data.link;
+
+}
+
+
+function closeProject(){
+
+    document
+        .querySelector(".project-list")
+        .style.display="block";
+
+    document
+        .querySelector(".page-top")
+        .style.display="flex";
+
+    document
+        .getElementById("detail")
+        .classList.remove("show");
+
+}
+
+
+/* ======================================================
+   KEYBOARD NAVIGATION
+====================================================== */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="1") go("home");
+    if(e.key==="2") go("work");
+    if(e.key==="3") go("credentials");
+    if(e.key==="4") go("about");
+
+});
+
+
+/* ======================================================
+   CAPTCHA
+====================================================== */
+
+const gate =
+document.getElementById("gate");
+
+const app =
+document.getElementById("app");
+
+const arena =
+document.getElementById("arena");
+
+const dot =
+document.getElementById("dot");
+
+const start =
+document.getElementById("start");
+
+const count =
+document.getElementById("count");
+
+const gameStatus =
+document.getElementById("gameStatus");
+
+let score=0;
+let playing=false;
+let timer;
+let time=15;
+
+
+/* random position */
+
+function move(){
+
+    const w=arena.clientWidth;
+    const h=arena.clientHeight;
+
+    const x=25+Math.random()*(w-50);
+    const y=25+Math.random()*(h-50);
+
+    dot.style.left=x+"px";
+    dot.style.top=y+"px";
+}
+
+
+/* start game */
+
+start.onclick=()=>{
+
+    score=0;
+    time=15;
+    playing=true;
+
+    count.innerText="0 / 5";
+    gameStatus.innerText="15.0s";
+
+    start.style.display="none";
+    dot.style.display="block";
+
+    move();
 
     clearInterval(timer);
 
-    timer = setInterval(() => {
+    timer=setInterval(()=>{
 
-        timeLeft -= .1;
+        time-=.1;
 
-        status.textContent =
-            Math.max(timeLeft,0).toFixed(1) + "s";
+        gameStatus.innerText=
+            Math.max(time,0).toFixed(1)+"s";
 
-        if(timeLeft <= 0){
+        if(time<=0){
 
             clearInterval(timer);
 
-            playing = false;
+            playing=false;
 
-            target.style.display = "none";
+            dot.style.display="none";
 
-            status.textContent = "FAILED";
+            gameStatus.innerText="MISSED";
 
-            message.textContent =
-                "The signal disappeared. Try again.";
+            start.innerText="TRY AGAIN";
+            start.style.display="block";
 
-            startBtn.textContent = "TRY AGAIN";
-            startBtn.style.display = "block";
         }
 
     },100);
 
-});
+};
 
 
-/* Catch signal */
+/* click signal */
 
-target.addEventListener("click",(e)=>{
+dot.onclick=e=>{
 
     e.stopPropagation();
 
-    if(!playing) return;
+    if(!playing)return;
 
     score++;
 
-    counter.textContent =
-        score + " / 5";
+    count.innerText=
+        score+" / 5";
 
-    if(score >= 5){
+    if(score===5){
 
         clearInterval(timer);
 
-        playing = false;
+        playing=false;
 
-        target.style.display = "none";
+        dot.style.display="none";
 
-        status.textContent = "VERIFIED";
-
-        message.textContent =
-            "Access granted. Welcome.";
+        gameStatus.innerText="VERIFIED";
 
         setTimeout(()=>{
 
-            gate.classList.add("hidden");
-            site.classList.add("visible");
+            gate.classList.add("hide");
 
-            document.body.style.overflow = "auto";
+            app.classList.add("show");
 
-        },650);
+            document.body.style.overflow="hidden";
+
+        },500);
 
         return;
+
     }
 
-    /* Make the remaining targets increasingly playful */
+    time=Math.min(time+.7,15);
 
-    timeLeft = Math.min(timeLeft + .7,12);
+    move();
 
-    moveTarget();
-
-});
+};
 
 
-/* Make target occasionally relocate */
+/* automatically move */
 
-let movement = null;
+setInterval(()=>{
 
-function beginMovement(){
+    if(playing)
+        move();
 
-    clearInterval(movement);
+},1600);
 
-    movement = setInterval(()=>{
 
-        if(playing){
+/* ======================================================
+   INITIAL HASH
+====================================================== */
 
-            moveTarget();
+const initial=
+location.hash.replace("#","");
 
-        }
-
-    },1800);
-
+if(
+    ["home","work","credentials","about"]
+    .includes(initial)
+){
+    go(initial);
 }
-
-beginMovement();
-
-
-/* Prevent scrolling while gate is active */
-
-document.body.style.overflow = "hidden";
 
 </script>
 
