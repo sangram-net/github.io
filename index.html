@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sangram Ganguly — Security & Systems</title>
+
+<style>
+/* =========================================================
+   SANGRAM GANGULY — SINGLE FILE PORTFOLIO
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap');
+
+:root{
+    --bg:#080d10;
+    --bg2:#0c1317;
+    --paper:#e8eee9;
+    --muted:#8e9b97;
+    --line:#26342f;
+    --blue:#315d78;
+    --blue-soft:#183342;
+    --olive:#747d43;
+    --olive-dark:#3e4829;
+    --orange:#d36d35;
+    --orange-soft:#70391f;
+    --max:1180px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
+}
+
+/* ---------- ATMOSPHERE ---------- */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:-30%;
+    z-index:-3;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(49,93,120,.25),transparent 27%),
+        radial-gradient(circle at 82% 13%,rgba(116,125,67,.17),transparent 25%),
+        radial-gradient(circle at 62% 72%,rgba(211,109,53,.10),transparent 24%),
+        radial-gradient(circle at 30% 90%,rgba(49,93,120,.14),transparent 30%);
+    filter:blur(55px);
+    animation:clouds 20s ease-in-out infinite alternate;
+}
+
+@keyframes clouds{
+    from{transform:translate3d(-2%,0,0) scale(1)}
+    to{transform:translate3d(3%,-2%,0) scale(1.06)}
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:100;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* ---------- GATE ---------- */
+
+#gate{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:
+        radial-gradient(circle at 70% 30%,rgba(49,93,120,.18),transparent 30%),
+        radial-gradient(circle at 20% 80%,rgba(116,125,67,.13),transparent 28%),
+        #080d10;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    transition:opacity .7s ease,visibility .7s ease;
+}
+
+#gate.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.gate-inner{
+    width:min(520px,100%);
+}
+
+.eyebrow{
+    font:500 11px "DM Mono",monospace;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--olive);
+}
+
+.gate-title{
+    margin-top:25px;
+    font-size:clamp(48px,8vw,82px);
+    line-height:.92;
+    letter-spacing:-.065em;
+    font-weight:600;
+}
+
+.gate-title em{
+    font-family:"Playfair Display",serif;
+    color:#aab37b;
+    font-weight:500;
+}
+
+.gate-description{
+    margin-top:25px;
+    max-width:460px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.game{
+    margin-top:35px;
+    border:1px solid var(--line);
+    background:rgba(12,19,23,.82);
+}
+
+.game-top{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 15px;
+    border-bottom:1px solid var(--line);
+    font:11px "DM Mono",monospace;
+    color:#7f8c87;
+}
+
+.game-area{
+    position:relative;
+    height:210px;
+    overflow:hidden;
+    cursor:crosshair;
+    background:
+        radial-gradient(circle at 40% 60%,rgba(49,93,120,.12),transparent 30%),
+        #0a1114;
+}
+
+.game-grid{
+    position:absolute;
+    inset:0;
+    opacity:.12;
+    background-image:
+        linear-gradient(var(--line) 1px,transparent 1px),
+        linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;
+}
+
+#target{
+    position:absolute;
+    width:34px;
+    height:34px;
+    border:1px solid #e8eee9;
+    border-radius:50%;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    transform:translate(-50%,-50%);
+    cursor:pointer;
+    transition:left .25s ease,top .25s ease;
+}
+
+#target::before{
+    content:"";
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 0 6px rgba(211,109,53,.12);
+}
+
+#target:hover{
+    background:rgba(211,109,53,.1);
+}
+
+.game-bottom{
+    padding:15px;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+#status{
+    font:11px "DM Mono",monospace;
+    color:#7f8c87;
+}
+
+button{
+    border:0;
+    background:var(--orange);
+    color:#101010;
+    padding:11px 17px;
+    font:600 11px "DM Mono",monospace;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#e28349;
+    transform:translateY(-1px);
+}
+
+#game-message{
+    margin-top:12px;
+    font:11px "DM Mono",monospace;
+    color:var(--olive);
+    min-height:15px;
+}
+
+/* ---------- SITE ---------- */
+
+#site{
+    display:none;
+}
+
+#site.visible{
+    display:block;
+}
+
+.container{
+    width:min(var(--max),calc(100% - 42px));
+    margin:auto;
+}
+
+header{
+    height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+}
+
+.logo{
+    color:var(--paper);
+    text-decoration:none;
+    font:500 13px "DM Mono",monospace;
+    letter-spacing:.04em;
+}
+
+.logo span{
+    color:var(--orange);
+}
+
+nav{
+    display:flex;
+    gap:27px;
+}
+
+nav a{
+    color:#89948f;
+    text-decoration:none;
+    font:11px "DM Mono",monospace;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:var(--paper);
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+    min-height:calc(100vh - 82px);
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:50px;
+    align-items:center;
+    padding:90px 0 110px;
+}
+
+.hero-meta{
+    font:11px "DM Mono",monospace;
+    color:var(--olive);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:30px;
+}
+
+.hero h1{
+    font-size:clamp(70px,10vw,145px);
+    line-height:.78;
+    letter-spacing:-.085em;
+    font-weight:600;
+}
+
+.hero h1 span{
+    display:block;
+}
+
+.hero h1 .italic{
+    font-family:"Playfair Display",serif;
+    font-style:italic;
+    font-weight:500;
+    color:#9da879;
+    margin-left:55px;
+    margin-top:8px;
+}
+
+.hero-copy{
+    align-self:end;
+    max-width:430px;
+    padding-bottom:8px;
+}
+
+.hero-copy p{
+    color:#9ba6a2;
+    line-height:1.75;
+    font-size:15px;
+}
+
+.hero-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:25px;
+}
+
+.hero-links a{
+    color:#dbe2de;
+    text-decoration:none;
+    border-bottom:1px solid #405049;
+    padding-bottom:4px;
+    font:11px "DM Mono",monospace;
+}
+
+.hero-links a:hover{
+    color:var(--orange);
+    border-color:var(--orange);
+}
+
+/* ---------- SECTIONS ---------- */
+
+section{
+    padding:110px 0;
+    border-top:1px solid var(--line);
+}
+
+.section-head{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:40px;
+    margin-bottom:55px;
+}
+
+.section-number{
+    font:11px "DM Mono",monospace;
+    color:var(--olive);
+}
+
+.section-title{
+    font-size:clamp(38px,5vw,70px);
+    line-height:.95;
+    letter-spacing:-.06em;
+    font-weight:500;
+}
+
+.section-title em{
+    font-family:"Playfair Display",serif;
+    color:#9ca77a;
+}
+
+/* ---------- ABOUT ---------- */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    margin-left:220px;
+}
+
+.about-grid p{
+    color:#9ba6a2;
+    line-height:1.85;
+    font-size:16px;
+}
+
+.fact-list{
+    border-top:1px solid var(--line);
+}
+
+.fact{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+    font:11px "DM Mono",monospace;
+}
+
+.fact span:first-child{
+    color:#66736e;
+}
+
+.fact span:last-child{
+    color:#c8d0cc;
+    text-align:right;
+}
+
+/* ---------- PROJECTS ---------- */
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+}
+
+.project{
+    min-height:300px;
+    padding:30px;
+    background:var(--bg);
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.3s;
+}
+
+.project:hover{
+    background:#0d171c;
+}
+
+.project:nth-child(2):hover{
+    background:#11170f;
+}
+
+.project:nth-child(3):hover{
+    background:#17100d;
+}
+
+.project:nth-child(4):hover{
+    background:#0d1519;
+}
+
+.project-number{
+    font:11px "DM Mono",monospace;
+    color:#596760;
+}
+
+.project h3{
+    margin-top:auto;
+    font-size:28px;
+    letter-spacing:-.04em;
+    font-weight:500;
+}
+
+.project p{
+    margin-top:10px;
+    color:#7e8a85;
+    line-height:1.6;
+    font-size:13px;
+}
+
+.project-bottom{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    font:10px "DM Mono",monospace;
+    color:var(--orange);
+}
+
+.project-tag{
+    color:#68756e;
+}
+
+/* ---------- CREDENTIALS ---------- */
+
+.credentials{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-top:1px solid var(--line);
+}
+
+.credential{
+    min-height:190px;
+    padding:30px;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    color:inherit;
+    transition:.25s;
+}
+
+.credential:nth-child(odd){
+    border-right:1px solid var(--line);
+}
+
+.credential:hover{
+    background:#0d1519;
+}
+
+.credential-type{
+    font:10px "DM Mono",monospace;
+    color:var(--orange);
+    text-transform:uppercase;
+    letter-spacing:.1em;
+}
+
+.credential h3{
+    margin-top:35px;
+    font-size:21px;
+    font-weight:500;
+}
+
+.credential p{
+    margin-top:8px;
+    color:#75827d;
+    font-size:12px;
+}
+
+/* ---------- EDUCATION ---------- */
+
+.education{
+    margin-left:220px;
+}
+
+.edu-item{
+    padding:30px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:40px;
+}
+
+.edu-year{
+    color:var(--olive);
+    font:11px "DM Mono",monospace;
+}
+
+.edu-item h3{
+    font-size:23px;
+    font-weight:500;
+}
+
+.edu-item p{
+    margin-top:8px;
+    color:#7f8b86;
+    font-size:13px;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:45px 0;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    align-items:flex-end;
+}
+
+.footer-name{
+    font-size:25px;
+    letter-spacing:-.04em;
+}
+
+.footer-note{
+    color:#65716c;
+    font:10px "DM Mono",monospace;
+    line-height:1.7;
+    text-align:right;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:800px){
+
+    .container{
+        width:min(100% - 28px,var(--max));
+    }
+
+    header{
+        height:70px;
+    }
+
+    nav{
+        gap:12px;
+    }
+
+    nav a{
+        font-size:9px;
+    }
+
+    .hero{
+        display:block;
+        padding:90px 0;
+    }
+
+    .hero h1{
+        font-size:clamp(65px,19vw,110px);
+    }
+
+    .hero h1 .italic{
+        margin-left:20px;
+    }
+
+    .hero-copy{
+        margin-top:80px;
+    }
+
+    section{
+        padding:80px 0;
+    }
+
+    .section-head{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .about-grid,
+    .education{
+        margin-left:0;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .projects,
+    .credentials{
+        grid-template-columns:1fr;
+    }
+
+    .credential:nth-child(odd){
+        border-right:0;
+    }
+
+    .edu-item{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .footer-inner{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .footer-note{
+        text-align:left;
+    }
+
+    .gate-title{
+        font-size:58px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ======================================================
+     PLAYFUL CAPTCHA
+     ====================================================== -->
+
+<div id="gate">
+
+    <div class="gate-inner">
+
+        <div class="eyebrow">PRIVATE ENTRY / 01</div>
+
+        <h1 class="gate-title">
+            Prove you're<br>
+            <em>human enough.</em>
+        </h1>
+
+        <p class="gate-description">
+            A tiny game instead of a checkbox.
+            Start the verification and catch five drifting signals
+            before the clock runs out.
+        </p>
+
+        <div class="game">
+
+            <div class="game-top">
+                <span>SECURITY CHECK</span>
+                <span id="counter">0 / 5</span>
+            </div>
+
+            <div class="game-area" id="gameArea">
+
+                <div class="game-grid"></div>
+
+                <div id="target"></div>
+
+            </div>
+
+            <div class="game-bottom">
+
+                <span id="status">READY</span>
+
+                <button id="startBtn">
+                    START VERIFICATION
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="game-message"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     WEBSITE
+     ====================================================== -->
+
+<div id="site">
+
+<div class="container">
+
+<header>
+
+    <a class="logo" href="#top">
+        SG<span>/</span>
+    </a>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#education">Education</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<main id="top">
+
+<section class="hero">
+
+    <div>
+
+        <div class="hero-meta">
+            Sangram Ganguly · Kolkata, India
+        </div>
+
+        <h1>
+            <span>Security,</span>
+            <span>systems</span>
+            <span class="italic">& things worth</span>
+            <span>building.</span>
+        </h1>
+
+    </div>
+
+    <div class="hero-copy">
+
+        <p>
+            Cybersecurity student focused on security,
+            Linux, systems and practical experimentation.
+            I like understanding how things work —
+            especially when they break.
+        </p>
+
+        <div class="hero-links">
+
+            <a href="https://github.com/sangram-net" target="_blank">
+                GitHub ↗
+            </a>
+
+            <a href="https://www.linkedin.com/in/sangramcloud" target="_blank">
+                LinkedIn ↗
+            </a>
+
+            <a href="https://instagram.com/cyber_sangram" target="_blank">
+                Instagram ↗
+            </a>
+
+            <a href="mailto:connect.sangram@proton.me">
+                Email ↗
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="section-head">
+
+        <div class="section-number">
+            01 / ABOUT
+        </div>
+
+        <h2 class="section-title">
+            Curious about<br>
+            <em>systems.</em>
+        </h2>
+
+    </div>
+
+    <div class="about-grid">
+
+        <p>
+            I'm Sangram — a BCA student exploring cybersecurity,
+            ethical hacking, Linux and software development.
+            My work sits somewhere between learning,
+            breaking things and building them back better.
+        </p>
+
+        <div class="fact-list">
+
+            <div class="fact">
+                <span>FOCUS</span>
+                <span>Cybersecurity / Systems</span>
+            </div>
+
+            <div class="fact">
+                <span>DEGREE</span>
+                <span>BCA</span>
+            </div>
+
+            <div class="fact">
+                <span>STACK</span>
+                <span>Python · Linux · Git</span>
+            </div>
+
+            <div class="fact">
+                <span>INTERESTS</span>
+                <span>Security · Cloud · Systems</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+    <div class="section-head">
+
+        <div class="section-number">
+            02 / PROJECTS
+        </div>
+
+        <h2 class="section-title">
+            Things I've<br>
+            <em>built.</em>
+        </h2>
+
+    </div>
+
+    <div class="projects">
+
+
+        <a
+            class="project"
+            href="https://github.com/sangram-net/SentinelX"
+            target="_blank"
+        >
+
+            <div class="project-number">01</div>
+
+            <div>
+
+                <h3>SentinelX</h3>
+
+                <p>
+                    Local smart log sentinel designed
+                    around security monitoring and
+                    suspicious activity detection.
+                </p>
+
+            </div>
+
+            <div class="project-bottom">
+                <span>GITHUB ↗</span>
+                <span class="project-tag">SECURITY</span>
+            </div>
+
+        </a>
+
+
+        <a
+            class="project"
+            href="https://github.com/sangram-net/password-strength-checker"
+            target="_blank"
+        >
+
+            <div class="project-number">02</div>
+
+            <div>
+
+                <h3>Password Strength Checker</h3>
+
+                <p>
+                    A small security-focused utility
+                    for evaluating password strength
+                    and common weaknesses.
+                </p>
+
+            </div>
+
+            <div class="project-bottom">
+                <span>GITHUB ↗</span>
+                <span class="project-tag">PYTHON</span>
+            </div>
+
+        </a>
+
+
+        <a
+            class="project"
+            href="https://github.com/sangram-net/password_generator"
+            target="_blank"
+        >
+
+            <div class="project-number">03</div>
+
+            <div>
+
+                <h3>Password Generator</h3>
+
+                <p>
+                    Lightweight password generation
+                    tool built as a practical security
+                    programming project.
+                </p>
+
+            </div>
+
+            <div class="project-bottom">
+                <span>GITHUB ↗</span>
+                <span class="project-tag">PYTHON</span>
+            </div>
+
+        </a>
+
+
+        <a
+            class="project"
+            href="https://github.com/sangram-net/System-Usage-Dashboard"
+            target="_blank"
+        >
+
+            <div class="project-number">04</div>
+
+            <div>
+
+                <h3>System Usage Dashboard</h3>
+
+                <p>
+                    A compact system-monitoring project
+                    for observing machine resources and
+                    system activity.
+                </p>
+
+            </div>
+
+            <div class="project-bottom">
+                <span>GITHUB ↗</span>
+                <span class="project-tag">SYSTEMS</span>
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CREDENTIALS -->
+
+<section id="credentials">
+
+    <div class="section-head">
+
+        <div class="section-number">
+            03 / CREDENTIALS
+        </div>
+
+        <h2 class="section-title">
+            Proof of<br>
+            <em>learning.</em>
+        </h2>
+
+    </div>
+
+    <div class="credentials">
+
+
+        <a
+            class="credential"
+            href="https://learn.microsoft.com/en-us/users/sangramganguly-8466/credentials/656cd979f1fb8dd0"
+            target="_blank"
+        >
+
+            <div class="credential-type">
+                Microsoft
+            </div>
+
+            <h3>Microsoft Credential</h3>
+
+            <p>
+                View verified credential
+            </p>
+
+        </a>
+
+
+        <a
+            class="credential"
+            href="https://hackviser.com/verify?id=HV-CORE-EXRKUUNH"
+            target="_blank"
+        >
+
+            <div class="credential-type">
+                Hackviser
+            </div>
+
+            <h3>Hackviser Credential</h3>
+
+            <p>
+                Verify credential ↗
+            </p>
+
+        </a>
+
+
+        <a
+            class="credential"
+            href="https://www.credly.com/badges/088ea347-9db3-4a03-876c-342a5d201e27/public_url"
+            target="_blank"
+        >
+
+            <div class="credential-type">
+                Credly
+            </div>
+
+            <h3>Verified Badge</h3>
+
+            <p>
+                View badge ↗
+            </p>
+
+        </a>
+
+
+        <a
+            class="credential"
+            href="https://www.credly.com/users/sangram.space"
+            target="_blank"
+        >
+
+            <div class="credential-type">
+                Credly Profile
+            </div>
+
+            <h3>All Certifications</h3>
+
+            <p>
+                View complete badge collection ↗
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- EDUCATION -->
+
+<section id="education">
+
+    <div class="section-head">
+
+        <div class="section-number">
+            04 / EDUCATION
+        </div>
+
+        <h2 class="section-title">
+            Currently<br>
+            <em>learning.</em>
+        </h2>
+
+    </div>
+
+    <div class="education">
+
+        <div class="edu-item">
+
+            <div class="edu-year">
+                2025 — 2028
+            </div>
+
+            <div>
+
+                <h3>
+                    Bachelor of Computer Applications
+                </h3>
+
+                <p>
+                    Amity University Online
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="edu-item">
+
+            <div class="edu-year">
+                NOW
+            </div>
+
+            <div>
+
+                <h3>
+                    Cybersecurity & Systems
+                </h3>
+
+                <p>
+                    Independent labs · CTFs · Linux ·
+                    Security projects · Practical experimentation
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+
+            <div class="footer-name">
+                Sangram Ganguly
+            </div>
+
+            <div class="hero-links">
+
+                <a href="https://github.com/sangram-net" target="_blank">
+                    GitHub
+                </a>
+
+                <a href="https://x.com/Sangramexe" target="_blank">
+                    X
+                </a>
+
+                <a href="https://instagram.com/cyber_sangram" target="_blank">
+                    Instagram
+                </a>
+
+                <a href="mailto:connect.sangram@proton.me">
+                    Email
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+
+            SECURITY / SYSTEMS / CURIOSITY<br>
+            © 2026 SANGRAM GANGULY
+
+        </div>
+
+    </div>
+
+</footer>
+
+</div>
+</div>
+
+
+<script>
+/* =========================================================
+   PLAYABLE CAPTCHA
+   ========================================================= */
+
+const gate = document.getElementById("gate");
+const site = document.getElementById("site");
+const startBtn = document.getElementById("startBtn");
+const target = document.getElementById("target");
+const gameArea = document.getElementById("gameArea");
+const counter = document.getElementById("counter");
+const status = document.getElementById("status");
+const message = document.getElementById("game-message");
+
+let score = 0;
+let timer = null;
+let playing = false;
+let timeLeft = 12;
+
+
+/* Random target position */
+
+function moveTarget(){
+
+    const rect = gameArea.getBoundingClientRect();
+
+    const padding = 35;
+
+    const x =
+        padding +
+        Math.random() *
+        (rect.width - padding * 2);
+
+    const y =
+        padding +
+        Math.random() *
+        (rect.height - padding * 2);
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
+}
+
+
+/* Start */
+
+startBtn.addEventListener("click", () => {
+
+    score = 0;
+    timeLeft = 12;
+    playing = true;
+
+    counter.textContent = "0 / 5";
+    status.textContent = "12.0s";
+    message.textContent = "";
+
+    startBtn.style.display = "none";
+    target.style.display = "flex";
+
+    moveTarget();
+
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+
+        timeLeft -= .1;
+
+        status.textContent =
+            Math.max(timeLeft,0).toFixed(1) + "s";
+
+        if(timeLeft <= 0){
+
+            clearInterval(timer);
+
+            playing = false;
+
+            target.style.display = "none";
+
+            status.textContent = "FAILED";
+
+            message.textContent =
+                "The signal disappeared. Try again.";
+
+            startBtn.textContent = "TRY AGAIN";
+            startBtn.style.display = "block";
+        }
+
+    },100);
+
+});
+
+
+/* Catch signal */
+
+target.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    if(!playing) return;
+
+    score++;
+
+    counter.textContent =
+        score + " / 5";
+
+    if(score >= 5){
+
+        clearInterval(timer);
+
+        playing = false;
+
+        target.style.display = "none";
+
+        status.textContent = "VERIFIED";
+
+        message.textContent =
+            "Access granted. Welcome.";
+
+        setTimeout(()=>{
+
+            gate.classList.add("hidden");
+            site.classList.add("visible");
+
+            document.body.style.overflow = "auto";
+
+        },650);
+
+        return;
+    }
+
+    /* Make the remaining targets increasingly playful */
+
+    timeLeft = Math.min(timeLeft + .7,12);
+
+    moveTarget();
+
+});
+
+
+/* Make target occasionally relocate */
+
+let movement = null;
+
+function beginMovement(){
+
+    clearInterval(movement);
+
+    movement = setInterval(()=>{
+
+        if(playing){
+
+            moveTarget();
+
+        }
+
+    },1800);
+
+}
+
+beginMovement();
+
+
+/* Prevent scrolling while gate is active */
+
+document.body.style.overflow = "hidden";
+
+</script>
+
+</body>
+</html>
