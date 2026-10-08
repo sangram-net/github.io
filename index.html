@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Sangram Ganguly — IT Networking Service Engineer and BCA student focused on cybersecurity, Linux, networking and infrastructure.">
+
 <title>Sangram Ganguly</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 :root{
-  --bg:#070b1b;
+  --bg:#080c1b;
   --panel:#0d1530;
   --text:#eee8d5;
   --muted:#8e98b0;
   --gold:#d6bb62;
   --blue:#49639d;
-  --line:#27345b;
+  --line:#293552;
 }
 
 *{
@@ -33,8 +33,8 @@ body{
   min-height:100vh;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 15%,rgba(73,99,157,.16),transparent 28%),
-    radial-gradient(circle at 82% 22%,rgba(214,187,98,.08),transparent 24%),
+    radial-gradient(circle at 15% 15%,rgba(73,99,157,.14),transparent 30%),
+    radial-gradient(circle at 82% 25%,rgba(214,187,98,.06),transparent 25%),
     var(--bg);
   font-family:Manrope,sans-serif;
   overflow-x:hidden;
@@ -44,9 +44,9 @@ body:before{
   content:"";
   position:fixed;
   inset:0;
-  pointer-events:none;
   z-index:-1;
-  opacity:.25;
+  pointer-events:none;
+  opacity:.22;
   background-image:
     radial-gradient(circle,rgba(238,232,213,.7) 0 1px,transparent 1.5px),
     radial-gradient(circle,rgba(214,187,98,.5) 0 1px,transparent 1.5px);
@@ -65,24 +65,29 @@ a{
   text-decoration:none;
 }
 
-button,
-input{
+button{
   font:inherit;
 }
 
-/* =========================
-   SIMPLE TERMINAL
-========================= */
+
+/* =========================================================
+   SIMPLE TOUCH TERMINAL
+========================================================= */
 
 #terminalGate{
   position:fixed;
   inset:0;
   z-index:9999;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#050814;
-  transition:.6s ease;
+
+  background:#080b14;
+
+  transition:
+    opacity .5s ease,
+    visibility .5s ease;
 }
 
 #terminalGate.hide{
@@ -92,92 +97,151 @@ input{
 }
 
 .terminal{
-  width:min(650px,90%);
-  background:#080d18;
-  border:1px solid #303b55;
-  box-shadow:0 25px 80px rgba(0,0,0,.45);
-  font:13px "DM Mono",monospace;
+  width:min(600px,90%);
+
+  background:#0d111c;
+
+  border:1px solid #30394e;
+
+  border-radius:8px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.45);
+
+  font-family:"DM Mono",monospace;
 }
 
-.terminal-bar{
-  height:38px;
+.terminal-header{
+  height:36px;
+
   display:flex;
   align-items:center;
-  gap:7px;
+
   padding:0 13px;
-  border-bottom:1px solid #202b40;
-  color:#69758e;
+
+  background:#151a27;
+
+  border-bottom:1px solid #252c3d;
 }
 
-.terminal-bar span{
+.terminal-buttons{
+  display:flex;
+  gap:6px;
+}
+
+.terminal-buttons span{
   width:9px;
   height:9px;
+
   border-radius:50%;
-  background:#48536a;
+
+  background:#596176;
 }
 
-.terminal-bar small{
-  margin-left:10px;
+.terminal-title{
+  margin:auto;
+
+  color:#737d91;
+
+  font-size:11px;
 }
 
-.terminal-content{
-  padding:22px;
-  min-height:230px;
-  color:#aeb8ca;
+.terminal-body{
+  padding:20px;
+
+  color:#b7c0d1;
+
+  font-size:13px;
+
   line-height:1.8;
 }
 
-#terminalOutput{
-  min-height:150px;
+.command-line{
+  margin-top:8px;
 }
 
-#terminalForm{
+.prompt{
+  color:#91a66e;
+}
+
+#selectedCommand{
+  color:#eee8d5;
+}
+
+#terminalMessage{
+  margin-top:5px;
+
+  color:#8e98b0;
+}
+
+.terminal-commands{
   display:flex;
-  gap:9px;
-  margin-top:10px;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
 }
 
-#terminalForm span{
+.terminal-commands button{
+  min-height:42px;
+
+  padding:8px 15px;
+
+  border:1px solid #30394e;
+
+  border-radius:5px;
+
+  background:#111827;
+
+  color:#aeb8ca;
+
+  font-family:"DM Mono",monospace;
+
+  font-size:12px;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.terminal-commands button:hover,
+.terminal-commands button:active{
+  border-color:var(--gold);
   color:var(--gold);
+  background:#151c2e;
 }
 
-#terminalInput{
-  flex:1;
-  border:0;
-  outline:0;
-  background:none;
-  color:var(--text);
-  font:inherit;
-  caret-color:var(--gold);
-}
 
-.terminal-success{
-  color:#a8b878;
-}
-
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 header{
   position:fixed;
   top:0;
   left:0;
   right:0;
-  z-index:50;
-  height:76px;
+
+  z-index:100;
+
+  height:72px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 5vw;
-  border-bottom:1px solid rgba(39,52,91,.65);
-  background:rgba(7,11,27,.76);
-  backdrop-filter:blur(16px);
+
+  padding:0 6vw;
+
+  border-bottom:1px solid rgba(41,53,82,.7);
+
+  background:rgba(8,12,27,.78);
+
+  backdrop-filter:blur(15px);
 }
 
 .logo{
-  font-family:"Libre Baskerville",serif;
-  font-size:18px;
+  font:700 18px "Libre Baskerville",serif;
 }
 
 .logo span{
@@ -191,9 +255,13 @@ nav{
 
 nav a{
   color:var(--muted);
-  font:500 12px "DM Mono",monospace;
+
+  font:500 11px "DM Mono",monospace;
+
   letter-spacing:.08em;
+
   text-transform:uppercase;
+
   transition:.25s;
 }
 
@@ -202,97 +270,131 @@ nav a.active{
   color:var(--gold);
 }
 
-/* =========================
+
+/* =========================================================
    PAGES
-========================= */
+========================================================= */
 
 .page{
   display:none;
+
   min-height:100vh;
-  padding:128px 7vw 80px;
-  animation:pageIn .5s ease both;
+
+  padding:125px 7vw 80px;
+
+  animation:appear .45s ease;
 }
 
 .page.active{
   display:block;
 }
 
-@keyframes pageIn{
+@keyframes appear{
   from{
     opacity:0;
-    transform:translateY(14px);
+    transform:translateY(12px);
   }
+
   to{
     opacity:1;
     transform:none;
   }
 }
 
-/* =========================
+
+/* =========================================================
    HOME
-========================= */
+========================================================= */
 
 .hero{
-  min-height:calc(100vh - 76px);
-  padding-top:112px;
+  min-height:calc(100vh - 72px);
+
+  padding-top:100px;
+
   display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
-  gap:7vw;
+
+  grid-template-columns:1.1fr .9fr;
+
+  gap:70px;
+
   align-items:center;
 }
 
 .eyebrow,
 .section-kicker{
-  font:500 11px "DM Mono",monospace;
   color:var(--gold);
+
+  font:500 10px "DM Mono",monospace;
+
   letter-spacing:.18em;
+
   text-transform:uppercase;
 }
 
 .hero h1{
-  margin:20px 0 24px;
-  font:700 clamp(48px,7.2vw,105px)/.98 "Libre Baskerville",serif;
-  letter-spacing:-.055em;
+  margin:20px 0;
+
+  font:700 clamp(48px,7vw,95px)/1 "Libre Baskerville",serif;
+
+  letter-spacing:-.06em;
 }
 
 .hero h1 span{
+  color:#b7c2dc;
   font-style:italic;
-  color:#b9c4df;
 }
 
 .hero-copy{
-  max-width:650px;
-  color:#aab3c7;
-  font-size:16px;
-  line-height:1.85;
+  max-width:620px;
+
+  color:#aab3c5;
+
+  font-size:15px;
+
+  line-height:1.9;
 }
 
 .hero-links{
   display:flex;
-  gap:24px;
-  margin-top:36px;
+
+  gap:25px;
+
+  margin-top:32px;
+
   flex-wrap:wrap;
 }
 
 .text-link{
   position:relative;
-  font:500 12px "DM Mono",monospace;
+
   color:var(--text);
+
+  padding-bottom:7px;
+
+  font:500 11px "DM Mono",monospace;
+
   letter-spacing:.08em;
+
   text-transform:uppercase;
-  padding-bottom:8px;
 }
 
 .text-link:after{
   content:"";
+
   position:absolute;
+
   left:0;
-  right:0;
   bottom:0;
+
+  width:100%;
   height:1px;
+
   background:var(--gold);
-  transform:scaleX(.35);
+
+  transform:scaleX(.3);
+
   transform-origin:left;
+
   transition:.3s;
 }
 
@@ -300,70 +402,92 @@ nav a.active{
   transform:scaleX(1);
 }
 
-/* =========================
-   ORBIT
-========================= */
+
+/* =========================================================
+   ORBIT ART
+========================================================= */
 
 .orbit-art{
   position:relative;
-  width:min(430px,80vw);
+
+  width:min(400px,75vw);
+
   aspect-ratio:1;
+
   margin:auto;
 }
 
 .orbit-art:before{
   content:"";
+
   position:absolute;
-  inset:17%;
-  border:1px solid rgba(214,187,98,.35);
+
+  inset:18%;
+
+  border:1px solid rgba(214,187,98,.3);
+
   border-radius:50%;
-  box-shadow:0 0 80px rgba(73,99,157,.15);
 }
 
 .orbit-art:after{
   content:"";
+
   position:absolute;
-  inset:31%;
+
+  inset:32%;
+
   border:1px solid rgba(73,99,157,.5);
+
   border-radius:50%;
 }
 
 .planet{
   position:absolute;
-  inset:36%;
+
+  inset:37%;
+
   border-radius:50%;
+
   background:
-    radial-gradient(circle at 35% 30%,#d7c57d 0 3%,transparent 4%),
-    radial-gradient(circle at 65% 55%,#7083b3 0 12%,transparent 13%),
-    radial-gradient(circle at 42% 70%,#24365f 0 17%,transparent 18%),
-    #111d3d;
-  box-shadow:0 0 55px rgba(73,99,157,.35);
+    radial-gradient(circle at 35% 30%,#d6c477 0 3%,transparent 4%),
+    radial-gradient(circle at 65% 55%,#7182ac 0 12%,transparent 13%),
+    #121d3a;
+
+  box-shadow:
+    0 0 50px rgba(73,99,157,.3);
+
   animation:float 5s ease-in-out infinite;
 }
 
 @keyframes float{
   50%{
-    transform:translateY(-10px);
+    transform:translateY(-9px);
   }
 }
 
 .orbit{
   position:absolute;
+
   inset:8%;
+
   border:1px solid rgba(238,232,213,.12);
+
   border-radius:50%;
-  transform:rotate(-18deg);
 }
 
 .orbit i{
   position:absolute;
+
   top:-4px;
   left:50%;
+
   width:8px;
   height:8px;
+
   border-radius:50%;
+
   background:var(--gold);
-  box-shadow:0 0 20px rgba(214,187,98,.7);
+
   animation:spin 9s linear infinite;
 }
 
@@ -375,149 +499,203 @@ nav a.active{
 
 .signal{
   position:absolute;
-  left:3%;
-  right:3%;
-  top:49%;
+
+  left:4%;
+  right:4%;
+
+  top:50%;
+
   height:1px;
+
   background:linear-gradient(
     90deg,
     transparent,
     var(--gold),
     transparent
   );
-  opacity:.65;
-  animation:signal 3.5s ease-in-out infinite;
+
+  animation:signal 3s ease-in-out infinite;
 }
 
 @keyframes signal{
   50%{
-    transform:scaleX(.72);
     opacity:.25;
+    transform:scaleX(.7);
   }
 }
 
 .side-note{
   position:absolute;
+
   right:-10px;
-  bottom:5%;
+  bottom:7%;
+
   writing-mode:vertical-rl;
-  color:#65718d;
-  font:500 10px "DM Mono",monospace;
-  letter-spacing:.22em;
+
+  color:#64708a;
+
+  font:10px "DM Mono",monospace;
+
+  letter-spacing:.2em;
 }
 
-/* =========================
+
+/* =========================================================
    SECTION HEAD
-========================= */
+========================================================= */
 
 .section-head{
   display:flex;
+
   justify-content:space-between;
+
   align-items:end;
+
   gap:30px;
-  margin-bottom:58px;
-  border-bottom:1px solid var(--line);
+
+  margin-bottom:55px;
+
   padding-bottom:22px;
+
+  border-bottom:1px solid var(--line);
 }
 
 .section-head h2{
-  margin-top:13px;
-  font:400 clamp(38px,5vw,70px)/1 "Libre Baskerville",serif;
+  margin-top:12px;
+
+  font:400 clamp(38px,5vw,68px)/1 "Libre Baskerville",serif;
+
   letter-spacing:-.05em;
 }
 
 .section-head p{
-  max-width:410px;
+  max-width:400px;
+
   color:var(--muted);
+
+  font-size:13px;
+
   line-height:1.8;
-  font-size:14px;
 }
 
-/* =========================
+
+/* =========================================================
    ABOUT
-========================= */
+========================================================= */
 
 .about-grid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:80px;
-  max-width:1100px;
 }
 
 .about-grid h3{
-  font:400 27px "Libre Baskerville",serif;
   margin-bottom:18px;
+
+  font:400 26px "Libre Baskerville",serif;
 }
 
 .about-grid p{
-  color:#aab3c7;
+  color:#aab3c5;
+
+  font-size:14px;
+
   line-height:1.9;
-  font-size:15px;
 }
 
 .facts{
-  margin-top:35px;
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
+  margin-top:30px;
+
   border-top:1px solid var(--line);
 }
 
 .fact{
-  padding:20px 0;
+  padding:18px 0;
+
   border-bottom:1px solid var(--line);
 }
 
 .fact small{
   display:block;
+
+  margin-bottom:7px;
+
   color:var(--muted);
+
   font:10px "DM Mono",monospace;
+
+  letter-spacing:.08em;
+
   text-transform:uppercase;
-  letter-spacing:.12em;
-  margin-bottom:8px;
 }
 
 .fact strong{
-  font-size:14px;
+  font-size:13px;
+
   font-weight:500;
 }
 
-/* =========================
+
+/* =========================================================
    PROJECTS
-========================= */
+========================================================= */
 
 .project-list{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:15px;
 }
 
 .project{
   position:relative;
-  min-height:160px;
-  padding:25px 27px 23px;
-  border:1px solid #33405e;
-  background:rgba(13,21,48,.52);
+
+  min-height:155px;
+
+  padding:24px;
+
+  border:1px solid #33405b;
+
+  background:rgba(13,21,48,.5);
+
   transition:.3s;
+
   overflow:hidden;
 }
 
 .project:before{
   content:"";
+
   position:absolute;
+
   left:0;
   top:0;
   bottom:0;
+
   width:2px;
+
   background:var(--gold);
+
   transform:scaleY(0);
+
   transform-origin:bottom;
+
   transition:.3s;
 }
 
 .project:hover{
   transform:translateY(-4px);
-  border-color:#667496;
-  background:rgba(16,26,56,.8);
+
+  border-color:#65718e;
+
+  background:#101a36;
 }
 
 .project:hover:before{
@@ -526,40 +704,50 @@ nav a.active{
 
 .project-top{
   display:flex;
-  align-items:center;
+
   justify-content:space-between;
+
   gap:15px;
 }
 
 .project-name{
-  color:#72a7e6;
-  font-weight:600;
+  color:#78a8df;
+
   font-size:14px;
+
+  font-weight:600;
 }
 
 .repo-mark{
-  color:#7f8aa2;
+  color:#758199;
 }
 
 .project p{
-  margin:15px 0 19px;
+  margin:14px 0 18px;
+
   color:#929cb1;
+
   font-size:12px;
+
   line-height:1.75;
 }
 
 .lang{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:#9ca5b6;
+  color:#9da6b8;
+
   font-size:11px;
 }
 
 .lang i{
-  width:10px;
-  height:10px;
+  display:inline-block;
+
+  width:9px;
+  height:9px;
+
+  margin-right:5px;
+
   border-radius:50%;
+
   background:#3d82b8;
 }
 
@@ -567,9 +755,10 @@ nav a.active{
   background:#eee34d;
 }
 
-/* =========================
+
+/* =========================================================
    CREDENTIALS
-========================= */
+========================================================= */
 
 .credentials{
   max-width:1000px;
@@ -577,31 +766,43 @@ nav a.active{
 
 .credential{
   display:grid;
-  grid-template-columns:180px 1fr auto;
+
+  grid-template-columns:170px 1fr auto;
+
   gap:30px;
-  align-items:center;
-  padding:25px 0;
+
+  padding:24px 0;
+
   border-bottom:1px solid var(--line);
+
+  align-items:center;
 }
 
 .credential-year{
-  font:500 11px "DM Mono",monospace;
   color:var(--gold);
+
+  font:10px "DM Mono",monospace;
 }
 
 .credential h3{
-  font-size:15px;
-  margin-bottom:7px;
+  margin-bottom:6px;
+
+  font-size:14px;
 }
 
 .credential p{
   color:var(--muted);
+
   font-size:12px;
 }
 
 .credential a{
-  font:500 10px "DM Mono",monospace;
-  color:#aeb8ce;
+  color:#aeb8ca;
+
+  font:10px "DM Mono",monospace;
+
+  letter-spacing:.08em;
+
   text-transform:uppercase;
 }
 
@@ -609,18 +810,22 @@ nav a.active{
   color:var(--gold);
 }
 
-/* =========================
+
+/* =========================================================
    CONTACT
-========================= */
+========================================================= */
 
 .contact-grid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:90px;
 }
 
 .contact-grid h2{
-  font:400 clamp(38px,5vw,68px) "Libre Baskerville",serif;
+  font:400 clamp(38px,5vw,65px) "Libre Baskerville",serif;
+
   letter-spacing:-.05em;
 }
 
@@ -629,9 +834,13 @@ nav a.active{
 }
 
 .contact-copy{
+  max-width:500px;
+
+  margin-top:22px;
+
   color:var(--muted);
+
   line-height:1.9;
-  margin-top:25px;
 }
 
 .socials{
@@ -640,62 +849,55 @@ nav a.active{
 
 .social{
   display:flex;
+
   justify-content:space-between;
-  padding:20px 0;
+
+  padding:19px 0;
+
   border-bottom:1px solid var(--line);
-  transition:.25s;
+
+  transition:.2s;
 }
 
 .social:hover{
-  padding-left:10px;
+  padding-left:8px;
+
   color:var(--gold);
 }
 
 .social small{
   color:var(--muted);
+
   font:10px "DM Mono",monospace;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer{
-  padding:25px 7vw;
-  border-top:1px solid var(--line);
   display:flex;
+
   justify-content:space-between;
+
+  padding:24px 7vw;
+
+  border-top:1px solid var(--line);
+
   color:#65718d;
+
   font:10px "DM Mono",monospace;
+
   letter-spacing:.08em;
+
   text-transform:uppercase;
 }
 
-/* =========================
-   CURSOR
-========================= */
 
-.cursor{
-  position:fixed;
-  z-index:200;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--gold);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  mix-blend-mode:difference;
-  transition:.2s;
-}
-
-.cursor.big{
-  width:28px;
-  height:28px;
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:850px){
 
@@ -704,34 +906,37 @@ footer{
   }
 
   nav{
-    gap:14px;
+    gap:13px;
   }
 
   nav a{
-    font-size:9px;
+    font-size:8px;
   }
 
   .page{
-    padding:110px 22px 65px;
+    padding:110px 22px 60px;
   }
 
   .hero{
     grid-template-columns:1fr;
-    padding-top:70px;
-    gap:50px;
+
+    gap:55px;
+
+    padding-top:60px;
   }
 
   .hero h1{
-    font-size:clamp(44px,13vw,76px);
+    font-size:clamp(45px,13vw,75px);
   }
 
   .orbit-art{
-    width:min(330px,78vw);
+    width:min(320px,75vw);
   }
 
   .about-grid,
   .contact-grid{
     grid-template-columns:1fr;
+
     gap:45px;
   }
 
@@ -741,11 +946,8 @@ footer{
 
   .credential{
     grid-template-columns:1fr;
-    gap:9px;
-  }
 
-  .credential a{
-    justify-self:start;
+    gap:8px;
   }
 
   .section-head{
@@ -753,21 +955,23 @@ footer{
   }
 
   .section-head p{
-    margin-top:22px;
+    margin-top:20px;
   }
 
   footer{
-    padding:22px;
     display:block;
+
+    padding:22px;
   }
 
   footer span{
     display:block;
-    margin-top:8px;
+
+    margin-top:7px;
   }
 }
 
-@media(max-width:520px){
+@media(max-width:500px){
 
   header{
     height:65px;
@@ -778,28 +982,18 @@ footer{
   }
 
   nav{
-    gap:9px;
+    gap:8px;
   }
 
   nav a{
-    font-size:8px;
-  }
-
-  .hero{
-    min-height:auto;
-    padding-top:80px;
-  }
-
-  .hero-copy{
-    font-size:14px;
+    font-size:7px;
   }
 
   .facts{
     grid-template-columns:1fr;
   }
 
-  .side-note,
-  .cursor{
+  .side-note{
     display:none;
   }
 
@@ -807,8 +1001,18 @@ footer{
     width:94%;
   }
 
-  .terminal-content{
+  .terminal-body{
     padding:17px;
+  }
+
+  .terminal-commands{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+  }
+
+  .terminal-commands button{
+    width:100%;
   }
 }
 </style>
@@ -816,41 +1020,88 @@ footer{
 
 <body>
 
+
 <!-- =====================================================
-     TERMINAL UNLOCK
+     TOUCH TERMINAL
 ===================================================== -->
 
 <div id="terminalGate">
 
   <div class="terminal">
 
-    <div class="terminal-bar">
-      <span></span>
-      <span></span>
-      <span></span>
-      <small>sangram@portfolio:~</small>
-    </div>
+    <div class="terminal-header">
 
-    <div class="terminal-content">
-
-      <div id="terminalOutput">
-        <div>Welcome to Sangram's portfolio.</div>
-        <div>Type <b>help</b> to continue.</div>
+      <div class="terminal-buttons">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
-      <form id="terminalForm">
+      <div class="terminal-title">
+        sangram@portfolio
+      </div>
 
-        <span>sangram@portfolio:~$</span>
+    </div>
 
-        <input
-          id="terminalInput"
-          type="text"
-          autocomplete="off"
-          spellcheck="false"
-          autofocus
+
+    <div class="terminal-body">
+
+      <div>
+        Welcome.
+      </div>
+
+      <div>
+        Choose a command:
+      </div>
+
+
+      <div class="command-line">
+
+        <span class="prompt">
+          sangram@portfolio:~$
+        </span>
+
+        <span id="selectedCommand">
+          _
+        </span>
+
+      </div>
+
+
+      <div id="terminalMessage"></div>
+
+
+      <div class="terminal-commands">
+
+        <button
+          type="button"
+          onclick="terminalCommand('whoami')"
         >
+          whoami
+        </button>
 
-      </form>
+        <button
+          type="button"
+          onclick="terminalCommand('ls')"
+        >
+          ls
+        </button>
+
+        <button
+          type="button"
+          onclick="terminalCommand('projects')"
+        >
+          projects
+        </button>
+
+        <button
+          type="button"
+          onclick="terminalCommand('open')"
+        >
+          open
+        </button>
+
+      </div>
 
     </div>
 
@@ -865,18 +1116,36 @@ footer{
 
 <div id="site">
 
+
 <header>
 
   <a class="logo" href="#home">
     Sangram<span>.</span>
   </a>
 
+
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#credentials">Credentials</a>
-    <a href="#contact">Contact</a>
+
+    <a href="#home">
+      Home
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#projects">
+      Projects
+    </a>
+
+    <a href="#credentials">
+      Credentials
+    </a>
+
+    <a href="#contact">
+      Contact
+    </a>
+
   </nav>
 
 </header>
@@ -884,7 +1153,10 @@ footer{
 
 <main>
 
-<!-- HOME -->
+
+<!-- =====================================================
+     HOME
+===================================================== -->
 
 <section id="home" class="page active">
 
@@ -896,28 +1168,38 @@ footer{
         Cybersecurity / Networking / Linux
       </div>
 
+
       <h1>
         Sangram <span>Ganguly.</span>
       </h1>
 
+
       <p class="hero-copy">
-        IT Networking Service Engineer and BCA student building practical
-        knowledge across cybersecurity, Linux, networking and infrastructure.
+        IT Networking Service Engineer and BCA student building
+        practical knowledge across cybersecurity, Linux,
+        networking and infrastructure.
       </p>
+
 
       <div class="hero-links">
 
-        <a class="text-link" href="#projects">
+        <a
+          class="text-link"
+          href="#projects"
+        >
           View projects
         </a>
+
 
         <a
           class="text-link"
           href="https://github.com/sangram-net"
           target="_blank"
+          rel="noopener"
         >
           GitHub
         </a>
+
 
         <a
           class="text-link"
@@ -952,20 +1234,27 @@ footer{
 </section>
 
 
-<!-- ABOUT -->
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
 <section id="about" class="page">
 
   <div class="section-head">
 
     <div>
-      <div class="section-kicker">01 / About</div>
+
+      <div class="section-kicker">
+        01 / About
+      </div>
 
       <h2>
         Built around<br>
         curiosity.
       </h2>
+
     </div>
+
 
     <p>
       Learning by building, breaking, fixing and understanding
@@ -979,18 +1268,22 @@ footer{
 
     <div>
 
-      <h3>A little about me</h3>
+      <h3>
+        A little about me
+      </h3>
 
       <p>
-        I am Sangram Ganguly, an IT Networking Service Engineer and
-        BCA student based in Kolkata, India. My interests sit at the
-        intersection of cybersecurity, Linux, networking and practical
-        infrastructure.
+        I am Sangram Ganguly, an IT Networking Service Engineer
+        and BCA student based in Kolkata, India. My interests
+        sit at the intersection of cybersecurity, Linux,
+        networking and practical infrastructure.
       </p>
 
+
       <p style="margin-top:18px">
-        I enjoy turning small ideas into working projects and continuously
-        expanding my understanding of defensive security and systems.
+        I enjoy turning small ideas into working projects and
+        continuously expanding my understanding of systems
+        and security.
       </p>
 
     </div>
@@ -998,33 +1291,67 @@ footer{
 
     <div>
 
-      <h3>Currently learning</h3>
+      <h3>
+        Currently learning
+      </h3>
 
       <p>
-        Cybersecurity, networking, Linux administration, cloud technologies,
-        ethical hacking and digital defense.
+        Cybersecurity, networking, Linux administration,
+        cloud technologies, ethical hacking and digital defense.
       </p>
+
 
       <div class="facts">
 
         <div class="fact">
-          <small>Education</small>
-          <strong>BCA · Amity University Online</strong>
+
+          <small>
+            Education
+          </small>
+
+          <strong>
+            BCA · Amity University Online
+          </strong>
+
         </div>
 
-        <div class="fact">
-          <small>Period</small>
-          <strong>2025 — 2028</strong>
-        </div>
 
         <div class="fact">
-          <small>Focus</small>
-          <strong>Cybersecurity & Networking</strong>
+
+          <small>
+            Period
+          </small>
+
+          <strong>
+            2025 — 2028
+          </strong>
+
         </div>
 
+
         <div class="fact">
-          <small>Based in</small>
-          <strong>Kolkata, India</strong>
+
+          <small>
+            Focus
+          </small>
+
+          <strong>
+            Cybersecurity & Networking
+          </strong>
+
+        </div>
+
+
+        <div class="fact">
+
+          <small>
+            Based in
+          </small>
+
+          <strong>
+            Kolkata, India
+          </strong>
+
         </div>
 
       </div>
@@ -1036,7 +1363,9 @@ footer{
 </section>
 
 
-<!-- PROJECTS -->
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
 
 <section id="projects" class="page">
 
@@ -1055,6 +1384,7 @@ footer{
 
     </div>
 
+
     <p>
       Four practical projects. No filler repositories.
     </p>
@@ -1064,10 +1394,14 @@ footer{
 
   <div class="project-list">
 
+
+    <!-- PROJECT 1 -->
+
     <a
       class="project"
       href="https://github.com/sangram-net/password-strength-checker"
       target="_blank"
+      rel="noopener"
     >
 
       <div class="project-top">
@@ -1076,26 +1410,35 @@ footer{
           password-strength-checker
         </span>
 
-        <span class="repo-mark">↗</span>
+        <span class="repo-mark">
+          ↗
+        </span>
 
       </div>
 
+
       <p>
-        A Python GUI-based cybersecurity tool to analyze password
-        strength with show/hide feature and smart suggestions.
+        A Python GUI-based cybersecurity tool to analyze
+        password strength with show/hide feature and smart
+        suggestions.
       </p>
 
+
       <span class="lang">
-        <i></i> Python
+        <i></i>
+        Python
       </span>
 
     </a>
 
 
+    <!-- PROJECT 2 -->
+
     <a
       class="project"
       href="https://github.com/sangram-net/password_generator"
       target="_blank"
+      rel="noopener"
     >
 
       <div class="project-top">
@@ -1104,26 +1447,35 @@ footer{
           password_generator
         </span>
 
-        <span class="repo-mark">↗</span>
+        <span class="repo-mark">
+          ↗
+        </span>
 
       </div>
 
+
       <p>
-        A Python GUI-based password generator that creates strong,
-        random passwords with a clean dark interface using Tkinter.
+        A Python GUI-based password generator that creates
+        strong, random passwords with a clean dark interface
+        using Tkinter.
       </p>
 
+
       <span class="lang">
-        <i></i> Python
+        <i></i>
+        Python
       </span>
 
     </a>
 
 
+    <!-- PROJECT 3 -->
+
     <a
       class="project"
       href="https://github.com/sangram-net/System-Usage-Dashboard"
       target="_blank"
+      rel="noopener"
     >
 
       <div class="project-top">
@@ -1132,28 +1484,35 @@ footer{
           System-Usage-Dashboard
         </span>
 
-        <span class="repo-mark">↗</span>
+        <span class="repo-mark">
+          ↗
+        </span>
 
       </div>
 
+
       <p>
-        A Python-based system monitoring dashboard that provides
-        real-time insights into CPU, memory, and disk usage using
-        the psutil library, designed with a clean and efficient
-        terminal interface.
+        A Python-based system monitoring dashboard that
+        provides real-time insights into CPU, memory and
+        disk usage using psutil.
       </p>
 
+
       <span class="lang">
-        <i></i> Python
+        <i></i>
+        Python
       </span>
 
     </a>
 
 
+    <!-- PROJECT 4 -->
+
     <a
       class="project"
       href="https://github.com/sangram-net/SentinelX"
       target="_blank"
+      rel="noopener"
     >
 
       <div class="project-top">
@@ -1162,27 +1521,35 @@ footer{
           SentinelX
         </span>
 
-        <span class="repo-mark">↗</span>
+        <span class="repo-mark">
+          ↗
+        </span>
 
       </div>
+
 
       <p>
         Local Smart Log Sentinel — lightweight security log
         analysis and threat detection.
       </p>
 
-      <span class="lang js">
-        <i></i> JavaScript
+
+      <span class="lang">
+        <i></i>
+        JavaScript
       </span>
 
     </a>
+
 
   </div>
 
 </section>
 
 
-<!-- CREDENTIALS -->
+<!-- =====================================================
+     CREDENTIALS
+===================================================== -->
 
 <section id="credentials" class="page">
 
@@ -1201,8 +1568,10 @@ footer{
 
     </div>
 
+
     <p>
-      Certifications and applied learning collected along the way.
+      Certifications and applied learning collected along
+      the way.
     </p>
 
   </div>
@@ -1210,11 +1579,13 @@ footer{
 
   <div class="credentials">
 
+
     <div class="credential">
 
       <div class="credential-year">
         SEP 2026
       </div>
+
 
       <div>
 
@@ -1223,14 +1594,17 @@ footer{
         </h3>
 
         <p>
-          Microsoft Applied Skills · Credential ID 556CD979F1FB8DD0
+          Microsoft Applied Skills · Credential ID
+          556CD979F1FB8DD0
         </p>
 
       </div>
 
+
       <a
         href="https://learn.microsoft.com/en-us/credentials/"
         target="_blank"
+        rel="noopener"
       >
         Verify ↗
       </a>
@@ -1243,6 +1617,7 @@ footer{
       <div class="credential-year">
         SEP 2026
       </div>
+
 
       <div>
 
@@ -1256,9 +1631,11 @@ footer{
 
       </div>
 
+
       <a
         href="https://hackviser.com/"
         target="_blank"
+        rel="noopener"
       >
         Verify ↗
       </a>
@@ -1272,6 +1649,7 @@ footer{
         MAR 2026
       </div>
 
+
       <div>
 
         <h3>
@@ -1284,9 +1662,11 @@ footer{
 
       </div>
 
+
       <a
         href="https://www.credly.com/users/sangram.space"
         target="_blank"
+        rel="noopener"
       >
         Profile ↗
       </a>
@@ -1300,6 +1680,7 @@ footer{
         NOV 2025
       </div>
 
+
       <div>
 
         <h3>
@@ -1312,21 +1693,26 @@ footer{
 
       </div>
 
+
       <a
         href="https://www.credly.com/users/sangram.space"
         target="_blank"
+        rel="noopener"
       >
         Profile ↗
       </a>
 
     </div>
 
+
   </div>
 
 </section>
 
 
-<!-- CONTACT -->
+<!-- =====================================================
+     CONTACT
+===================================================== -->
 
 <section id="contact" class="page">
 
@@ -1345,6 +1731,7 @@ footer{
 
     </div>
 
+
     <p>
       For projects, collaboration, networking or just a good
       technical conversation.
@@ -1355,16 +1742,20 @@ footer{
 
   <div class="contact-grid">
 
+
     <div>
 
       <h2>
         Say <em>hello.</em>
       </h2>
 
+
       <p class="contact-copy">
-        Whether it is cybersecurity, Linux, networking or a project
-        worth building, you can find me around the links below.
+        Whether it is cybersecurity, Linux, networking or
+        a project worth building, you can find me around
+        the links below.
       </p>
+
 
       <div class="hero-links">
 
@@ -1375,10 +1766,12 @@ footer{
           Email me
         </a>
 
+
         <a
           class="text-link"
           href="https://github.com/sangram-net"
           target="_blank"
+          rel="noopener"
         >
           GitHub
         </a>
@@ -1394,45 +1787,79 @@ footer{
         class="social"
         href="https://www.linkedin.com/in/sangramcloud"
         target="_blank"
+        rel="noopener"
       >
-        <span>LinkedIn</span>
-        <small>Professional</small>
+        <span>
+          LinkedIn
+        </span>
+
+        <small>
+          Professional
+        </small>
       </a>
+
 
       <a
         class="social"
         href="https://github.com/sangram-net"
         target="_blank"
+        rel="noopener"
       >
-        <span>GitHub</span>
-        <small>Code / Projects</small>
+        <span>
+          GitHub
+        </span>
+
+        <small>
+          Code / Projects
+        </small>
       </a>
+
 
       <a
         class="social"
         href="https://instagram.com/cyber_sangram"
         target="_blank"
+        rel="noopener"
       >
-        <span>Instagram</span>
-        <small>Visuals / Life</small>
+        <span>
+          Instagram
+        </span>
+
+        <small>
+          Visuals / Life
+        </small>
       </a>
+
 
       <a
         class="social"
         href="https://x.com/Sangramexe"
         target="_blank"
+        rel="noopener"
       >
-        <span>X</span>
-        <small>Updates</small>
+        <span>
+          X
+        </span>
+
+        <small>
+          Updates
+        </small>
       </a>
+
 
       <a
         class="social"
         href="https://www.credly.com/users/sangram.space"
         target="_blank"
+        rel="noopener"
       >
-        <span>Credly</span>
-        <small>Credentials</small>
+        <span>
+          Credly
+        </span>
+
+        <small>
+          Credentials
+        </small>
       </a>
 
     </div>
@@ -1441,12 +1868,15 @@ footer{
 
 </section>
 
+
 </main>
 
 
 <footer>
 
-  <span>© 2026 Sangram Ganguly</span>
+  <span>
+    © 2026 Sangram Ganguly
+  </span>
 
   <span>
     Built with HTML / CSS / JavaScript
@@ -1454,123 +1884,78 @@ footer{
 
 </footer>
 
+
 </div>
-
-
-<div class="cursor" id="cursor"></div>
 
 
 <script>
 
-/* =====================================================
-   TERMINAL
-===================================================== */
+/* =========================================================
+   TOUCH TERMINAL
+========================================================= */
 
-const terminalGate =
-  document.getElementById("terminalGate");
+function terminalCommand(command){
 
-const terminalForm =
-  document.getElementById("terminalForm");
+  const selected =
+    document.getElementById("selectedCommand");
 
-const terminalInput =
-  document.getElementById("terminalInput");
-
-const terminalOutput =
-  document.getElementById("terminalOutput");
+  const message =
+    document.getElementById("terminalMessage");
 
 
-function printTerminal(text,className=""){
+  selected.textContent =
+    command;
 
-  const line =
-    document.createElement("div");
 
-  line.textContent = text;
+  if(command === "whoami"){
 
-  if(className){
-    line.className = className;
+    message.textContent =
+      "Sangram Ganguly — BCA / Networking / Cybersecurity";
+
+    return;
   }
 
-  terminalOutput.appendChild(line);
-}
 
+  if(command === "ls"){
 
-terminalForm.addEventListener("submit",function(e){
+    message.textContent =
+      "about  projects  credentials  contact";
 
-  e.preventDefault();
-
-  const command =
-    terminalInput.value.trim().toLowerCase();
-
-  if(!command) return;
-
-
-  printTerminal(
-    "sangram@portfolio:~$ " + command
-  );
-
-
-  if(command === "help"){
-
-    printTerminal(
-      "Available: help · whoami · projects · clear · unlock"
-    );
-
+    return;
   }
 
-  else if(command === "whoami"){
 
-    printTerminal(
-      "Sangram Ganguly — Cybersecurity / Networking / Linux"
-    );
+  if(command === "projects"){
 
+    message.textContent =
+      "4 projects found.";
+
+    return;
   }
 
-  else if(command === "projects"){
 
-    printTerminal(
-      "password-strength-checker · password_generator · System-Usage-Dashboard · SentinelX"
-    );
+  if(command === "open"){
 
-  }
+    message.textContent =
+      "Opening portfolio...";
 
-  else if(command === "clear"){
-
-    terminalOutput.innerHTML = "";
-
-  }
-
-  else if(command === "unlock"){
-
-    printTerminal(
-      "Access granted.",
-      "terminal-success"
-    );
 
     setTimeout(function(){
 
-      terminalGate.classList.add("hide");
+      document
+        .getElementById("terminalGate")
+        .classList.add("hide");
 
-    },500);
-
-  }
-
-  else{
-
-    printTerminal(
-      "command not found. Type 'help'."
-    );
+    },400);
 
   }
 
-
-  terminalInput.value = "";
-
-});
+}
 
 
-/* =====================================================
-   SPA NAVIGATION
-===================================================== */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 const pages =
   [...document.querySelectorAll(".page")];
@@ -1620,36 +2005,29 @@ function showPage(id){
 }
 
 
-function navigate(event){
-
-  const href =
-    event.currentTarget.getAttribute("href");
-
-  if(
-    !href ||
-    !href.startsWith("#")
-  ){
-    return;
-  }
-
-  event.preventDefault();
-
-  history.pushState(
-    null,
-    "",
-    href
-  );
-
-  showPage(href);
-
-}
-
-
 navLinks.forEach(link => {
 
   link.addEventListener(
     "click",
-    navigate
+    function(event){
+
+      event.preventDefault();
+
+
+      const href =
+        this.getAttribute("href");
+
+
+      history.pushState(
+        null,
+        "",
+        href
+      );
+
+
+      showPage(href);
+
+    }
   );
 
 });
@@ -1657,56 +2035,21 @@ navLinks.forEach(link => {
 
 window.addEventListener(
   "popstate",
-  () => showPage(location.hash)
+  function(){
+    showPage(location.hash);
+  }
 );
 
 
 window.addEventListener(
   "hashchange",
-  () => showPage(location.hash)
-);
-
-
-showPage(location.hash);
-
-
-/* =====================================================
-   CUSTOM CURSOR
-===================================================== */
-
-const cursor =
-  document.getElementById("cursor");
-
-
-window.addEventListener(
-  "mousemove",
-  function(e){
-
-    cursor.style.left =
-      e.clientX + "px";
-
-    cursor.style.top =
-      e.clientY + "px";
-
+  function(){
+    showPage(location.hash);
   }
 );
 
 
-document
-  .querySelectorAll("a,button,.project")
-  .forEach(element => {
-
-    element.addEventListener(
-      "mouseenter",
-      () => cursor.classList.add("big")
-    );
-
-    element.addEventListener(
-      "mouseleave",
-      () => cursor.classList.remove("big")
-    );
-
-  });
+showPage(location.hash);
 
 </script>
 
