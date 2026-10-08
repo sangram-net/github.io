@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sangram Ganguly</title>
+<title>Sangram Ganguly — Cybersecurity</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap');
-
 :root{
-  --bg:#080c1b;
-  --panel:#0d1530;
-  --text:#eee8d5;
-  --muted:#8e98b0;
-  --gold:#d6bb62;
-  --blue:#49639d;
-  --line:#293552;
+  --bg:#0b0f12;
+  --bg2:#11171b;
+  --text:#e8ece9;
+  --muted:#929d98;
+  --line:#293238;
+  --blue:#7899ad;
+  --orange:#d89455;
+  --olive:#87956b;
+  --max:1120px;
 }
 
 *{
@@ -30,34 +30,14 @@ html{
 }
 
 body{
-  min-height:100vh;
-  color:var(--text);
   background:
-    radial-gradient(circle at 15% 15%,rgba(73,99,157,.14),transparent 30%),
-    radial-gradient(circle at 82% 25%,rgba(214,187,98,.06),transparent 25%),
-    var(--bg);
-  font-family:Manrope,sans-serif;
+    radial-gradient(circle at 10% 10%,rgba(120,153,173,.09),transparent 30%),
+    radial-gradient(circle at 90% 40%,rgba(216,148,85,.07),transparent 30%),
+    linear-gradient(145deg,#090d10,#0d1316 60%,#10140f);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.6;
   overflow-x:hidden;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-  opacity:.22;
-  background-image:
-    radial-gradient(circle,rgba(238,232,213,.7) 0 1px,transparent 1.5px),
-    radial-gradient(circle,rgba(214,187,98,.5) 0 1px,transparent 1.5px);
-  background-size:83px 91px,137px 151px;
-  animation:stars 35s linear infinite;
-}
-
-@keyframes stars{
-  to{
-    background-position:180px 220px,-90px -120px;
-  }
 }
 
 a{
@@ -65,954 +45,562 @@ a{
   text-decoration:none;
 }
 
-button{
-  font:inherit;
+::selection{
+  background:rgba(216,148,85,.3);
 }
 
+/* NAV */
 
-/* =========================================================
-   SIMPLE TOUCH TERMINAL
-========================================================= */
-
-#terminalGate{
+nav{
   position:fixed;
-  inset:0;
-  z-index:9999;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:#080b14;
-
-  transition:
-    opacity .5s ease,
-    visibility .5s ease;
-}
-
-#terminalGate.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.terminal{
-  width:min(600px,90%);
-
-  background:#0d111c;
-
-  border:1px solid #30394e;
-
-  border-radius:8px;
-
-  overflow:hidden;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.45);
-
-  font-family:"DM Mono",monospace;
-}
-
-.terminal-header{
-  height:36px;
-
-  display:flex;
-  align-items:center;
-
-  padding:0 13px;
-
-  background:#151a27;
-
-  border-bottom:1px solid #252c3d;
-}
-
-.terminal-buttons{
-  display:flex;
-  gap:6px;
-}
-
-.terminal-buttons span{
-  width:9px;
-  height:9px;
-
-  border-radius:50%;
-
-  background:#596176;
-}
-
-.terminal-title{
-  margin:auto;
-
-  color:#737d91;
-
-  font-size:11px;
-}
-
-.terminal-body{
-  padding:20px;
-
-  color:#b7c0d1;
-
-  font-size:13px;
-
-  line-height:1.8;
-}
-
-.command-line{
-  margin-top:8px;
-}
-
-.prompt{
-  color:#91a66e;
-}
-
-#selectedCommand{
-  color:#eee8d5;
-}
-
-#terminalMessage{
-  margin-top:5px;
-
-  color:#8e98b0;
-}
-
-.terminal-commands{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:18px;
-}
-
-.terminal-commands button{
-  min-height:42px;
-
-  padding:8px 15px;
-
-  border:1px solid #30394e;
-
-  border-radius:5px;
-
-  background:#111827;
-
-  color:#aeb8ca;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:12px;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.terminal-commands button:hover,
-.terminal-commands button:active{
-  border-color:var(--gold);
-  color:var(--gold);
-  background:#151c2e;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-
   z-index:100;
-
-  height:72px;
-
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(calc(100% - 28px),1000px);
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  padding:0 6vw;
-
-  border-bottom:1px solid rgba(41,53,82,.7);
-
-  background:rgba(8,12,27,.78);
-
-  backdrop-filter:blur(15px);
+  padding:10px 12px 10px 18px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(10,14,17,.78);
+  backdrop-filter:blur(16px);
+  border-radius:50px;
 }
 
 .logo{
-  font:700 18px "Libre Baskerville",serif;
+  font-weight:800;
+  letter-spacing:-.04em;
 }
 
 .logo span{
-  color:var(--gold);
+  color:var(--orange);
 }
 
-nav{
+.nav-links{
   display:flex;
-  gap:28px;
+  gap:4px;
 }
 
-nav a{
-  color:var(--muted);
-
-  font:500 11px "DM Mono",monospace;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
-
+.nav-links a{
+  padding:7px 12px;
+  border-radius:20px;
+  color:#aab3af;
+  font-size:.87rem;
   transition:.25s;
 }
 
-nav a:hover,
-nav a.active{
-  color:var(--gold);
+.nav-links a:hover{
+  color:white;
+  background:rgba(255,255,255,.06);
 }
 
-
-/* =========================================================
-   PAGES
-========================================================= */
-
-.page{
-  display:none;
-
-  min-height:100vh;
-
-  padding:125px 7vw 80px;
-
-  animation:appear .45s ease;
+.nav-github{
+  border:1px solid var(--line);
+  padding:8px 14px;
+  border-radius:30px;
+  font-size:.85rem;
 }
 
-.page.active{
-  display:block;
+/* GENERAL */
+
+.container{
+  width:min(calc(100% - 36px),var(--max));
+  margin:auto;
 }
 
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
-
-  to{
-    opacity:1;
-    transform:none;
-  }
+section{
+  padding:110px 0;
+  border-top:1px solid rgba(255,255,255,.055);
 }
 
+.kicker{
+  color:var(--orange);
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:.75rem;
+  font-weight:700;
+}
 
-/* =========================================================
-   HOME
-========================================================= */
+.section-title{
+  font-size:clamp(2rem,5vw,3.6rem);
+  letter-spacing:-.06em;
+  line-height:1;
+  margin-top:9px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  align-items:end;
+  margin-bottom:35px;
+}
+
+.section-note{
+  max-width:430px;
+  color:var(--muted);
+}
+
+/* HERO */
 
 .hero{
-  min-height:calc(100vh - 72px);
-
-  padding-top:100px;
-
+  min-height:100vh;
   display:grid;
+  align-items:center;
+  padding-top:120px;
+}
 
-  grid-template-columns:1.1fr .9fr;
-
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.4fr .6fr;
   gap:70px;
-
   align-items:center;
 }
 
-.eyebrow,
-.section-kicker{
-  color:var(--gold);
-
-  font:500 10px "DM Mono",monospace;
-
-  letter-spacing:.18em;
-
+.eyebrow{
+  color:var(--olive);
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.15em;
   text-transform:uppercase;
 }
 
 .hero h1{
-  margin:20px 0;
-
-  font:700 clamp(48px,7vw,95px)/1 "Libre Baskerville",serif;
-
-  letter-spacing:-.06em;
+  font-size:clamp(3.3rem,8vw,7rem);
+  line-height:.87;
+  letter-spacing:-.08em;
+  margin:18px 0 28px;
 }
 
 .hero h1 span{
-  color:#b7c2dc;
-  font-style:italic;
+  color:var(--orange);
 }
 
-.hero-copy{
-  max-width:620px;
-
-  color:#aab3c5;
-
-  font-size:15px;
-
-  line-height:1.9;
+.hero-text{
+  color:#aab4af;
+  max-width:650px;
+  font-size:1.08rem;
 }
 
-.hero-links{
+.buttons{
   display:flex;
-
-  gap:25px;
-
-  margin-top:32px;
-
+  gap:10px;
   flex-wrap:wrap;
+  margin-top:30px;
 }
 
-.text-link{
+.btn{
+  padding:11px 17px;
+  border-radius:30px;
+  border:1px solid var(--line);
+  background:#12181c;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  border-color:#52616a;
+}
+
+.btn-primary{
+  background:var(--orange);
+  color:#17100b;
+  border-color:var(--orange);
+  font-weight:700;
+}
+
+/* ORBIT */
+
+.orbit{
+  width:290px;
+  height:290px;
+  border:1px solid #344149;
+  border-radius:50%;
   position:relative;
-
-  color:var(--text);
-
-  padding-bottom:7px;
-
-  font:500 11px "DM Mono",monospace;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
-}
-
-.text-link:after{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  bottom:0;
-
-  width:100%;
-  height:1px;
-
-  background:var(--gold);
-
-  transform:scaleX(.3);
-
-  transform-origin:left;
-
-  transition:.3s;
-}
-
-.text-link:hover:after{
-  transform:scaleX(1);
-}
-
-
-/* =========================================================
-   ORBIT ART
-========================================================= */
-
-.orbit-art{
-  position:relative;
-
-  width:min(400px,75vw);
-
-  aspect-ratio:1;
-
   margin:auto;
+  animation:float 6s ease-in-out infinite;
 }
 
-.orbit-art:before{
+.orbit:before,
+.orbit:after{
   content:"";
-
   position:absolute;
-
-  inset:18%;
-
-  border:1px solid rgba(214,187,98,.3);
-
+  border:1px solid #29353b;
   border-radius:50%;
 }
 
-.orbit-art:after{
-  content:"";
-
-  position:absolute;
-
-  inset:32%;
-
-  border:1px solid rgba(73,99,157,.5);
-
-  border-radius:50%;
+.orbit:before{
+  inset:17% -9%;
+  transform:rotate(27deg);
 }
 
-.planet{
+.orbit:after{
+  inset:-9% 17%;
+  transform:rotate(-25deg);
+}
+
+.core{
   position:absolute;
-
-  inset:37%;
-
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:82px;
+  height:82px;
+  display:grid;
+  place-items:center;
   border-radius:50%;
+  background:linear-gradient(145deg,#7898aa,#405864);
+  color:#0c1418;
+  font-weight:900;
+  box-shadow:0 0 0 12px rgba(120,153,173,.05);
+}
 
-  background:
-    radial-gradient(circle at 35% 30%,#d6c477 0 3%,transparent 4%),
-    radial-gradient(circle at 65% 55%,#7182ac 0 12%,transparent 13%),
-    #121d3a;
+.dot{
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--orange);
+  top:17%;
+  left:20%;
+  animation:move 5s ease-in-out infinite;
+}
 
-  box-shadow:
-    0 0 50px rgba(73,99,157,.3);
-
-  animation:float 5s ease-in-out infinite;
+.dot.two{
+  top:auto;
+  left:auto;
+  right:14%;
+  bottom:19%;
+  background:var(--olive);
+  animation-delay:-2s;
 }
 
 @keyframes float{
   50%{
-    transform:translateY(-9px);
+    transform:translateY(-9px) rotate(2deg);
   }
 }
 
-.orbit{
-  position:absolute;
-
-  inset:8%;
-
-  border:1px solid rgba(238,232,213,.12);
-
-  border-radius:50%;
-}
-
-.orbit i{
-  position:absolute;
-
-  top:-4px;
-  left:50%;
-
-  width:8px;
-  height:8px;
-
-  border-radius:50%;
-
-  background:var(--gold);
-
-  animation:spin 9s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.signal{
-  position:absolute;
-
-  left:4%;
-  right:4%;
-
-  top:50%;
-
-  height:1px;
-
-  background:linear-gradient(
-    90deg,
-    transparent,
-    var(--gold),
-    transparent
-  );
-
-  animation:signal 3s ease-in-out infinite;
-}
-
-@keyframes signal{
+@keyframes move{
   50%{
-    opacity:.25;
-    transform:scaleX(.7);
+    transform:translate(15px,-12px);
   }
 }
 
-.side-note{
-  position:absolute;
-
-  right:-10px;
-  bottom:7%;
-
-  writing-mode:vertical-rl;
-
-  color:#64708a;
-
-  font:10px "DM Mono",monospace;
-
-  letter-spacing:.2em;
-}
-
-
-/* =========================================================
-   SECTION HEAD
-========================================================= */
-
-.section-head{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:end;
-
-  gap:30px;
-
-  margin-bottom:55px;
-
-  padding-bottom:22px;
-
-  border-bottom:1px solid var(--line);
-}
-
-.section-head h2{
-  margin-top:12px;
-
-  font:400 clamp(38px,5vw,68px)/1 "Libre Baskerville",serif;
-
-  letter-spacing:-.05em;
-}
-
-.section-head p{
-  max-width:400px;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.8;
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
+/* ABOUT */
 
 .about-grid{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
-  gap:80px;
+  gap:18px;
 }
 
-.about-grid h3{
-  margin-bottom:18px;
-
-  font:400 26px "Libre Baskerville",serif;
+.panel{
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(18,24,28,.65);
+  transition:.3s;
 }
 
-.about-grid p{
-  color:#aab3c5;
+.panel:hover{
+  transform:translateY(-4px);
+  border-color:#3d4a51;
+}
 
-  font-size:14px;
-
-  line-height:1.9;
+.panel p{
+  color:#aab3ae;
+  margin-bottom:15px;
 }
 
 .facts{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
-  margin-top:30px;
-
-  border-top:1px solid var(--line);
+  gap:12px;
 }
 
 .fact{
-  padding:18px 0;
-
-  border-bottom:1px solid var(--line);
-}
-
-.fact small{
-  display:block;
-
-  margin-bottom:7px;
-
-  color:var(--muted);
-
-  font:10px "DM Mono",monospace;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
+  padding:15px;
+  border-left:2px solid var(--olive);
+  background:rgba(255,255,255,.025);
+  border-radius:7px;
 }
 
 .fact strong{
-  font-size:13px;
-
-  font-weight:500;
+  display:block;
 }
 
+.fact span{
+  color:var(--muted);
+  font-size:.84rem;
+}
 
-/* =========================================================
-   PROJECTS
-========================================================= */
+/* EDUCATION */
 
-.project-list{
+.timeline{
+  position:relative;
+  padding-left:30px;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:7px;
+  top:4px;
+  bottom:4px;
+  width:1px;
+  background:#344047;
+}
+
+.timeline-item{
+  position:relative;
+  margin-bottom:35px;
+}
+
+.timeline-item:before{
+  content:"";
+  position:absolute;
+  left:-27px;
+  top:8px;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--orange);
+  border:3px solid var(--bg);
+}
+
+.timeline-item small{
+  color:var(--olive);
+  font-weight:700;
+}
+
+.timeline-item h3{
+  margin:5px 0;
+}
+
+.timeline-item p{
+  color:var(--muted);
+}
+
+/* PROJECTS */
+
+.project-grid{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
-  gap:15px;
+  gap:14px;
 }
 
 .project{
   position:relative;
-
-  min-height:155px;
-
-  padding:24px;
-
-  border:1px solid #33405b;
-
-  background:rgba(13,21,48,.5);
-
-  transition:.3s;
-
+  min-height:210px;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(15,21,24,.7);
   overflow:hidden;
-}
-
-.project:before{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  top:0;
-  bottom:0;
-
-  width:2px;
-
-  background:var(--gold);
-
-  transform:scaleY(0);
-
-  transform-origin:bottom;
-
   transition:.3s;
 }
 
 .project:hover{
-  transform:translateY(-4px);
-
-  border-color:#65718e;
-
-  background:#101a36;
+  transform:translateY(-6px);
+  background:#141b1f;
+  border-color:#47555d;
 }
 
-.project:hover:before{
-  transform:scaleY(1);
+.project:after{
+  content:"↗";
+  position:absolute;
+  right:22px;
+  top:20px;
+  color:#65716d;
+  transition:.3s;
 }
 
-.project-top{
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:15px;
+.project:hover:after{
+  color:var(--orange);
+  transform:translate(3px,-3px);
 }
 
-.project-name{
-  color:#78a8df;
-
-  font-size:14px;
-
-  font-weight:600;
+.tag{
+  display:inline-block;
+  border:1px solid #303a40;
+  border-radius:30px;
+  padding:4px 9px;
+  color:#aab4ae;
+  font-size:.72rem;
+  margin-bottom:30px;
 }
 
-.repo-mark{
-  color:#758199;
+.project h3{
+  font-size:1.25rem;
+  margin-bottom:8px;
 }
 
 .project p{
-  margin:14px 0 18px;
-
-  color:#929cb1;
-
-  font-size:12px;
-
-  line-height:1.75;
-}
-
-.lang{
-  color:#9da6b8;
-
-  font-size:11px;
-}
-
-.lang i{
-  display:inline-block;
-
-  width:9px;
-  height:9px;
-
-  margin-right:5px;
-
-  border-radius:50%;
-
-  background:#3d82b8;
-}
-
-.lang.js i{
-  background:#eee34d;
-}
-
-
-/* =========================================================
-   CREDENTIALS
-========================================================= */
-
-.credentials{
-  max-width:1000px;
-}
-
-.credential{
-  display:grid;
-
-  grid-template-columns:170px 1fr auto;
-
-  gap:30px;
-
-  padding:24px 0;
-
-  border-bottom:1px solid var(--line);
-
-  align-items:center;
-}
-
-.credential-year{
-  color:var(--gold);
-
-  font:10px "DM Mono",monospace;
-}
-
-.credential h3{
-  margin-bottom:6px;
-
-  font-size:14px;
-}
-
-.credential p{
   color:var(--muted);
-
-  font-size:12px;
-}
-
-.credential a{
-  color:#aeb8ca;
-
-  font:10px "DM Mono",monospace;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
-}
-
-.credential a:hover{
-  color:var(--gold);
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact-grid{
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:90px;
-}
-
-.contact-grid h2{
-  font:400 clamp(38px,5vw,65px) "Libre Baskerville",serif;
-
-  letter-spacing:-.05em;
-}
-
-.contact-grid h2 em{
-  color:var(--gold);
-}
-
-.contact-copy{
+  font-size:.92rem;
   max-width:500px;
-
-  margin-top:22px;
-
-  color:var(--muted);
-
-  line-height:1.9;
 }
+
+/* CERTIFICATIONS */
+
+.cert-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.cert{
+  min-height:180px;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(15,21,24,.7);
+  transition:.3s;
+}
+
+.cert:hover{
+  transform:translateY(-5px);
+  border-color:#47555d;
+}
+
+.cert-source{
+  color:var(--olive);
+  text-transform:uppercase;
+  font-size:.75rem;
+  letter-spacing:.1em;
+  font-weight:700;
+}
+
+.cert h3{
+  margin:15px 0 8px;
+}
+
+.cert p{
+  color:var(--muted);
+}
+
+/* SOCIALS */
 
 .socials{
-  border-top:1px solid var(--line);
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
 
 .social{
-  display:flex;
-
-  justify-content:space-between;
-
-  padding:19px 0;
-
-  border-bottom:1px solid var(--line);
-
-  transition:.2s;
+  padding:14px 18px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#11171a;
+  color:#c5ceca;
+  transition:.25s;
 }
 
 .social:hover{
-  padding-left:8px;
-
-  color:var(--gold);
+  transform:translateY(-3px);
+  color:white;
+  border-color:#53616a;
 }
 
-.social small{
-  color:var(--muted);
-
-  font:10px "DM Mono",monospace;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
+/* FOOTER */
 
 footer{
+  padding:45px 0 65px;
+  color:#69736f;
   display:flex;
-
   justify-content:space-between;
-
-  padding:24px 7vw;
-
-  border-top:1px solid var(--line);
-
-  color:#65718d;
-
-  font:10px "DM Mono",monospace;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
+  font-size:.85rem;
 }
 
+/* SCROLL ANIMATION */
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+.reveal{
+  opacity:0;
+  transform:translateY(25px);
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
 
-@media(max-width:850px){
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
 
-  header{
-    padding:0 22px;
-  }
+/* MOBILE */
+
+@media(max-width:780px){
 
   nav{
-    gap:13px;
+    top:8px;
   }
 
-  nav a{
-    font-size:8px;
-  }
-
-  .page{
-    padding:110px 22px 60px;
+  .nav-links{
+    display:none;
   }
 
   .hero{
+    padding-top:125px;
+    min-height:auto;
+    padding-bottom:90px;
+  }
+
+  .hero-grid{
     grid-template-columns:1fr;
-
     gap:55px;
-
-    padding-top:60px;
   }
 
-  .hero h1{
-    font-size:clamp(45px,13vw,75px);
-  }
-
-  .orbit-art{
-    width:min(320px,75vw);
+  .orbit{
+    width:220px;
+    height:220px;
   }
 
   .about-grid,
-  .contact-grid{
+  .project-grid,
+  .cert-grid{
     grid-template-columns:1fr;
-
-    gap:45px;
-  }
-
-  .project-list{
-    grid-template-columns:1fr;
-  }
-
-  .credential{
-    grid-template-columns:1fr;
-
-    gap:8px;
   }
 
   .section-head{
     display:block;
   }
 
-  .section-head p{
-    margin-top:20px;
+  .section-note{
+    margin-top:15px;
   }
 
-  footer{
-    display:block;
-
-    padding:22px;
-  }
-
-  footer span{
-    display:block;
-
-    margin-top:7px;
-  }
-}
-
-@media(max-width:500px){
-
-  header{
-    height:65px;
-  }
-
-  .logo{
-    font-size:15px;
-  }
-
-  nav{
-    gap:8px;
-  }
-
-  nav a{
-    font-size:7px;
+  section{
+    padding:80px 0;
   }
 
   .facts{
     grid-template-columns:1fr;
   }
 
-  .side-note{
-    display:none;
+  footer{
+    display:block;
   }
 
-  .terminal{
-    width:94%;
+  footer div+div{
+    margin-top:8px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
   }
 
-  .terminal-body{
-    padding:17px;
-  }
-
-  .terminal-commands{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-  }
-
-  .terminal-commands button{
-    width:100%;
+  .reveal{
+    opacity:1;
+    transform:none;
   }
 }
 </style>
@@ -1020,192 +608,66 @@ footer{
 
 <body>
 
+<!-- NAVIGATION -->
 
-<!-- =====================================================
-     TOUCH TERMINAL
-===================================================== -->
+<nav>
 
-<div id="terminalGate">
-
-  <div class="terminal">
-
-    <div class="terminal-header">
-
-      <div class="terminal-buttons">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <div class="terminal-title">
-        sangram@portfolio
-      </div>
-
-    </div>
-
-
-    <div class="terminal-body">
-
-      <div>
-        Welcome.
-      </div>
-
-      <div>
-        Choose a command:
-      </div>
-
-
-      <div class="command-line">
-
-        <span class="prompt">
-          sangram@portfolio:~$
-        </span>
-
-        <span id="selectedCommand">
-          _
-        </span>
-
-      </div>
-
-
-      <div id="terminalMessage"></div>
-
-
-      <div class="terminal-commands">
-
-        <button
-          type="button"
-          onclick="terminalCommand('whoami')"
-        >
-          whoami
-        </button>
-
-        <button
-          type="button"
-          onclick="terminalCommand('ls')"
-        >
-          ls
-        </button>
-
-        <button
-          type="button"
-          onclick="terminalCommand('projects')"
-        >
-          projects
-        </button>
-
-        <button
-          type="button"
-          onclick="terminalCommand('open')"
-        >
-          open
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     WEBSITE
-===================================================== -->
-
-<div id="site">
-
-
-<header>
-
-  <a class="logo" href="#home">
+  <a href="#home" class="logo">
     Sangram<span>.</span>
   </a>
 
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact">Contact</a>
+  </div>
 
-  <nav>
+  <a
+    class="nav-github"
+    href="https://github.com/sangram-net"
+    target="_blank">
+    GitHub ↗
+  </a>
 
-    <a href="#home">
-      Home
-    </a>
-
-    <a href="#about">
-      About
-    </a>
-
-    <a href="#projects">
-      Projects
-    </a>
-
-    <a href="#credentials">
-      Credentials
-    </a>
-
-    <a href="#contact">
-      Contact
-    </a>
-
-  </nav>
-
-</header>
+</nav>
 
 
-<main>
+<!-- HERO -->
 
+<section class="hero" id="home">
 
-<!-- =====================================================
-     HOME
-===================================================== -->
+  <div class="container hero-grid">
 
-<section id="home" class="page active">
-
-  <div class="hero">
-
-    <div>
+    <div class="reveal">
 
       <div class="eyebrow">
-        Cybersecurity / Networking / Linux
+        Cybersecurity · Linux · Python
       </div>
-
 
       <h1>
-        Sangram <span>Ganguly.</span>
+        Build quietly.<br>
+        <span>Learn deeply.</span>
       </h1>
 
-
-      <p class="hero-copy">
-        IT Networking Service Engineer and BCA student building
-        practical knowledge across cybersecurity, Linux,
-        networking and infrastructure.
+      <p class="hero-text">
+        I'm Sangram Ganguly — a cybersecurity student who enjoys
+        Linux, security tooling and turning small ideas into
+        working projects.
       </p>
 
+      <div class="buttons">
 
-      <div class="hero-links">
-
-        <a
-          class="text-link"
-          href="#projects"
-        >
-          View projects
+        <a href="#projects" class="btn btn-primary">
+          Explore projects ↓
         </a>
 
-
         <a
-          class="text-link"
-          href="https://github.com/sangram-net"
+          href="https://www.linkedin.com/in/sangramcloud"
           target="_blank"
-          rel="noopener"
-        >
-          GitHub
-        </a>
-
-
-        <a
-          class="text-link"
-          href="mailto:connect.sangram@proton.me"
-        >
-          Get in touch
+          class="btn">
+          LinkedIn ↗
         </a>
 
       </div>
@@ -1213,18 +675,17 @@ footer{
     </div>
 
 
-    <div class="orbit-art">
+    <div class="reveal">
 
       <div class="orbit">
-        <i></i>
-      </div>
 
-      <div class="planet"></div>
+        <div class="core">
+          SG
+        </div>
 
-      <div class="signal"></div>
+        <i class="dot"></i>
+        <i class="dot two"></i>
 
-      <div class="side-note">
-        SYSTEMS / SIGNAL / DEFENSE
       </div>
 
     </div>
@@ -1234,123 +695,83 @@ footer{
 </section>
 
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+<!-- ABOUT -->
 
-<section id="about" class="page">
+<section id="about">
 
-  <div class="section-head">
+  <div class="container">
 
-    <div>
+    <div class="section-head reveal">
 
-      <div class="section-kicker">
-        01 / About
+      <div>
+
+        <div class="kicker">
+          01 / About
+        </div>
+
+        <h2 class="section-title">
+          A work in progress.
+        </h2>
+
       </div>
 
-      <h2>
-        Built around<br>
-        curiosity.
-      </h2>
-
-    </div>
-
-
-    <p>
-      Learning by building, breaking, fixing and understanding
-      how systems behave.
-    </p>
-
-  </div>
-
-
-  <div class="about-grid">
-
-    <div>
-
-      <h3>
-        A little about me
-      </h3>
-
-      <p>
-        I am Sangram Ganguly, an IT Networking Service Engineer
-        and BCA student based in Kolkata, India. My interests
-        sit at the intersection of cybersecurity, Linux,
-        networking and practical infrastructure.
-      </p>
-
-
-      <p style="margin-top:18px">
-        I enjoy turning small ideas into working projects and
-        continuously expanding my understanding of systems
-        and security.
+      <p class="section-note">
+        Curious about systems, security and the details
+        most people skip.
       </p>
 
     </div>
 
 
-    <div>
+    <div class="about-grid">
 
-      <h3>
-        Currently learning
-      </h3>
+      <div class="panel reveal">
 
-      <p>
-        Cybersecurity, networking, Linux administration,
-        cloud technologies, ethical hacking and digital defense.
-      </p>
+        <p>
+          I'm currently studying BCA and building my foundation
+          in cybersecurity through hands-on projects, Linux,
+          CTFs and practical security learning.
+        </p>
 
+        <p>
+          I like projects that are simple enough to understand
+          completely, but useful enough to teach something real.
+        </p>
 
-      <div class="facts">
-
-        <div class="fact">
-
-          <small>
-            Education
-          </small>
-
-          <strong>
-            BCA · Amity University Online
-          </strong>
-
-        </div>
+      </div>
 
 
-        <div class="fact">
+      <div class="panel reveal">
 
-          <small>
-            Period
-          </small>
+        <div class="facts">
 
-          <strong>
-            2025 — 2028
-          </strong>
+          <div class="fact">
+            <strong>Focus</strong>
+            <span>
+              Cybersecurity & ethical hacking
+            </span>
+          </div>
 
-        </div>
+          <div class="fact">
+            <strong>Stack</strong>
+            <span>
+              Python · JavaScript · Linux
+            </span>
+          </div>
 
+          <div class="fact">
+            <strong>Currently</strong>
+            <span>
+              BCA · Amity University Online
+            </span>
+          </div>
 
-        <div class="fact">
-
-          <small>
-            Focus
-          </small>
-
-          <strong>
-            Cybersecurity & Networking
-          </strong>
-
-        </div>
-
-
-        <div class="fact">
-
-          <small>
-            Based in
-          </small>
-
-          <strong>
-            Kolkata, India
-          </strong>
+          <div class="fact">
+            <strong>Based in</strong>
+            <span>
+              Kolkata, India
+            </span>
+          </div>
 
         </div>
 
@@ -1363,503 +784,383 @@ footer{
 </section>
 
 
-<!-- =====================================================
-     PROJECTS
-===================================================== -->
+<!-- EDUCATION -->
 
-<section id="projects" class="page">
+<section id="education">
 
-  <div class="section-head">
+  <div class="container">
 
-    <div>
-
-      <div class="section-kicker">
-        02 / Selected work
-      </div>
-
-      <h2>
-        Things I've<br>
-        built.
-      </h2>
-
-    </div>
-
-
-    <p>
-      Four practical projects. No filler repositories.
-    </p>
-
-  </div>
-
-
-  <div class="project-list">
-
-
-    <!-- PROJECT 1 -->
-
-    <a
-      class="project"
-      href="https://github.com/sangram-net/password-strength-checker"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <div class="project-top">
-
-        <span class="project-name">
-          password-strength-checker
-        </span>
-
-        <span class="repo-mark">
-          ↗
-        </span>
-
-      </div>
-
-
-      <p>
-        A Python GUI-based cybersecurity tool to analyze
-        password strength with show/hide feature and smart
-        suggestions.
-      </p>
-
-
-      <span class="lang">
-        <i></i>
-        Python
-      </span>
-
-    </a>
-
-
-    <!-- PROJECT 2 -->
-
-    <a
-      class="project"
-      href="https://github.com/sangram-net/password_generator"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <div class="project-top">
-
-        <span class="project-name">
-          password_generator
-        </span>
-
-        <span class="repo-mark">
-          ↗
-        </span>
-
-      </div>
-
-
-      <p>
-        A Python GUI-based password generator that creates
-        strong, random passwords with a clean dark interface
-        using Tkinter.
-      </p>
-
-
-      <span class="lang">
-        <i></i>
-        Python
-      </span>
-
-    </a>
-
-
-    <!-- PROJECT 3 -->
-
-    <a
-      class="project"
-      href="https://github.com/sangram-net/System-Usage-Dashboard"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <div class="project-top">
-
-        <span class="project-name">
-          System-Usage-Dashboard
-        </span>
-
-        <span class="repo-mark">
-          ↗
-        </span>
-
-      </div>
-
-
-      <p>
-        A Python-based system monitoring dashboard that
-        provides real-time insights into CPU, memory and
-        disk usage using psutil.
-      </p>
-
-
-      <span class="lang">
-        <i></i>
-        Python
-      </span>
-
-    </a>
-
-
-    <!-- PROJECT 4 -->
-
-    <a
-      class="project"
-      href="https://github.com/sangram-net/SentinelX"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <div class="project-top">
-
-        <span class="project-name">
-          SentinelX
-        </span>
-
-        <span class="repo-mark">
-          ↗
-        </span>
-
-      </div>
-
-
-      <p>
-        Local Smart Log Sentinel — lightweight security log
-        analysis and threat detection.
-      </p>
-
-
-      <span class="lang">
-        <i></i>
-        JavaScript
-      </span>
-
-    </a>
-
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     CREDENTIALS
-===================================================== -->
-
-<section id="credentials" class="page">
-
-  <div class="section-head">
-
-    <div>
-
-      <div class="section-kicker">
-        03 / Credentials
-      </div>
-
-      <h2>
-        Proof of<br>
-        progress.
-      </h2>
-
-    </div>
-
-
-    <p>
-      Certifications and applied learning collected along
-      the way.
-    </p>
-
-  </div>
-
-
-  <div class="credentials">
-
-
-    <div class="credential">
-
-      <div class="credential-year">
-        SEP 2026
-      </div>
-
+    <div class="section-head reveal">
 
       <div>
 
-        <h3>
-          Defend against cyberthreats with Microsoft Defender XDR
-        </h3>
-
-        <p>
-          Microsoft Applied Skills · Credential ID
-          556CD979F1FB8DD0
-        </p>
-
-      </div>
-
-
-      <a
-        href="https://learn.microsoft.com/en-us/credentials/"
-        target="_blank"
-        rel="noopener"
-      >
-        Verify ↗
-      </a>
-
-    </div>
-
-
-    <div class="credential">
-
-      <div class="credential-year">
-        SEP 2026
-      </div>
-
-
-      <div>
-
-        <h3>
-          Certified Cybersecurity Foundations: CORE
-        </h3>
-
-        <p>
-          Hackviser · Credential ID HV-CORE-EXRKUUNH
-        </p>
-
-      </div>
-
-
-      <a
-        href="https://hackviser.com/"
-        target="_blank"
-        rel="noopener"
-      >
-        Verify ↗
-      </a>
-
-    </div>
-
-
-    <div class="credential">
-
-      <div class="credential-year">
-        MAR 2026
-      </div>
-
-
-      <div>
-
-        <h3>
-          Cisco Endpoint Security
-        </h3>
-
-        <p>
-          Cisco Networking Academy
-        </p>
-
-      </div>
-
-
-      <a
-        href="https://www.credly.com/users/sangram.space"
-        target="_blank"
-        rel="noopener"
-      >
-        Profile ↗
-      </a>
-
-    </div>
-
-
-    <div class="credential">
-
-      <div class="credential-year">
-        NOV 2025
-      </div>
-
-
-      <div>
-
-        <h3>
-          Operating System Basics
-        </h3>
-
-        <p>
-          Cisco Networking Academy
-        </p>
-
-      </div>
-
-
-      <a
-        href="https://www.credly.com/users/sangram.space"
-        target="_blank"
-        rel="noopener"
-      >
-        Profile ↗
-      </a>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section id="contact" class="page">
-
-  <div class="section-head">
-
-    <div>
-
-      <div class="section-kicker">
-        04 / Contact
-      </div>
-
-      <h2>
-        Let's stay<br>
-        connected.
-      </h2>
-
-    </div>
-
-
-    <p>
-      For projects, collaboration, networking or just a good
-      technical conversation.
-    </p>
-
-  </div>
-
-
-  <div class="contact-grid">
-
-
-    <div>
-
-      <h2>
-        Say <em>hello.</em>
-      </h2>
-
-
-      <p class="contact-copy">
-        Whether it is cybersecurity, Linux, networking or
-        a project worth building, you can find me around
-        the links below.
-      </p>
-
-
-      <div class="hero-links">
-
-        <a
-          class="text-link"
-          href="mailto:connect.sangram@proton.me"
-        >
-          Email me
-        </a>
-
-
-        <a
-          class="text-link"
-          href="https://github.com/sangram-net"
-          target="_blank"
-          rel="noopener"
-        >
-          GitHub
-        </a>
+        <div class="kicker">
+          02 / Education
+        </div>
+
+        <h2 class="section-title">
+          Learning by doing.
+        </h2>
 
       </div>
 
     </div>
 
 
-    <div class="socials">
+    <div class="panel timeline reveal">
 
-      <a
-        class="social"
-        href="https://www.linkedin.com/in/sangramcloud"
-        target="_blank"
-        rel="noopener"
-      >
-        <span>
-          LinkedIn
-        </span>
+      <div class="timeline-item">
 
         <small>
-          Professional
+          2025 — 2028
         </small>
+
+        <h3>
+          Bachelor of Computer Applications
+        </h3>
+
+        <p>
+          Amity University Online · Computer Applications,
+          programming and computing fundamentals.
+        </p>
+
+      </div>
+
+
+      <div class="timeline-item">
+
+        <small>
+          Ongoing
+        </small>
+
+        <h3>
+          Cybersecurity Practice
+        </h3>
+
+        <p>
+          Linux, security tooling, CTFs, networking fundamentals
+          and practical security labs.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div>
+
+        <div class="kicker">
+          03 / Selected work
+        </div>
+
+        <h2 class="section-title">
+          Things I've built.
+        </h2>
+
+      </div>
+
+      <p class="section-note">
+        Click any project to open the actual GitHub repository.
+      </p>
+
+    </div>
+
+
+    <div class="project-grid">
+
+
+      <!-- PASSWORD STRENGTH CHECKER -->
+
+      <a
+        class="project reveal"
+        href="https://github.com/sangram-net/password-strength-checker"
+        target="_blank">
+
+        <span class="tag">
+          Python · Security
+        </span>
+
+        <h3>
+          Password Strength Checker
+        </h3>
+
+        <p>
+          GUI-based cybersecurity tool for analyzing
+          password strength with show/hide and smart suggestions.
+        </p>
+
       </a>
 
+
+      <!-- PASSWORD GENERATOR -->
+
+      <a
+        class="project reveal"
+        href="https://github.com/sangram-net/password_generator"
+        target="_blank">
+
+        <span class="tag">
+          Python · Tkinter
+        </span>
+
+        <h3>
+          Password Generator
+        </h3>
+
+        <p>
+          Generates strong, random passwords through
+          a clean desktop interface.
+        </p>
+
+      </a>
+
+
+      <!-- SYSTEM USAGE -->
+
+      <a
+        class="project reveal"
+        href="https://github.com/sangram-net/System-Usage-Dashboard"
+        target="_blank">
+
+        <span class="tag">
+          Python · psutil
+        </span>
+
+        <h3>
+          System Usage Dashboard
+        </h3>
+
+        <p>
+          Terminal dashboard for real-time CPU,
+          memory and disk usage.
+        </p>
+
+      </a>
+
+
+      <!-- SENTINELX -->
+
+      <a
+        class="project reveal"
+        href="https://github.com/sangram-net/SentinelX"
+        target="_blank">
+
+        <span class="tag">
+          JavaScript · Security
+        </span>
+
+        <h3>
+          SentinelX
+        </h3>
+
+        <p>
+          Local Smart Log Sentinel for lightweight
+          security log analysis and threat detection.
+        </p>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CERTIFICATIONS -->
+
+<section id="certifications">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div>
+
+        <div class="kicker">
+          04 / Credentials
+        </div>
+
+        <h2 class="section-title">
+          Proof of learning.
+        </h2>
+
+      </div>
+
+      <p class="section-note">
+        Verification links open the original credential provider.
+      </p>
+
+    </div>
+
+
+    <div class="cert-grid">
+
+
+      <a
+        class="cert reveal"
+        href="https://learn.microsoft.com/en-us/users/sangramganguly-8466/credentials/656cd979f1fb8dd0"
+        target="_blank">
+
+        <div class="cert-source">
+          Microsoft Learn
+        </div>
+
+        <h3>
+          Microsoft Credential
+        </h3>
+
+        <p>
+          Open the official Microsoft Learn credential
+          verification page.
+        </p>
+
+      </a>
+
+
+      <a
+        class="cert reveal"
+        href="https://hackviser.com/verify?id=HV-CORE-EXRKUUNH"
+        target="_blank">
+
+        <div class="cert-source">
+          Hackviser
+        </div>
+
+        <h3>
+          Cybersecurity Credential
+        </h3>
+
+        <p>
+          Official Hackviser certificate verification page.
+        </p>
+
+      </a>
+
+
+      <a
+        class="cert reveal"
+        href="https://www.credly.com/badges/088ea347-9db3-4a03-876c-342a5d201e27/public_url"
+        target="_blank">
+
+        <div class="cert-source">
+          Credly
+        </div>
+
+        <h3>
+          Endpoint Security
+        </h3>
+
+        <p>
+          Official Credly public badge verification page.
+        </p>
+
+      </a>
+
+
+      <a
+        class="cert reveal"
+        href="https://www.credly.com/users/sangram.space"
+        target="_blank">
+
+        <div class="cert-source">
+          Credly Profile
+        </div>
+
+        <h3>
+          View all Credly badges ↗
+        </h3>
+
+        <p>
+          Open your complete Credly profile to see
+          your remaining credentials.
+        </p>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT / SOCIALS -->
+
+<section id="contact">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div>
+
+        <div class="kicker">
+          05 / Elsewhere
+        </div>
+
+        <h2 class="section-title">
+          Find me around the web.
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="socials reveal">
 
       <a
         class="social"
         href="https://github.com/sangram-net"
-        target="_blank"
-        rel="noopener"
-      >
-        <span>
-          GitHub
-        </span>
-
-        <small>
-          Code / Projects
-        </small>
+        target="_blank">
+        GitHub ↗
       </a>
 
+      <a
+        class="social"
+        href="https://www.linkedin.com/in/sangramcloud"
+        target="_blank">
+        LinkedIn ↗
+      </a>
 
       <a
         class="social"
         href="https://instagram.com/cyber_sangram"
-        target="_blank"
-        rel="noopener"
-      >
-        <span>
-          Instagram
-        </span>
-
-        <small>
-          Visuals / Life
-        </small>
+        target="_blank">
+        Instagram ↗
       </a>
-
 
       <a
         class="social"
         href="https://x.com/Sangramexe"
-        target="_blank"
-        rel="noopener"
-      >
-        <span>
-          X
-        </span>
-
-        <small>
-          Updates
-        </small>
+        target="_blank">
+        X ↗
       </a>
-
 
       <a
         class="social"
-        href="https://www.credly.com/users/sangram.space"
-        target="_blank"
-        rel="noopener"
-      >
-        <span>
-          Credly
-        </span>
+        href="https://sangram.space"
+        target="_blank">
+        Website ↗
+      </a>
 
-        <small>
-          Credentials
-        </small>
+      <a
+        class="social"
+        href="mailto:connect.sangram@proton.me">
+        Email ↗
       </a>
 
     </div>
@@ -1869,187 +1170,65 @@ footer{
 </section>
 
 
-</main>
+<!-- FOOTER -->
 
+<footer class="container">
 
-<footer>
-
-  <span>
+  <div>
     © 2026 Sangram Ganguly
-  </span>
+  </div>
 
-  <span>
-    Built with HTML / CSS / JavaScript
-  </span>
+  <div>
+    Built with HTML, CSS & JavaScript.
+  </div>
 
 </footer>
 
 
-</div>
-
-
 <script>
 
-/* =========================================================
-   TOUCH TERMINAL
-========================================================= */
+/* SCROLL REVEAL */
 
-function terminalCommand(command){
+const observer = new IntersectionObserver(
+  entries => {
 
-  const selected =
-    document.getElementById("selectedCommand");
+    entries.forEach(entry => {
 
-  const message =
-    document.getElementById("terminalMessage");
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
 
+    });
 
-  selected.textContent =
-    command;
-
-
-  if(command === "whoami"){
-
-    message.textContent =
-      "Sangram Ganguly — BCA / Networking / Cybersecurity";
-
-    return;
+  },
+  {
+    threshold:.12
   }
+);
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(element => observer.observe(element));
 
 
-  if(command === "ls"){
+/* SMALL PARALLAX EFFECT */
 
-    message.textContent =
-      "about  projects  credentials  contact";
+window.addEventListener("mousemove", event => {
 
-    return;
-  }
+  const orbit = document.querySelector(".orbit");
 
+  if(!orbit || window.innerWidth < 780) return;
 
-  if(command === "projects"){
+  const x =
+    (event.clientX / window.innerWidth - .5) * 8;
 
-    message.textContent =
-      "4 projects found.";
+  const y =
+    (event.clientY / window.innerHeight - .5) * 8;
 
-    return;
-  }
-
-
-  if(command === "open"){
-
-    message.textContent =
-      "Opening portfolio...";
-
-
-    setTimeout(function(){
-
-      document
-        .getElementById("terminalGate")
-        .classList.add("hide");
-
-    },400);
-
-  }
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const pages =
-  [...document.querySelectorAll(".page")];
-
-const navLinks =
-  [...document.querySelectorAll("nav a")];
-
-
-function showPage(id){
-
-  id =
-    (id || "home").replace("#","");
-
-
-  if(!pages.some(
-    page => page.id === id
-  )){
-    id = "home";
-  }
-
-
-  pages.forEach(page => {
-
-    page.classList.toggle(
-      "active",
-      page.id === id
-    );
-
-  });
-
-
-  navLinks.forEach(link => {
-
-    link.classList.toggle(
-      "active",
-      link.getAttribute("href") === "#" + id
-    );
-
-  });
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"instant"
-  });
-
-}
-
-
-navLinks.forEach(link => {
-
-  link.addEventListener(
-    "click",
-    function(event){
-
-      event.preventDefault();
-
-
-      const href =
-        this.getAttribute("href");
-
-
-      history.pushState(
-        null,
-        "",
-        href
-      );
-
-
-      showPage(href);
-
-    }
-  );
+  orbit.style.transform =
+    `translate(${x}px,${y}px)`;
 
 });
-
-
-window.addEventListener(
-  "popstate",
-  function(){
-    showPage(location.hash);
-  }
-);
-
-
-window.addEventListener(
-  "hashchange",
-  function(){
-    showPage(location.hash);
-  }
-);
-
-
-showPage(location.hash);
 
 </script>
 
