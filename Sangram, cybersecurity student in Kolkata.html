@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sangram, cybersecurity student in Kolkata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#f4f1ee;--mute:#8d8a87;--line:#2b2927;--orange:#2f9e5b;--orange-hi:#5fd48f;
+ color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,"Segoe UI",Helvetica,Arial,sans-serif;font-size:1.0625rem;line-height:1.55;min-height:100vh;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--orange-hi);outline-offset:3px;border-radius:4px}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+
+/* planet */
+.planet{position:fixed;z-index:1;left:var(--px);top:var(--py);width:var(--ps);aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;background:none;cursor:pointer;
+ transition:left 1.5s cubic-bezier(.65,0,.2,1),top 1.5s cubic-bezier(.65,0,.2,1),width 1.5s cubic-bezier(.65,0,.2,1),opacity 1s}
+.disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:linear-gradient(180deg,#1d6a3b 0 14%,#2f9e5b 14% 27%,#4cbd7c 27% 33%,#2f9e5b 33% 49%,#17562f 49% 56%,#3aa968 56% 70%,#1d6a3b 70% 82%,#2f9e5b 82%)}
+.clouds{position:absolute;inset:0;width:200%;animation:drift 40s linear infinite}
+.clouds i{position:absolute;border-radius:50%;background:#8fe3b0;opacity:.55;filter:blur(7px)}
+.clouds i:nth-child(1){left:6%;top:18%;width:18%;height:5%}
+.clouds i:nth-child(2){left:30%;top:41%;width:24%;height:6%;opacity:.4}
+.clouds i:nth-child(3){left:18%;top:63%;width:15%;height:4%}
+.clouds i:nth-child(4){left:42%;top:26%;width:12%;height:4%}
+.clouds i:nth-child(5){left:3%;top:80%;width:22%;height:5%;opacity:.35}
+.clouds i:nth-child(6){left:36%;top:72%;width:14%;height:4%}
+.clouds i:nth-child(7){left:24%;top:9%;width:10%;height:3%}
+.spot{position:absolute;left:34%;top:50%;width:13%;height:8%;border-radius:50%;background:#0f4524;box-shadow:0 0 0 4px #1b6137}
+@keyframes drift{to{transform:translateX(-50%)}}
+.orbit{position:absolute;inset:-14%;border:1px dashed #3a3633;border-radius:50%;animation:turn var(--orbit,22s) linear infinite;pointer-events:none}
+.moon{position:absolute;left:0;top:50%;width:7%;aspect-ratio:1;margin:-3.5% 0 0 -3.5%;border-radius:50%;background:radial-gradient(circle at 30% 35%,#c9c5c1 0 12%,transparent 13%),radial-gradient(circle at 65% 62%,#a9a5a1 0 9%,transparent 10%),#8d8a87}
+@keyframes turn{to{transform:rotate(360deg)}}
+.planet.poked .clouds{animation-duration:3s}
+.planet.poked{--orbit:3s}
+.planet:active .disc{transform:scale(.985)}
+body{background:radial-gradient(60vw 50vh at 88% 8%,rgba(47,158,91,.16),transparent 70%),radial-gradient(50vw 50vh at 4% 92%,rgba(244,241,238,.05),transparent 70%),#000 fixed}
+.disc{box-shadow:0 0 150px 12px rgba(63,185,110,.3)}
+.planet{animation:bob 7s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -16px}}
+.planet.dizzy .disc{animation:dizzy 1.2s ease-in-out}
+@keyframes dizzy{50%{transform:rotate(540deg) scale(.82)}100%{transform:rotate(1080deg)}}
+.w{display:inline-block;transition:transform .4s cubic-bezier(.3,1.8,.5,1),font-stretch .3s,color .2s}
+.w:hover{transform:translateY(-.08em) rotate(-4deg) scale(1.05);font-stretch:100%;color:var(--orange-hi)}
+.btn{box-shadow:4px 4px 0 #0f4524}
+.btn:hover{box-shadow:6px 6px 0 #0f4524}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 #0f4524}
+.ghost,.ghost:hover{box-shadow:none}
+.card{transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--orange)}
+.cert:hover{transform:rotate(0) translate(-3px,-5px)}
+.dot{transition:transform .35s cubic-bezier(.3,1.8,.5,1)}
+.card:hover .dot{transform:scale(1.3) rotate(25deg)}
+.badge{display:block;width:118px;margin-top:2.2rem;animation:turn 24s linear infinite}
+.badge text{fill:var(--mute);font-size:11.5px;font-weight:600}
+.ship{position:fixed;z-index:15;left:0;top:0;width:34px;height:34px;pointer-events:none;transform:translate(-100px,-100px)}
+@media (pointer:coarse),(prefers-reduced-motion:reduce){.ship{display:none}}
+@media (prefers-reduced-motion:reduce){.planet,.badge{animation:none}}
+
+body[data-page=home]{--px:72%;--py:52%;--ps:min(58vw,600px)}
+body[data-page=projects]{--px:96%;--py:6%;--ps:min(34vw,320px)}
+body[data-page=learned]{--px:4%;--py:92%;--ps:min(56vw,640px)}
+body[data-page=contact]{--px:50%;--py:112%;--ps:min(120vw,1100px)}
+body:not([data-page=home]) .planet{opacity:.55}
+
+/* layout */
+.shell{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2rem) 4rem;min-height:100vh;display:flex;flex-direction:column}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem 1.5rem;padding:1.1rem 0;background:linear-gradient(#000 60%,transparent)}
+.mark{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;text-decoration:none;display:inline-flex;align-items:center;gap:.55rem}
+.mark b{width:.9rem;height:.9rem;border-radius:50%;background:var(--orange);box-shadow:.55rem -.35rem 0 -.2rem var(--mute)}
+nav{display:flex;gap:.25rem;flex-wrap:wrap}
+nav a{text-decoration:none;padding:.35rem .8rem;border-radius:999px;color:var(--mute);transition:color .2s,background .2s}
+nav a:hover{color:var(--ink)}
+nav a[aria-current=page]{background:var(--ink);color:#000;font-weight:600}
+main{flex:1}
+section[hidden]{display:none}
+section{padding-top:clamp(2rem,8vh,5rem)}
+h1,h2,h3{font-weight:700;letter-spacing:-.025em;line-height:1.05;margin:0}
+h1:focus,h2:focus{outline:none}
+.big{font-size:clamp(2.6rem,7.4vw,5.6rem);font-weight:800;font-stretch:80%;max-width:11ch}
+.lead{max-width:34rem;font-size:1.2rem;color:#cfcac5;margin:1.6rem 0 2rem}
+.btn{display:inline-block;background:var(--orange);color:#000;font-weight:700;padding:.8rem 1.4rem;border-radius:999px;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{background:var(--orange-hi);transform:rotate(-2deg) scale(1.03)}
+.ghost{background:none;color:var(--ink);border:1px solid var(--line);margin-left:.5rem}
+.ghost:hover{background:none;border-color:var(--mute)}
+.hint{margin-top:3rem;color:var(--mute);font-size:.95rem}
+h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;font-stretch:82%}
+.sub{color:var(--mute);max-width:32rem;margin:.8rem 0 2.4rem}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+.card{position:relative;background:rgba(10,9,8,.82);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(3px)}
+.card h3{font-size:1.5rem;margin:.9rem 0 .35rem}
+.card p{margin:.4rem 0;color:#cfcac5}
+.card .tag{display:inline-block;font-size:.85rem;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:.1rem .65rem;margin:.6rem .35rem 0 0}
+.card a.go{display:inline-block;margin-top:1.2rem;font-weight:600;color:var(--orange-hi);text-underline-offset:4px}
+.card a.go:hover{text-decoration-style:wavy}
+.feat{grid-column:1/-1;border-radius:32px;padding:clamp(1.5rem,4vw,2.6rem)}
+.feat h3{font-size:clamp(2rem,5vw,3rem)}
+.feat .tagline{font-size:1.25rem;color:var(--ink);margin-top:.2rem}
+.dot{display:block;border-radius:50%;background:var(--orange)}
+.feat .dot{width:3.4rem;height:3.4rem;box-shadow:0 0 0 .5rem #000,0 0 0 calc(.5rem + 1px) var(--line)}
+.d2 .dot{width:1.8rem;height:1.8rem;background:var(--mute)}
+.d3 .dot{width:1.2rem;height:1.2rem;background:var(--ink)}
+
+/* certs */
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.cert{transform:rotate(var(--r));transition:transform .25s}
+.cert:nth-child(1){--r:-1.4deg}.cert:nth-child(2){--r:1.1deg}.cert:nth-child(3){--r:.8deg}.cert:nth-child(4){--r:-1deg}
+.cert:hover{transform:rotate(0) translateY(-4px)}
+.cert small{color:var(--mute)}
+.cert h3{font-size:1.25rem;margin-top:.5rem}
+.now{margin-top:3rem;max-width:34rem;padding:1.2rem 1.4rem;border-left:3px solid var(--orange);background:rgba(0,0,0,.7)}
+.now p{margin:0}
+
+/* contact */
+.links{list-style:none;margin:2rem 0 0;padding:0;max-width:34rem}
+.links li{border-top:1px solid var(--line)}
+.links li:last-child{border-bottom:1px solid var(--line)}
+.links a{display:flex;justify-content:space-between;gap:1rem;padding:1rem .2rem;text-decoration:none;font-size:1.25rem;font-weight:600;transition:padding .25s,color .25s;background:rgba(0,0,0,.6)}
+.links a span{color:var(--mute);font-weight:400;font-size:1rem;align-self:center;overflow-wrap:anywhere;text-align:right}
+.links a:hover{padding-left:1rem;color:var(--orange-hi)}
+footer{color:var(--mute);font-size:.9rem;padding-top:3rem}
+
+#toast{position:fixed;z-index:20;left:50%;bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,2rem);opacity:0;max-width:min(90vw,26rem);background:var(--ink);color:#000;padding:.7rem 1.1rem;border-radius:14px;font-weight:600;transition:transform .3s,opacity .3s;pointer-events:none}
+#toast.on{transform:translate(-50%,0);opacity:1}
+
+@media (max-width:720px){
+ .grid{grid-template-columns:1fr}
+ body[data-page=home]{--px:50%;--py:74%;--ps:96vw}
+ body[data-page=projects]{--px:100%;--py:2%;--ps:48vw}
+ body[data-page=learned]{--px:0%;--py:100%;--ps:80vw}
+ body[data-page=contact]{--ps:150vw}
+ .planet{opacity:.5}
+ .ghost{margin:.6rem 0 0}
+}
+@media (prefers-reduced-motion:reduce){
+ .clouds,.orbit{animation:none}
+ .planet{transition:none}
+ .btn,.cert,.links a{transition:none}
+}
+</style>
+</head>
+<body data-page="home">
+<canvas id="sky" aria-hidden="true"></canvas>
+<button class="planet" id="planet" aria-label="Poke the planet">
+ <span class="disc"><span class="clouds"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="spot"></span></span></span>
+ <span class="orbit"><span class="moon"></span></span>
+</button>
+<div id="toast" role="status" aria-live="polite"></div>
+<svg class="ship" id="ship" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3c6 6 8 14 6 24h-12c-2-10 0-18 6-24z" fill="#f4f1ee"/><circle cx="20" cy="15" r="3.2" fill="#2f9e5b"/><path d="M14 22l-6 8 7-2zM26 22l6 8-7-2z" fill="#5fd48f"/><path d="M17 28h6l-3 9z" fill="#8fe3b0"/></svg>
+
+<div class="shell">
+ <header>
+  <a class="mark" href="#home"><b></b>Sangram</a>
+  <nav aria-label="Pages">
+   <a href="#home">Home</a><a href="#projects">Things I’ve made</a><a href="#learned">Things I’ve learned</a><a href="#contact">Contact</a>
+  </nav>
+ </header>
+
+ <main>
+  <section id="home" aria-labelledby="h-home">
+   <h1 class="big" id="h-home" tabindex="-1">I break things so I know how to guard them.</h1>
+   <p class="lead">I’m Sangram, a cybersecurity student in Kolkata. I like Linux, networking, logs that tell a story, and tools small enough to understand.</p>
+   <a class="btn" href="#projects">See what I’ve made</a><a class="btn ghost" href="#contact">Say hi</a>
+   <p class="hint">The planet is a button. Go on. Also, something follows your mouse.</p>
+   <svg class="badge" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#ring" textLength="272" lengthAdjust="spacing">cybersecurity student ✦ kolkata ✦ india ✦ </textPath></text><circle cx="60" cy="60" r="14" fill="#2f9e5b"/><circle cx="55" cy="56" r="4" fill="#5fd48f"/></svg>
+  </section>
+
+  <section id="projects" aria-labelledby="h-projects" hidden>
+   <h2 id="h-projects" tabindex="-1">Things I’ve made</h2>
+   <p class="sub">Each one lives in its own GitHub repo. Open one up and poke around.</p>
+   <div class="grid">
+    <article class="card feat">
+     <span class="dot" aria-hidden="true"></span>
+     <h3>SentinelX</h3>
+     <p class="tagline">Turn logs into insights. Detect threats. Stay ahead.</p>
+     <p>A lightweight, local log analysis and threat detection dashboard. It parses raw authentication and web logs, spots suspicious patterns, links related events together and explains why something was flagged, so you read incidents instead of grepping through noise.</p>
+     <span class="tag">Log analysis</span><span class="tag">Threat detection</span><span class="tag">Dashboard</span><br>
+     <a class="go" href="https://github.com/sangram-net/SentinelX" target="_blank" rel="noopener">Open the repo</a>
+    </article>
+    <article class="card d2">
+     <span class="dot" aria-hidden="true"></span>
+     <h3>System-Usage-Dashboard</h3>
+     <p>Real-time CPU, memory and disk usage in a clean terminal interface, built in Python with psutil.</p>
+     <span class="tag">Python</span><span class="tag">psutil</span><span class="tag">Terminal</span><br>
+     <a class="go" href="https://github.com/sangram-net/System-Usage-Dashboard" target="_blank" rel="noopener">Open the repo</a>
+    </article>
+    <article class="card d3">
+     <span class="dot" aria-hidden="true"></span>
+     <h3>Password Strength Checker</h3>
+     <p>A Tkinter app that rates your password as weak, medium or strong and tells you how to fix it. Input is masked, with a show/hide toggle.</p>
+     <span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">Security</span><br>
+     <a class="go" href="https://github.com/sangram-net/password-strength-checker" target="_blank" rel="noopener">Open the repo</a>
+    </article>
+   </div>
+  </section>
+
+  <section id="learned" aria-labelledby="h-learned" hidden>
+   <h2 id="h-learned" tabindex="-1">Things I’ve learned</h2>
+   <p class="sub">Badges I’ve earned so far. Every one is verifiable, so click through and check.</p>
+   <div class="certs">
+    <article class="card cert"><small>MongoDB, via Credly</small><h3>Securing MongoDB Atlas Networking</h3><a class="go" href="https://www.credly.com/badges/4b65d64c-9f8f-4fdd-978b-ef2e27451291/public_url" target="_blank" rel="noopener">Verify badge</a></article>
+    <article class="card cert"><small>Microsoft Applied Skills</small><h3>Defend against cyberthreats with Microsoft Defender XDR</h3><a class="go" href="https://learn.microsoft.com/api/credentials/share/en-us/SangramGanguly-8466/656CD979F1FB8DD0?sharingId=DBC76255E9101922" target="_blank" rel="noopener">Verify credential</a></article>
+    <article class="card cert"><small>Cisco, via Credly</small><h3>Cisco Endpoint Security</h3><a class="go" href="https://www.credly.com/badges/088ea347-9db3-4a03-876c-342a5d201e27/public_url" target="_blank" rel="noopener">Verify badge</a></article>
+    <article class="card cert"><small>Hackviser</small><h3>Certified Cybersecurity Foundations</h3><a class="go" href="https://hackviser.com/verify?id=HV-CORE-EXRKUUNH" target="_blank" rel="noopener">Verify credential</a></article>
+   </div>
+   <div class="now"><p>Right now: third semester of a BCA in Cybersecurity (honours) at Amity University Online.</p></div>
+  </section>
+
+  <section id="contact" aria-labelledby="h-contact" hidden>
+   <h2 id="h-contact" tabindex="-1">Say hi</h2>
+   <p class="sub">Email is fastest. Everywhere else I’m mostly lurking, but I do answer.</p>
+   <a class="btn" href="mailto:connect.sangram@proton.me">Send a signal</a>
+   <ul class="links">
+    <li><a href="https://github.com/sangram-net" target="_blank" rel="noopener">GitHub<span>sangram-net</span></a></li>
+    <li><a href="https://www.linkedin.com/in/sangramcloud/" target="_blank" rel="noopener">LinkedIn<span>sangramcloud</span></a></li>
+    <li><a href="https://x.com/Sangramexe" target="_blank" rel="noopener">X<span>@Sangramexe</span></a></li>
+    <li><a href="https://www.instagram.com/sangram_x00" target="_blank" rel="noopener">Instagram<span>@sangram_x00</span></a></li>
+    <li><a href="https://www.credly.com/users/sangram.space/badges" target="_blank" rel="noopener">Credly<span>sangram.space</span></a></li>
+   </ul>
+  </section>
+ </main>
+ <footer>Made in Kolkata, under the same sky as everyone else.</footer>
+</div>
+
+<script>
+(function(){
+ var pages=['home','projects','learned','contact'];
+ var titles={home:'Sangram, cybersecurity student in Kolkata',projects:'Things I’ve made',learned:'Things I’ve learned',contact:'Say hi'};
+ document.querySelectorAll('h1,h2').forEach(function(h){h.innerHTML=h.textContent.split(' ').map(function(w){return '<span class="w">'+w+'</span>'}).join(' ')});
+ var links=document.querySelectorAll('nav a'),first=true;
+ function route(){
+  var h=(location.hash||'#home').slice(1);
+  if(pages.indexOf(h)<0)h='home';
+  document.body.dataset.page=h;
+  pages.forEach(function(p){document.getElementById(p).hidden=(p!==h)});
+  links.forEach(function(a){if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  document.title=h==='home'?titles.home:titles[h]+' | Sangram';
+  window.scrollTo(0,0);
+  if(!first){var t=document.getElementById('h-'+h);if(t)t.focus({preventScroll:true})}
+  first=false;
+ }
+ window.addEventListener('hashchange',route);route();
+
+ var planet=document.getElementById('planet'),toast=document.getElementById('toast'),tt,n=0;
+ var lines=[
+  'Fun fact: “password123” shows up in a lot of breaches. Don’t be that planet.',
+  'Logs never lie. People just forget to read them.',
+  'The moon has been in orbit for hours and has not once panicked.',
+  'Ping sent. No packets lost out here.',
+  'Gravity is the original access control.',
+  'Orbit is just a loop that never throws an exception.'
+ ];
+ planet.addEventListener('click',function(){
+  planet.classList.add('poked');
+  clearTimeout(planet._t);planet._t=setTimeout(function(){planet.classList.remove('poked')},2600);
+  n++;var dz=n%7===0;if(dz){planet.classList.add('dizzy');setTimeout(function(){planet.classList.remove('dizzy')},1300)}toast.textContent=dz?'Okay okay, I’m dizzy.':lines[n%lines.length];toast.classList.add('on');
+  clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},3200);
+ });
+
+ /* starfield */
+ var c=document.getElementById('sky'),x=c.getContext('2d'),W,H,stars=[],mx=0,my=0,shoot=null;
+ var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function size(){var d=window.devicePixelRatio||1;W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
+  stars=[];var count=Math.round(W*H/5500);
+  for(var i=0;i<count;i++){var z=Math.random();stars.push({x:Math.random()*W,y:Math.random()*H,r:.4+z*1.3,z:z,p:Math.random()*6.28,o:z>.85})}
+ }
+ function draw(t){
+  x.clearRect(0,0,W,H);
+  for(var i=0;i<stars.length;i++){var s=stars[i];
+   var a=calm?.8:.45+.45*Math.sin(t/900*(.4+s.z)+s.p);
+   var px=s.x+mx*s.z*14,py=s.y+my*s.z*14;
+   x.globalAlpha=a;x.fillStyle=s.o?'#5fd48f':'#f4f1ee';
+   x.beginPath();x.arc(px,py,s.r,0,6.283);x.fill();
+  }
+  if(!calm){
+   if(!shoot&&Math.random()<.003)shoot={x:Math.random()*W*.8,y:Math.random()*H*.4,l:0};
+   if(shoot){shoot.l+=14;shoot.x+=9;shoot.y+=4;
+    var g=x.createLinearGradient(shoot.x,shoot.y,shoot.x-70,shoot.y-31);
+    g.addColorStop(0,'rgba(244,241,238,.9)');g.addColorStop(1,'rgba(244,241,238,0)');
+    x.globalAlpha=1;x.strokeStyle=g;x.lineWidth=1.6;x.beginPath();x.moveTo(shoot.x,shoot.y);x.lineTo(shoot.x-70,shoot.y-31);x.stroke();
+    if(shoot.l>420)shoot=null;}
+   requestAnimationFrame(draw);
+  }
+ }
+ size();addEventListener('resize',function(){size();if(calm)draw(0)});
+ var ship=document.getElementById('ship'),sx=-100,sy=-100,tx=-100,ty=-100,ang=0,flying=false;
+ function fly(){var dx=tx-sx,dy=ty-sy;sx+=dx*.09;sy+=dy*.09;if(Math.abs(dx)+Math.abs(dy)>4)ang=Math.atan2(dy,dx)*57.3+90;ship.style.transform='translate('+(sx-17)+'px,'+(sy-17)+'px) rotate('+ang+'deg)';requestAnimationFrame(fly)}
+ if(!calm)addEventListener('pointermove',function(e){mx=e.clientX/W-.5;my=e.clientY/H-.5;tx=e.clientX+28;ty=e.clientY+28;if(!flying&&e.pointerType==='mouse'){flying=true;sx=tx;sy=ty;fly()}});
+ requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
