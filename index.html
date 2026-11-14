@@ -6,61 +6,90 @@
 <title>Sangram</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:#050505;--fg:#f2f2ee;--mut:#8a8a86;--line:#222;--g:#5fbf6a;--g2:#2f6b38;box-sizing:border-box;color-scheme:dark;
+:root{--bg:#040605;--fg:#f1f3ee;--mut:#7d867e;--line:#1b221d;--g:#6ee07c;--g2:#2f7a3b;--glow:rgba(110,224,124,.16);box-sizing:border-box;color-scheme:dark;
 padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.65 "JetBrains Mono",ui-monospace,Menlo,monospace;min-height:100vh;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.7 "JetBrains Mono",ui-monospace,Menlo,monospace;min-height:100vh;overflow-x:hidden}
 #sky{position:fixed;inset:0;width:100%;height:100%;z-index:0}
-header{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px clamp(18px,5vw,56px);flex-wrap:wrap}
-.logo{font:italic 26px "Instrument Serif",Georgia,serif;color:var(--fg);text-decoration:none}
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;background:
+radial-gradient(40% 35% at 20% 15%,rgba(110,224,124,.13),transparent 70%),
+radial-gradient(35% 30% at 85% 80%,rgba(47,122,59,.18),transparent 70%),
+radial-gradient(25% 25% at 70% 10%,rgba(150,240,170,.07),transparent 70%);animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-3%,4%,0) scale(1.08)}}
+#glow{position:fixed;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,var(--glow),transparent 65%);left:50%;top:40%}
+header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px clamp(18px,5vw,56px);flex-wrap:wrap;background:linear-gradient(var(--bg),rgba(4,6,5,0));backdrop-filter:blur(6px)}
+.logo{font:italic 28px "Instrument Serif",Georgia,serif;color:var(--fg);text-decoration:none}
 .logo b{color:var(--g);font-style:normal}
-nav{display:flex;gap:4px;flex-wrap:wrap}
-nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:99px;border:1px solid transparent;transition:.2s}
-nav a:hover{color:var(--fg);border-color:var(--line)}
-nav a.on{color:var(--bg);background:var(--g)}
-main{position:relative;z-index:2;padding:0 clamp(18px,5vw,56px) 80px;max-width:1100px;margin:0 auto}
-section{display:none;animation:in .5s ease both}
-section.on{display:block}
-@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-h1,h2{font:400 clamp(44px,8vw,96px)/1 "Instrument Serif",Georgia,serif;margin:0 0 24px;letter-spacing:-.02em}
-h2{font-size:clamp(36px,5vw,60px)}
-h1 em,h2 em{color:var(--g);font-style:italic}
-p{max-width:58ch;color:#cfcfca;margin:0 0 16px}
-.tag{font-size:12px;color:var(--g);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;display:block}
-.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;min-height:62vh}
-.planet-wrap{display:grid;place-items:center}
-#planet{width:min(340px,70vw);aspect-ratio:1;border-radius:50%;cursor:pointer;position:relative;overflow:hidden;
-background:linear-gradient(176deg,#2f6b38 0 9%,#4aa456 9% 17%,#245a2e 17% 26%,#5fbf6a 26% 38%,#357a40 38% 47%,#7fd48a 47% 55%,#2c6535 55% 68%,#4aa456 68% 77%,#1d4a25 77% 88%,#357a40 88%);
-transition:transform .25s cubic-bezier(.3,1.6,.5,1);box-shadow:inset -38px -14px 0 rgba(0,0,0,.28)}
-#planet:hover{transform:scale(1.04) rotate(-3deg)}
-#planet:active{transform:scale(.96)}
-.ring{position:absolute;width:140%;height:34%;border:2px solid var(--line);border-radius:50%;transform:rotate(-14deg);pointer-events:none}
-.pw{position:relative;display:grid;place-items:center;width:100%}
-.ping{font-size:13px;color:var(--mut);min-height:3em;text-align:center;margin-top:26px;max-width:34ch}
-.log{border:1px solid var(--line);padding:16px 18px;font-size:13px;color:var(--mut);max-width:520px;background:rgba(5,5,5,.7)}
+nav{display:flex;gap:2px;flex-wrap:wrap;padding:4px;border:1px solid var(--line);border-radius:99px;background:rgba(8,12,9,.7)}
+nav a{color:var(--mut);text-decoration:none;font-size:12.5px;padding:6px 14px;border-radius:99px;transition:color .2s,background .2s}
+nav a:hover{color:var(--fg)}
+nav a.on{color:#04120a;background:var(--g)}
+a:focus-visible,#planet:focus-visible{outline:2px solid var(--g);outline-offset:3px}
+main{position:relative;z-index:2;padding:0 clamp(18px,5vw,56px) 90px;max-width:1120px;margin:0 auto}
+section{display:none}
+section.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;filter:blur(8px);transform:translateY(18px)}to{opacity:1;filter:none;transform:none}}
+h1,h2{font:400 clamp(46px,9vw,108px)/.98 "Instrument Serif",Georgia,serif;margin:0 0 26px;letter-spacing:-.025em}
+h2{font-size:clamp(38px,5.4vw,68px)}
+h1 em,h2 em{font-style:italic;background:linear-gradient(100deg,var(--g),#b8f5c0 60%,var(--g));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
+@keyframes sheen{to{background-position:-200% 0}}
+p{max-width:60ch;color:#c4cbc5;margin:0 0 16px}
+.path{font-size:12.5px;color:var(--g);margin-bottom:16px;display:block}
+.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center;min-height:68vh}
+.log{border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--mut);max-width:500px;background:rgba(6,10,7,.75);min-height:7.8em;margin-top:26px}
 .log span{color:var(--g)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:28px}
-.card{border:1px solid var(--line);padding:24px;background:rgba(8,8,8,.8);transition:.25s;position:relative}
-.card:hover{border-color:var(--g);transform:translateY(-4px) rotate(-.4deg)}
-.card h3{font:400 30px "Instrument Serif",Georgia,serif;margin:0 0 8px}
-.card p{font-size:14px;margin:0 0 14px}
-.card .k{font-size:11px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
-a.lnk{color:var(--g);text-decoration:none;border-bottom:1px solid var(--g2);font-size:14px}
+.log .cur{display:inline-block;width:8px;height:1em;background:var(--g);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stage{display:grid;place-items:center;position:relative}
+.orbit{position:relative;width:min(380px,76vw);aspect-ratio:1;display:grid;place-items:center}
+.ring{position:absolute;inset:-14%;border-radius:50%;border:1px solid rgba(110,224,124,.22);transform:rotateX(72deg) rotateZ(-12deg);pointer-events:none}
+.ring.r2{inset:-30%;border-color:rgba(110,224,124,.09)}
+.moonpath{position:absolute;inset:-14%;animation:spin 14s linear infinite;pointer-events:none}
+.moon{position:absolute;top:50%;left:-3%;width:26px;height:26px;margin-top:-13px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#e9f7ea,#7a9a7f 60%,#2b3d2f);box-shadow:0 0 18px rgba(110,224,124,.35)}
+@keyframes spin{to{transform:rotate(360deg)}}
+#planet{width:100%;aspect-ratio:1;border-radius:50%;cursor:pointer;position:relative;overflow:hidden;border:0;padding:0;
+background:linear-gradient(176deg,#2f7a3b 0 9%,#4fb05c 9% 17%,#27642f 17% 26%,#6ee07c 26% 38%,#3a8a46 38% 47%,#8ae596 47% 55%,#2e6e38 55% 68%,#4fb05c 68% 77%,#1f5128 77% 88%,#3a8a46 88%);
+background-size:100% 160%;animation:bands 18s ease-in-out infinite alternate;
+box-shadow:inset -46px -18px 0 rgba(0,0,0,.34),inset 10px 8px 30px rgba(220,255,225,.14),0 0 90px rgba(110,224,124,.2);
+transition:transform .3s cubic-bezier(.3,1.7,.5,1)}
+@keyframes bands{to{background-position:0 100%}}
+#planet::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.22),transparent 45%)}
+#planet:hover{transform:scale(1.04) rotate(-3deg)}
+#planet:active{transform:scale(.95)}
+.ping{font-size:13px;color:var(--mut);min-height:3.2em;text-align:center;margin-top:30px;max-width:34ch}
+.spark{position:fixed;width:5px;height:5px;border-radius:50%;background:var(--g);pointer-events:none;z-index:9}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:30px}
+.card{--x:50%;--y:50%;border:1px solid var(--line);border-radius:16px;padding:26px;background:rgba(8,12,9,.82);position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--x) var(--y),rgba(110,224,124,.14),transparent 70%);opacity:0;transition:opacity .25s}
+.card:hover{border-color:var(--g2);transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+.card>*{position:relative}
+.card h3{font:400 32px "Instrument Serif",Georgia,serif;margin:6px 0 10px}
+.card p{font-size:13.5px;margin:0 0 16px}
+.card .k{font-size:11.5px;color:var(--mut)}
+a.lnk{color:var(--g);text-decoration:none;border-bottom:1px solid var(--g2);font-size:13.5px;transition:border-color .2s}
 a.lnk:hover{border-color:var(--g)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
-.chips i{font-style:normal;font-size:13px;border:1px solid var(--line);padding:5px 12px;border-radius:99px;color:#cfcfca;transition:.2s}
-.chips i:hover{background:var(--g);color:var(--bg);border-color:var(--g)}
-.rows a,.rows div{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;transition:.2s;flex-wrap:wrap}
-.rows a:hover{padding-left:12px;color:var(--g)}
-.rows small{color:var(--mut);font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+.chips i{font-style:normal;font-size:13px;border:1px solid var(--line);padding:6px 14px;border-radius:99px;color:#cfd6d0;background:rgba(8,12,9,.6);transition:.2s}
+.chips i:hover{background:var(--g);color:#04120a;border-color:var(--g);transform:translateY(-2px)}
+.marq{overflow:hidden;margin:44px -8px 0;border-block:1px solid var(--line);padding:12px 0;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marq div{display:flex;gap:40px;width:max-content;animation:mq 30s linear infinite;color:var(--mut);font-size:13px}
+.marq b{color:var(--g);font-weight:400}
+@keyframes mq{to{transform:translateX(-50%)}}
+.rows a,.rows div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;transition:padding .25s,color .25s;flex-wrap:wrap;font-size:16px}
+.rows a:hover{padding-left:14px;color:var(--g)}
+.rows small{color:var(--mut);font-size:12.5px}
+.rows.big a span{font:400 clamp(24px,3.4vw,38px)/1.1 "Instrument Serif",Georgia,serif}
 footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:12px;padding:0 20px 40px}
-@media(max-width:760px){.hero{grid-template-columns:1fr;min-height:0;padding-top:12px}.planet-wrap{order:-1}}
+@media(max-width:780px){.hero{grid-template-columns:1fr;min-height:0;padding-top:8px}.stage{order:-1}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <canvas id="sky"></canvas>
+<div class="aurora"></div>
+<div id="glow"></div>
 <header>
 <a class="logo" href="#home">sangram<b>.</b></a>
 <nav id="nav">
@@ -72,35 +101,36 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
 <section id="home">
 <div class="hero">
 <div>
-<span class="tag">Kolkata · Earth · for now</span>
+<span class="path">~/home · Kolkata, Earth, for now</span>
 <h1>Hi, I’m <em>Sangram.</em></h1>
 <p>I break things on purpose so they can be built better. Cybersecurity, Linux and networks are where I spend most of my time.</p>
 <div class="log" id="log"></div>
 </div>
-<div class="planet-wrap"><div class="pw"><div class="ring"></div><div id="planet" title="Poke it"></div></div><div class="ping" id="ping">Poke the planet.</div></div>
+<div class="stage"><div class="orbit"><div class="ring"></div><div class="ring r2"></div><div class="moonpath"><div class="moon"></div></div><button id="planet" aria-label="Poke the planet"></button></div><div class="ping" id="ping">Poke the planet.</div></div>
 </div>
 </section>
 
 <section id="about">
-<span class="tag">About</span>
+<span class="path">~/about</span>
 <h2>A student with <em>too many terminals</em> open.</h2>
 <p>I’m a BCA student specialising in cybersecurity (honours), currently in my third semester at Amity University Online, based in Kolkata.</p>
 <p>I like understanding how systems work down to the packet, then working out how they fail. Most of my learning happens on Linux, usually after something has already broken.</p>
 <div class="chips"><i>cybersecurity</i><i>linux</i><i>networking</i><i>programming</i><i>technology</i></div>
+<div class="marq"><div id="mq"></div></div>
 </section>
 
 <section id="made">
-<span class="tag">Things I’ve made</span>
+<span class="path">~/made</span>
 <h2>Small tools, <em>real problems.</em></h2>
 <div class="grid">
-<div class="card"><span class="k">Python · Security</span><h3>SentinelX</h3><p>A local smart log sentinel. It reads security logs on your own machine and flags what deserves your attention. Started at WCC Launchpad 30.</p><a class="lnk" href="https://github.com/sangram-net/SentinelX" target="_blank" rel="noopener">GitHub →</a></div>
-<div class="card"><span class="k">Python · psutil</span><h3>System-Usage-Dashboard</h3><p>A terminal monitor that shows CPU, memory and more at a glance, without leaving the shell.</p><a class="lnk" href="https://github.com/sangram-net/System-Usage-Dashboard" target="_blank" rel="noopener">GitHub →</a></div>
-<div class="card"><span class="k">Python · Tkinter</span><h3>Password Strength Checker</h3><p>A small GUI that tells you how fast your “clever” password would fall.</p><a class="lnk" href="https://github.com/sangram-net/password-strength-checker" target="_blank" rel="noopener">GitHub →</a></div>
+<div class="card"><span class="k">Python · Security</span><h3>SentinelX</h3><p>A local smart log sentinel. It reads security logs on your own machine and flags what deserves your attention. Started at WCC Launchpad 30.</p><a class="lnk" href="https://github.com/sangram-net/SentinelX" target="_blank" rel="noopener">View on GitHub</a></div>
+<div class="card"><span class="k">Python · psutil</span><h3>System-Usage-Dashboard</h3><p>A terminal monitor that shows CPU, memory and more at a glance, without leaving the shell.</p><a class="lnk" href="https://github.com/sangram-net/System-Usage-Dashboard" target="_blank" rel="noopener">View on GitHub</a></div>
+<div class="card"><span class="k">Python · Tkinter</span><h3>Password Strength Checker</h3><p>A small GUI that tells you how fast your “clever” password would fall.</p><a class="lnk" href="https://github.com/sangram-net/password-strength-checker" target="_blank" rel="noopener">View on GitHub</a></div>
 </div>
 </section>
 
 <section id="learned">
-<span class="tag">Things I’ve learned</span>
+<span class="path">~/learned</span>
 <h2>Proof I <em>showed up.</em></h2>
 <div class="rows">
 <a href="https://www.credly.com/users/sangram.space" target="_blank" rel="noopener"><span>Securing MongoDB Atlas Networking</span><small>Credly</small></a>
@@ -111,10 +141,10 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
 </section>
 
 <section id="contact">
-<span class="tag">Contact</span>
+<span class="path">~/contact</span>
 <h2>Send a <em>signal.</em></h2>
 <p>Email is the fastest way to reach me. I’m also around on the usual orbits.</p>
-<div class="rows">
+<div class="rows big">
 <a href="mailto:connect.sangram@proton.me"><span>Email</span><small>connect.sangram@proton.me</small></a>
 <a href="https://github.com/sangram-net" target="_blank" rel="noopener"><span>GitHub</span><small>sangram-net</small></a>
 <a href="https://linkedin.com/in/sangramcloud" target="_blank" rel="noopener"><span>LinkedIn</span><small>sangramcloud</small></a>
@@ -144,31 +174,53 @@ function typeLog(){
 var el=document.getElementById("log");if(typing)return;typing=true;el.innerHTML="";
 var i=0;
 (function next(){
-if(i>=lines.length){typing=false;return}
+if(i>=lines.length){el.insertAdjacentHTML("beforeend",'<div><span>></span> <i class="cur"></i></div>');typing=false;return}
 var d=document.createElement("div");el.appendChild(d);var s=lines[i++],c=0;
 (function t(){d.innerHTML='<span>'+s.slice(0,2)+'</span>'+s.slice(2,c);if(c++<s.length)setTimeout(t,22);else setTimeout(next,160)})();
 })();
 }
 
+var words=["cybersecurity","linux","networking","programming","technology","packets","logs","terminals"];
+var mq=document.getElementById("mq"),m="";
+for(var k=0;k<2;k++)words.forEach(function(w){m+="<span>"+w+"</span><b>✦</b>"});
+mq.innerHTML=m;mq.style.display="flex";mq.style.gap="40px";
+
 var facts=["Orbital period: roughly one assignment deadline.","Atmosphere: 80% green, 20% unresolved bugs.","Gravity: strong enough to keep me coding at 2 a.m.","Signal received. Please stop poking.","Surface temperature: terminal dark mode.","No life detected. Just Linux."];
 var fi=0,pl=document.getElementById("planet");
-pl.addEventListener("click",function(){document.getElementById("ping").textContent=facts[fi++%facts.length]});
+pl.addEventListener("click",function(e){
+document.getElementById("ping").textContent=facts[fi++%facts.length];
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+for(var n=0;n<14;n++){(function(){var s=document.createElement("i");s.className="spark";s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";document.body.appendChild(s);
+var a=Math.random()*6.28,d=40+Math.random()*80;
+s.animate([{transform:"translate(0,0) scale(1)",opacity:1},{transform:"translate("+Math.cos(a)*d+"px,"+Math.sin(a)*d+"px) scale(0)",opacity:0}],{duration:700+Math.random()*400,easing:"cubic-bezier(.2,.8,.2,1)"}).onfinish=function(){s.remove()}})()}
+});
 
-var cv=document.getElementById("sky"),cx=cv.getContext("2d"),W,H,stars=[],mx=0,my=0,tx=0,ty=0;
+document.addEventListener("pointermove",function(e){
+var c=e.target.closest&&e.target.closest(".card");
+if(c){var r=c.getBoundingClientRect();c.style.setProperty("--x",(e.clientX-r.left)+"px");c.style.setProperty("--y",(e.clientY-r.top)+"px")}
+});
+
+var cv=document.getElementById("sky"),cx=cv.getContext("2d"),W,H,stars=[],mx=0,my=0,tx=0,ty=0,gl=document.getElementById("glow"),gx=0,gy=0,shoot=null,nextShoot=3000;
 var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function size(){var r=window.devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);
-stars=[];var n=Math.min(260,Math.floor(W*H/6000));
+stars=[];var n=Math.min(300,Math.floor(W*H/5500));
 for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.9+.1,p:Math.random()*6.28})}
 size();window.addEventListener("resize",size);
-window.addEventListener("pointermove",function(e){tx=(e.clientX/W-.5);ty=(e.clientY/H-.5)});
+window.addEventListener("pointermove",function(e){tx=(e.clientX/W-.5);ty=(e.clientY/H-.5);gx=e.clientX;gy=e.clientY;gl.style.left=gx+"px";gl.style.top=gy+"px"});
 function draw(t){
 mx+=(tx-mx)*.05;my+=(ty-my)*.05;cx.clearRect(0,0,W,H);
 for(var i=0;i<stars.length;i++){var s=stars[i];
-var x=((s.x-mx*60*s.z)%W+W)%W,y=((s.y-my*60*s.z)%H+H)%H;
+var x=((s.x-mx*70*s.z)%W+W)%W,y=((s.y-my*70*s.z)%H+H)%H;
 var a=.35+.65*Math.abs(Math.sin(t/1500*s.z+s.p));
-cx.fillStyle=(i%11===0)?"rgba(95,191,106,"+a+")":"rgba(242,242,238,"+a*s.z+")";
+cx.fillStyle=(i%9===0)?"rgba(110,224,124,"+a+")":"rgba(241,243,238,"+a*s.z+")";
 cx.fillRect(x,y,s.z*2,s.z*2)}
-if(!reduce)requestAnimationFrame(draw)}
+if(!reduce){
+if(!shoot&&t>nextShoot){shoot={x:Math.random()*W*.7,y:Math.random()*H*.4,l:0};nextShoot=t+4000+Math.random()*6000}
+if(shoot){shoot.l+=14;var g=cx.createLinearGradient(shoot.x+shoot.l*.8,shoot.y+shoot.l*.45,shoot.x+shoot.l*.8-90,shoot.y+shoot.l*.45-50);
+g.addColorStop(0,"rgba(190,255,200,.9)");g.addColorStop(1,"rgba(190,255,200,0)");
+cx.strokeStyle=g;cx.lineWidth=1.5;cx.beginPath();cx.moveTo(shoot.x+shoot.l*.8,shoot.y+shoot.l*.45);cx.lineTo(shoot.x+shoot.l*.8-90,shoot.y+shoot.l*.45-50);cx.stroke();
+if(shoot.l>W)shoot=null}
+requestAnimationFrame(draw)}}
 requestAnimationFrame(draw);
 if(reduce)draw(0);
 
